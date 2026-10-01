@@ -1,6 +1,7 @@
 test-output/
 test-data/
 cases/
+/sa-legal-skills.zip
 
 __pycache__/
 *.py[cod]

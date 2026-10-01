@@ -1,10 +1,36 @@
-# Student Association Legal Skills
+# 學生自治法規審查與修法 Skills
 
 本 repository 提供學生自治組織使用的法規審查與修法輔助 Agent Skills。核心分工是：人負責制度與政策選擇；AI 協助整理想法、檢查漏洞與連動影響，並轉寫為正式法規文字及提案文件。
 
-## 安裝與使用
+## 快速開始
 
-`sa-legal-skills` 是供 AI Agent 使用的一組 Agent Skills，不是獨立 App，也沒有需要執行的安裝程式。Skills 是指引文件；取得 repository 後，依你使用的 Agent 支援方式提供這些 Skill，並在對話中交代要處理的任務及相關法規資料。
+不需要會 Git，也不需要執行安裝程式；可依 AI 的讀取能力選擇使用方式：
+
+1. **最快：能讀取 GitHub 的 Agent。**提供 repository URL：https://github.com/Clock1025/sa-legal-skills，再指定 Skill 路徑，例如 `skills/regulation-review/SKILL.md`。Agent 應先實際讀取檔案；若無法讀取 GitHub 或該檔案，必須明確告知，不得宣稱已讀取。
+2. **最通用：直接提供 `SKILL.md`。**取得需要的檔案，上傳或貼入 ChatGPT 或其他 AI，再提供法規文件與案件資料。
+3. **長期／進階：**Clone repository、使用 GitHub Codespaces，或依 Agent 支援方式安裝到 Skills 目錄；詳見下方進階使用方式。
+
+選擇 Skill：現行規定與合規問題用 `regulation-review`；整體制度設計及未決事項追蹤用 `large-scale-reform`；制度方向已定、要起草正式文件用 `amendment-drafting`。相關檔案見下方 Skills 說明。
+
+可直接複製以下提示詞：
+
+```text
+請讀取 GitHub repository：
+https://github.com/Clock1025/sa-legal-skills
+
+以 skills/regulation-review/SKILL.md 為本次主要 Skill，
+先完整閱讀其內容，再依照其中的工作流程與限制處理我接下來提供的案件。
+
+不得依記憶重建現行法規，也不得自行補完未決制度政策。
+若無法實際讀取該檔案，請明確告知，讓我提供 SKILL.md；
+不要宣稱已讀取。
+```
+
+正式 Release 發布後，預計提供固定名稱為 `sa-legal-skills.zip` 的下載包。Release asset 尚未發布前，請直接從 repository 取得需要的 `SKILL.md`；目前不提供未驗證的固定下載連結。
+
+## 進階使用方式
+
+若想取得完整 repository，或在可讀取 workspace 的 Agent 環境中工作，可使用以下方式。Codespaces 不是必要條件。
 
 ### 方法一：Clone repository
 
@@ -13,7 +39,7 @@ git clone https://github.com/Clock1025/sa-legal-skills.git
 cd sa-legal-skills
 ```
 
-此 repository 的 owner 為 `Clock1025`。可在支援 Agent Skills 的環境中，依該環境的說明將 `skills/` 加入可使用的 Skills；也可以在測試對話中提供本 repository 路徑，並指定讀取相關 Skill 的 `SKILL.md`。各 Agent 的 Skills 安裝方式與自動載入行為不同，Clone repository 本身不會替 Agent 安裝或啟用 Skills。
+此 repository 的 owner 為 `Clock1025`。可在支援 Agent Skills 的環境中，依該環境的說明將 `skills/` 加入可使用的 Skills；也可以在對話中提供 repository 路徑，並指定讀取相關 Skill 的 `SKILL.md`。各 Agent 的 Skills 安裝方式與自動載入行為不同，Clone repository 本身不會替 Agent 安裝或啟用 Skills。
 
 ### 方法二：GitHub Codespaces
 
@@ -25,44 +51,7 @@ cd sa-legal-skills
 
 Codespaces 不是必要條件，只是方便使用 repository 的方式；也可以在本機 Clone 後，依 Agent 的支援方式使用 Skills。
 
-### 開始測試
-
-先提供要審查或修改的正式法規文本、版本及相關事實，再明確指定 Skill。
-
-### 怎麼選 Skill
-
-#### 想知道現在規定是什麼
-
-使用 `regulation-review`，例如：
-
-- 誰有某項權限？
-- 有沒有期限？
-- 某程序是否合法？
-- 條文是否衝突？
-
-#### 已經知道要怎麼改
-
-使用 `amendment-drafting`，例如：
-
-- 起草修正條文。
-- 製作修正條文對照表。
-- 撰寫案由與修正說明。
-- 在執行環境支援時產生 DOCX。
-
-重大政策仍未決時，不要要求 Agent 自行補完；可先用 `large-scale-reform` 整理選項與待決事項。
-
-#### 還在設計整套制度
-
-使用 `large-scale-reform`，例如：
-
-- 全面修章。
-- 行政、立法、評議制度改革。
-- 任免、缺位、看守等連動制度。
-- 需要追蹤已決與未決事項。
-
-第一次測試可先從單一條文或一個制度問題開始。若 Agent 無法讀取 repository 路徑，請依該 Agent 的 Skills 說明安裝或提供對應的 `SKILL.md` 內容。不要只靠 AI 記憶重建現行法規；審查或製作對照表時，應提供可核對的正式文本及版本資訊。
-
-### 提供文件時的建議
+## 提供文件時的建議
 
 - 優先提供正式現行版本及其版本或生效資訊。
 - PDF、DOCX、純文字均可；實際解析能力依 Agent 環境而定。
@@ -73,9 +62,9 @@ Codespaces 不是必要條件，只是方便使用 repository 的方式；也可
 
 ## Skills
 
-- **`regulation-review`**：審查現行法規、制度、程序或行為。核實適用規範與有效版本，分析位階衝突、權限、程序、法律時點及條文一致性，並依據資料說明結論與不確定之處。
-- **`amendment-drafting`**：在制度方向已確認或足以草擬時，製作修正、制定或刪除條文、案由、修正總說明、修正條文對照表、提案 Email 草稿，並在執行環境支援時產生可編輯 DOCX。
-- **`large-scale-reform`**：管理整部章程、組織法規或多個相連制度的大規模改革；整理制度架構與問題、追蹤決策狀態、保留決策紀錄、處理暫緩事項及法規連動，再將已足夠明確的部分交由 `amendment-drafting`。
+- **[`regulation-review`](skills/regulation-review/SKILL.md)**：審查現行法規、制度、程序或行為。核實適用規範與有效版本，分析位階衝突、權限、程序、法律時點及條文一致性，並依據資料說明結論與不確定之處。
+- **[`amendment-drafting`](skills/amendment-drafting/SKILL.md)**：在制度方向已確認或足以草擬時，製作修正、制定或刪除條文、案由、修正總說明、修正條文對照表、提案 Email 草稿，並在執行環境支援時產生可編輯 DOCX。
+- **[`large-scale-reform`](skills/large-scale-reform/SKILL.md)**：管理整部章程、組織法規或多個相連制度的大規模改革；整理制度架構與問題、追蹤決策狀態、保留決策紀錄、處理暫緩事項及法規連動，再將已足夠明確的部分交由 `amendment-drafting`。
 
 ## 典型組合
 
