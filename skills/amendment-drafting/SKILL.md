@@ -11,8 +11,14 @@ Translate the user's chosen institutional direction into precise, internally con
 
 1. Identify the intended instrument, provisions, policy direction, scope, audience, and requested deliverables.
 2. Obtain the authoritative current text and verify its version and relevant effective dates. Never recreate current wording from memory. If it is unavailable, request it or clearly label any working text as unverified and do not present a definitive comparison.
-3. Separate confirmed policy from drafting choices. The user owns policy choices. Do not silently change a choice to make drafting easier. Ask the user only about ambiguity that would change substantive institutional content, including rights, powers, duties, procedures, qualifications, timing, or legal effect. Resolve purely legal-language, sentence-structure, formatting, and other editorial choices consistently without interrupting the user when they do not alter institutional meaning.
-4. Check adjacent provisions, definitions, references, institutional names, hierarchy, and consequential rules. Flag dependencies that require a decision or additional amendment.
+3. Before drafting or preparing a comparison table, identify the precise provision level and location affected: **條 → 項 → 款 → 目**. Do not substitute vague descriptions such as 「一段」、「一項文字」, or 「增列內容」 for an identifiable legal structure. Within an article, separate paragraphs are 項 in order (第一項、第二項、第三項, etc.), whether or not the text labels them explicitly; for example, adding a third paragraph after two existing paragraphs is 「增訂第三項」. Recognize 款 as typically numbered 一、二、三…… and 目 as （一）、（二）、（三）……; do not call a 款 an 項 or a 目 a 款.
+4. Separate confirmed policy from drafting choices. The user owns policy choices. Do not silently change a choice to make drafting easier. Ask the user only about ambiguity that would change substantive institutional content, including rights, powers, duties, procedures, qualifications, timing, or legal effect. Resolve purely legal-language, sentence-structure, formatting, and other editorial choices consistently without interrupting the user when they do not alter institutional meaning. Identifying the correct article, paragraph, subparagraph, or item is legal drafting precision, not a policy decision.
+5. Check adjacent provisions, definitions, references, institutional names, hierarchy, and consequential rules. Flag dependencies that require a decision or additional amendment, including cross-references to any article, paragraph, subparagraph, or item whose numbering or content changes. Carry forward every article, paragraph, subparagraph, or item identified in earlier review as potentially affected. During drafting, recheck each one and record exactly one disposition:
+   - **MODIFY** — rechecked and confirmed to require amendment; include it in the draft.
+   - **NO_CHANGE** — rechecked and confirmed not to require amendment; state the specific reason for leaving it unchanged.
+   - **UNRESOLVED** — rechecked and found to have a consequential link, but necessary policy, procedure, or other matter remains undecided, so it cannot safely be drafted yet; do not supply the missing policy yourself.
+
+   Do not let a previously identified related provision silently disappear when drafting begins. If an item has not been rechecked, do not imply that the consequential review is complete. Tracking these dispositions is a drafting and review completeness requirement, not a policy decision.
 
 ## Drafting deliverables
 
@@ -48,11 +54,13 @@ Apply underlining in Word formatting, not underscore characters or markup symbol
 - Entirely deleted provision: underline the full text in 現行條文 and put **刪除** in 修正條文.
 - Renumbering alone, where the substance is unchanged: show the appropriate provision locations, explain the renumbering in 說明, and do not mark the entire text as amended.
 
+If adding or deleting a 項, 款, or 目 changes later numbering, distinguish pure sequential renumbering from substantive textual change. Mark differences by actual text additions and deletions: do not mark otherwise unchanged text as substantively amended merely because a preceding paragraph, subparagraph, or item caused its number to shift. Check and update cross-references to affected locations where necessary, and identify consequential reference amendments separately.
+
 Before delivery, compare each table row against the verified source and final draft. Confirm that each underlined span corresponds to a real addition, deletion, or replacement and that no unchanged text is underlined.
 
 ## Reasons and language
 
-For each provision, explain in concrete terms:
+In the 說明欄 and any required reasons, identify the exact affected location using its legal structure, such as 「修正第三條第二項」、「增訂第三條第三項」、「修正第十條第一項第二款」, or 「增訂第十條第一項第二款第三目」. Avoid imprecise descriptions such as 「修正本條部分文字」 when the affected level can be identified. Explain each amendment in concrete terms:
 
 **現行規定／現況 → 存在的問題 → 本次如何修改 → 修改後的制度效果**
 
@@ -62,7 +70,7 @@ Convert the user's conversational explanation into clear, formal, consistent leg
 
 ## Final consistency review
 
-Check article numbering, amendments and repeals, cross-references, instrument and body names, defined terms, titles, authority, procedural steps, legal effects, effective dates, and any transitional or consequential amendments. Identify residual issues plainly. Ensure the reasons match the final text and that the clean proposal contains no drafting notes, alternatives, AI proposals, or unconfirmed defaults.
+Check article, paragraph, subparagraph, and item numbering; amendments and repeals; cross-references to affected locations; instrument and body names; defined terms; titles; authority; procedural steps; legal effects; effective dates; and any transitional or consequential amendments. Distinguish pure sequential renumbering from substantive change. Before completing the formal draft, perform a coverage check: compare the full list of related provisions identified in earlier review against the recorded **MODIFY**, **NO_CHANGE**, and **UNRESOLVED** dispositions, one by one, and confirm that none is missing. Include unresolved items and the reasons for no-change dispositions in the review record; do not imply complete coverage for any item not rechecked. Identify residual issues plainly. Ensure the reasons match the final text and that the clean proposal contains no drafting notes, alternatives, AI proposals, or unconfirmed defaults.
 
 ## Formal procedure boundary
 
