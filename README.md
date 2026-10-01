@@ -154,3 +154,7 @@ git pull
 ```
 
 若 Agent 使用的是已複製到其他位置的 Skill 檔案，更新 repository 後也要依該 Agent 的使用方式重新載入或更新 Skill。
+
+## 授權
+
+本專案採用 [Mozilla Public License 2.0](LICENSE) 授權。
