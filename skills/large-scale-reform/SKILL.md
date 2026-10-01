@@ -51,6 +51,7 @@ Assign a state to each important institutional decision. Use these exact status 
 Apply these safeguards:
 
 - Never record an assistant recommendation, common practice, implication, or convenient drafting assumption as the user's decision.
+- A high-level institutional issue may contain principles that the user has confirmed and details that remain undecided. Split these into atomic decisions and assign each its own status. Do not downgrade an explicitly confirmed principle to DIRECTION or OPEN merely because some details are unresolved. The overall issue may remain OPEN while its confirmed atomic decisions remain CONFIRMED.
 - Replies such as 「都可以」、「都行」、「沒差」 do not by themselves confirm an option. Record that there is no strong current preference, keep the decision OPEN (or DIRECTION only if the user has stated an actual direction), and ask only if a choice is needed to progress.
 - If drafting must proceed temporarily on one option, label it **「暫定方案（未確認）」**, state who proposed it and what depends on it, and keep it out of the clean formal proposal unless the user later confirms it.
 - Record the user's actual words or a faithful concise summary, the date/context when available, and affected decisions when this helps prevent later confusion.
@@ -80,6 +81,16 @@ DEC-012 人事任免制度
 - 公告
 ```
 
+Atomic-decision example:
+
+```text
+ISSUE 看守機制
+總體議題狀態：OPEN
+
+CONFIRMED：重要職務原則上應設看守機制。
+OPEN：適用職位、啟動條件、終止條件、代理人選、權限限制。
+```
+
 ## Policy / Implementation Separation
 
 Track these as distinct decision layers:
@@ -89,6 +100,17 @@ Track these as distinct decision layers:
 3. **技術實作方式** — tools or operational systems used to perform the process.
 
 Confirmation at one layer does not decide the others. For example, 「採法規公告型」 does not itself decide 「資訊系統自動公告」; 「任命應公告」 does not require a particular online system. Record each layer separately with its own decision state. Avoid introducing a technical implementation as if it were inherent in the policy choice.
+
+Technical implementation choices must not automatically become blocking OPEN items for institutional reform. If a rule can be designed in a technology-neutral way, record whether to build an information system, which platform to use, or whether to automate as implementation-layer issues, not as unresolved policy itself. Unless the user explicitly says a technical option is necessary for the institution to function, do not block completion of formal institutional design because that technical option is undecided. For example:
+
+```text
+CONFIRMED：法規公告制度不得依賴特定資訊系統存在。
+Layer: IMPLEMENTATION
+Status: OPEN
+Issue: 未來是否建置資訊系統、使用何種公告工具。
+```
+
+Do not infer 「資訊系統自動公告」 from a decision to adopt a 「法規公告型」制度.
 
 ## Completion review
 
