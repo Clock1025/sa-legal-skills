@@ -1,0 +1,11 @@
+test-data/
+cases/
+
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+.DS_Store
+Thumbs.db
+.vscode/
