@@ -36,9 +36,9 @@ Adjust this structure when the user or applicable formal procedure requires anot
 - **刪除條文** where repeal is intended, with consequential numbering and references checked.
 - **案由** that identifies the proposed action and instrument concisely.
 - **修正總說明** explaining the overall purpose and structure of the proposal.
-- **修正條文對照表**, using exactly these columns and order: **現行條文｜修正條文｜說明**. “現行條文” must always be the leftmost column; the 說明欄 ordinarily serves as that article's 逐條修正理由. Do not create a separate, duplicative 逐條修正理由 section unless the user or applicable formal procedure requires one.
+- **修正條文對照表**, using exactly these columns and order: **修正條文｜現行條文｜說明**. The 說明欄 ordinarily serves as that article's 逐條修正理由. Do not create a separate, duplicative 逐條修正理由 section unless the user or applicable formal procedure requires one.
 - **正式提案 Email 草稿** with an appropriate subject, recipient placeholder if unknown, concise submission text, and attachments or enclosures as applicable. It remains a draft for the user to send.
-- **DOCX**: when the execution environment supports editable DOCX generation, DOCX is the preferred output format for a formal document. Use actual editable Word text, native Word tables, and genuine underline formatting; never convert provisions or tables into images. Provide a working version with review annotations or alternatives when useful, and a separate clean formal proposal containing only confirmed choices. If the environment cannot create DOCX, provide complete, structured formal document content and clearly say DOCX could not be created in this environment; never claim that a DOCX was created when it was not.
+- **DOCX**: when the execution environment supports editable DOCX generation, DOCX is the preferred output format for a formal document. Use actual editable Word text, native Word tables, and genuine underline formatting; never convert provisions or tables into images. For formal Chinese rules, proposals, and amendment comparison tables, follow an existing formal document or institutional template's fonts and layout when supplied. Otherwise, this project's preferred Kai-style font order is **標楷體** (if available in the execution environment), then **全字庫正楷體** (if available), then a fallback font that displays Traditional Chinese correctly. Clearly report any fallback. Do not claim a font was used unless it exists in the execution/rendering environment. If the DOCX specifies a font family but rendering could not be verified, distinguish that it was **specified** from whether it was **verified**. When generating DOCX through OOXML, `python-docx`, or similar tools, set the Chinese font correctly in the East Asian font property (`w:eastAsia`) and any other required font properties; setting only the Western font property is insufficient and may cause Word to substitute another font. Use the actual font family name recognized by the execution environment for 標楷體 or 全字庫正楷體; verify it with available system font tools or font metadata instead of assuming an internal name. When rendering/preview QA is available, check that Chinese text uses the expected font without fallback, bold and underline remain correct, table text renders correctly, and font changes have not caused unwanted page breaks, overflow, or clipping. Font selection is a presentation/document-formatting requirement, not an institutional or policy decision. Do not add font files to the repository or copy third-party or government font files into this Skill package; point users to official download sources instead. Provide a working version with review annotations or alternatives when useful, and a separate clean formal proposal containing only confirmed choices. If the environment cannot create DOCX, provide complete, structured formal document content and clearly say DOCX could not be created in this environment; never claim that a DOCX was created when it was not.
 
 The comparison table's **現行條文** column must faithfully reproduce the text from the verified authoritative source. Do not correct typos, change punctuation, standardize terminology, modernize wording, or rewrite sentence structure in that column unless that exact change is part of the proposed amendment.
 
@@ -50,8 +50,14 @@ Apply underlining in Word formatting, not underscore characters or markup symbol
 - Added wording: underline it in **修正條文**.
 - Replaced wording: underline the old wording in **現行條文** and the replacement in **修正條文**.
 - Unchanged wording: do not underline it.
-- Entirely new provision: put **無** in 現行條文 and underline the full provision in 修正條文.
-- Entirely deleted provision: underline the full text in 現行條文 and put **刪除** in 修正條文.
+- Entirely new provision:
+  - 修正條文欄：新增條文全文加底線。
+  - 現行條文欄：填「（本條新增）」；「（本條新增）」本身不加底線。
+  - 說明欄：填具體增訂理由。
+- Entirely deleted provision:
+  - 修正條文欄：填「（刪除）」；「（刪除）」本身不加底線。
+  - 現行條文欄：原條文全文加底線。
+  - 說明欄：填具體刪除理由。
 - Renumbering alone, where the substance is unchanged: show the appropriate provision locations, explain the renumbering in 說明, and do not mark the entire text as amended.
 
 If adding or deleting a 項, 款, or 目 changes later numbering, distinguish pure sequential renumbering from substantive textual change. Mark differences by actual text additions and deletions: do not mark otherwise unchanged text as substantively amended merely because a preceding paragraph, subparagraph, or item caused its number to shift. Check and update cross-references to affected locations where necessary, and identify consequential reference amendments separately.
