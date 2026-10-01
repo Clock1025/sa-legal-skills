@@ -74,6 +74,8 @@ Ground each link in the supplied facts and source text. Avoid generic reasons su
 
 Convert the user's conversational explanation into clear, formal, consistent legal language while preserving the user's substantive choice. Use defined terms consistently; distinguish authority, duty, discretion, procedure, legal effect, and timing. Do not add a common institutional mechanism merely because it is customary. Flag unresolved choices instead of hiding them in legal wording.
 
+中文法規、修正條文、修正說明、案由、正式提案文字及其他正式中文法制文件，原則上使用逗號、句號、分號、冒號、全形括號及中文引號等全形中文標點。本規則適用於新擬文字；現行條文欄及直接引文應忠實保留原文，不得僅為統一標點而改寫。正式中文法制文字不得無必要混用半形標點。技術識別字、網址、檔名、版本號、程式碼、Git 指令、Skill 名稱等確有必要時，得使用半形符號。本規則屬文件格式與法制作業要求，不是制度或政策決定。
+
 ## Final consistency review
 
 Check article, paragraph, subparagraph, and item numbering; amendments and repeals; cross-references to affected locations; instrument and body names; defined terms; titles; authority; procedural steps; legal effects; effective dates; and any transitional or consequential amendments. Distinguish pure sequential renumbering from substantive change. Before completing the formal draft, perform a coverage check: compare the full list of related provisions identified in earlier review against the recorded **MODIFY**, **NO_CHANGE**, and **UNRESOLVED** dispositions, one by one, and confirm that none is missing. Include unresolved items and the reasons for no-change dispositions in the review record; do not imply complete coverage for any item not rechecked. Identify residual issues plainly. Ensure the reasons match the final text and that the clean proposal contains no drafting notes, alternatives, AI proposals, or unconfirmed defaults.
