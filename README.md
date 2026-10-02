@@ -2,35 +2,25 @@
 
 本 repository 提供學生自治組織使用的法規審查與修法輔助 Agent Skills。核心分工是：人負責制度與政策選擇；AI 協助整理想法、檢查漏洞與連動影響，並轉寫為正式法規文字及提案文件。
 
+第一次使用？從[新手引導](docs/first-time-user.md)開始；不確定提示詞貼哪裡或如何提供檔案，可看[平台使用指南](docs/platforms/)。
+
 ## 快速開始
 
 不需要會 Git，也不需要執行安裝程式；可依 AI 的讀取能力選擇使用方式：
 
-1. **最快：能讀取 GitHub 的 Agent。**提供 repository URL：https://github.com/Clock1025/sa-legal-skills，再指定 Skill 路徑，例如 `skills/regulation-review/SKILL.md`。Agent 應先實際讀取檔案；若無法讀取 GitHub 或該檔案，必須明確告知，不得宣稱已讀取。
-2. **最通用：直接提供 `SKILL.md`。**取得需要的檔案，上傳或貼入 ChatGPT 或其他 AI，再提供法規文件與案件資料。
+1. **最快：能讀取 GitHub 的 Agent。**提供 repository URL：<https://github.com/Clock1025/sa-legal-skills>，再指定 Skill 路徑，例如 `skills/regulation-review/SKILL.md`。Agent 應先實際讀取檔案；若無法讀取 GitHub 或該檔案，必須明確告知，不得宣稱已讀取。
+2. **最通用：直接提供 `SKILL.md`。**取得本次需要的檔案，完整貼入或上傳到 ChatGPT 或其他 AI，再提供法規文件與案件資料。
 3. **長期／進階：**Clone repository、使用 GitHub Codespaces，或依 Agent 支援方式安裝到 Skills 目錄；詳見下方進階使用方式。
 
 選擇 Skill：現行規定與合規問題用 `regulation-review`；整體制度設計及未決事項追蹤用 `large-scale-reform`；制度方向已定、要起草正式文件用 `amendment-drafting`。相關檔案見下方 Skills 說明。
 
-可直接複製以下提示詞：
+新手可複製唯一的[完整提示詞](START-HERE.md#可複製提示詞)開始；Skill 選擇與讀取前限制也以該提示詞為準。
 
-```text
-請讀取 GitHub repository：
-https://github.com/Clock1025/sa-legal-skills
-
-以 skills/regulation-review/SKILL.md 為本次主要 Skill，
-先完整閱讀其內容，再依照其中的工作流程與限制處理我接下來提供的案件。
-
-不得依記憶重建現行法規，也不得自行補完未決制度政策。
-若無法實際讀取該檔案，請明確告知，讓我提供 SKILL.md；
-不要宣稱已讀取。
-```
-
-正式 Release 發布後，預計提供固定名稱為 `sa-legal-skills.zip` 的下載包。Release asset 尚未發布前，請直接從 repository 取得需要的 `SKILL.md`；目前不提供未驗證的固定下載連結。
+可從[最新正式 Release](https://github.com/Clock1025/sa-legal-skills/releases/latest)的附件下載 `sa-legal-skills.zip`，解壓後先讀 `START-HERE.md`。
 
 ## 進階使用方式
 
-若想取得完整 repository，或在可讀取 workspace 的 Agent 環境中工作，可使用以下方式。Codespaces 不是必要條件。
+三個 Skill 的核心規則都在各自的 `SKILL.md`；只要完整讀取，GitHub、附件或完整貼入方式都可使用。以下方式適合長期工作；支援安裝的 Agent 可能可自動發現 Skill，減少每次重新指定的操作。實際行為依 Agent 支援方式而定，Codespaces 不是必要條件。
 
 ### 方法一：Clone repository
 

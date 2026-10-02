@@ -40,7 +40,25 @@ Adjust this structure when the user or applicable formal procedure requires anot
 - **正式提案 Email 草稿** with an appropriate subject, recipient placeholder if unknown, concise submission text, and attachments or enclosures as applicable. It remains a draft for the user to send.
 - **DOCX**: when the execution environment supports editable DOCX generation, DOCX is the preferred output format for a formal document. Use actual editable Word text, native Word tables, and genuine underline formatting; never convert provisions or tables into images. For formal Chinese rules, proposals, and amendment comparison tables, follow an existing formal document or institutional template's fonts and layout when supplied. Otherwise, this project's preferred Kai-style font order is **標楷體** (if available in the execution environment), then **全字庫正楷體** (if available), then a fallback font that displays Traditional Chinese correctly. Clearly report any fallback. Do not claim a font was used unless it exists in the execution/rendering environment. If the DOCX specifies a font family but rendering could not be verified, distinguish that it was **specified** from whether it was **verified**. When generating DOCX through OOXML, `python-docx`, or similar tools, set the Chinese font correctly in the East Asian font property (`w:eastAsia`) and any other required font properties; setting only the Western font property is insufficient and may cause Word to substitute another font. Use the actual font family name recognized by the execution environment for 標楷體 or 全字庫正楷體; verify it with available system font tools or font metadata instead of assuming an internal name. When rendering/preview QA is available, check that Chinese text uses the expected font without fallback, bold and underline remain correct, table text renders correctly, and font changes have not caused unwanted page breaks, overflow, or clipping. Font selection is a presentation/document-formatting requirement, not an institutional or policy decision. Do not add font files to the repository or copy third-party or government font files into this Skill package; point users to official download sources instead. Provide a working version with review annotations or alternatives when useful, and a separate clean formal proposal containing only confirmed choices. If the environment cannot create DOCX, provide complete, structured formal document content and clearly say DOCX could not be created in this environment; never claim that a DOCX was created when it was not.
 
-The comparison table's **現行條文** column must faithfully reproduce the text from the verified authoritative source. Do not correct typos, change punctuation, standardize terminology, modernize wording, or rewrite sentence structure in that column unless that exact change is part of the proposed amendment.
+The comparison table's **現行條文** column must faithfully preserve the verified source's provision wording, punctuation, and the substantive text and structure of its 項、款、目. Do not correct typos, change punctuation, standardize terminology, modernize wording, or rewrite sentence structure. Formal Word layout may normalize the article number and join it with the first paragraph as specified below; source website UI formatting or HTML block separation does not define the formal document layout. This formatting treatment does not authorize merging or changing any later 項、款、目.
+
+### 法規段落與 Word 縮排
+
+「項」通常沒有編號符號，段落界線與縮排本身就是法規結構資訊。不得因重新排版而合併不同項，或使其看起來像同一段。有機關／正式範本時，優先沿用其條、項、款、目縮排及字級、行距、段前段後格式。無範本時，使用一致、可讀且不破壞法規層級的格式，不預設固定字級；行距與段落間距依下列規則，縮排採以下預設：
+
+C = 該段落實際正文所使用的中文字型與字級之一個全形中文字寬（約 1 em）的版面基準。以下僅為無正式範本時的 fallback，不得凌駕使用者提供的正式範本：
+
+- 無正式範本另有規定時，法規正文及修正條文對照表中的條文段落，段前與段後間距均設為 0 pt，行距設為 single／1.0；不得預設 1.5 倍行距或用空白行製造段落距離。此處 0 pt 指 paragraph spacing before／after，不等於強制單行距；但本 fallback 的行距為 single／1.0。正式範本優先。表格儲存格內的條文段落也適用此規則。
+- 無正式範本另有規定時，正式法規條號使用中文數字，條號文字內不得插入空白；例如「第一條」、「第二十三條」、「第一百八十四條」、「第一千零五十二條」。不得用字元間距模擬排版。
+- 正式條文中的「條號＋第一項正文」置於同一 Word paragraph，預設為「第一百八十四條　第一項正文……」；條號與第一項正文之間使用一個全形空白 U+3000，不得以冒號、Tab 或多個空白代替。此規則適用於修正條文欄、現行條文欄及一般正式條文正文。條號＋第一項基本左縮排 C、首行使用凸排 C，因此段落首行起始位置為 0、自動換行後為 C。第二項及其後各項仍各自使用獨立 paragraph，基本左縮排 C、首行再增加 C，因此首行 2C、續行 C。
+- 款、目保留清楚可辨識的階層與編號對齊。修正條文對照表儲存格內也保留同樣的條、項、款、目結構，除非正式範本另有規定。表格內以儲存格內容區左界為縮排原點；C 仍為正文的一字寬，不把儲存格內距算入 C。
+- 無正式範本另有規定時，Word 原生修正條文對照表的可見格線使用黑色（`#000000`）；OOXML 應明確指定 `w:color="000000"`，不得依賴 theme color 或應用程式預設灰色。正式範本優先。
+- 優先使用 Word／OOXML 原生 paragraph indentation。環境支援時可用 character-based indentation；若工具只能使用 points／twips，依有效字級換算近似一個 em，並以實際渲染結果驗證。不得同時疊加互相衝突的 hanging、first-line、character 或 twips 設定；應確認 paragraph style 的繼承縮排與最終有效格式。
+- 不得堆疊全形空白、半形空白或 Tab 字元模擬整個段落縮排，也不得用空白行、額外空白字元或 Tab 取代段落間距控制。C 是版面基準，不是插入方塊或空白字元的指令。
+- 現行條文欄與直接引文的法規正文文字、標點及項、款、目內容須忠實保留原文；條號轉為正式文件所需的中文數字格式，以及條號和第一項間單一 U+3000，依前述排版規則處理。來源網站的 UI 顯示（例如「第 184 條」）或 HTML 將條號與第一項分成不同區塊，不代表正式 Word 文件也應照其形式呈現。不得因此合併第二項、款、目或其他具有法律結構意義的段落。除此明定的條號格式及分隔外，原文沒有空白、Tab 或其他字元時，不得僅為排版自行新增；優先以 paragraph formatting、tab stop、表格配置或其他不改變原文字元的方法處理。若工具無法同時維持指定版面與正文原文完整性，保留正文原文並揭露版面限制。
+- 新擬文字可依正式範本或預設法制格式安排必要的條號與正文間隔；這不等於用大量空白模擬段落縮排。
+
+DOCX QA 若環境支援，核對條文段落 paragraph spacing before／after 為 0 pt、fallback line spacing 為 single／1.0；渲染後檢查不同項仍可區分、首行與續行縮排正確、款目階層未消失、表格內格式正常、換頁未破壞法規結構，以及新設縮排未以新增前置空白字元假裝實現。同時核對 underline、bold、East Asian font 與既有字型規則；若無法渲染，明確說明版面尚未驗證。既有原文含有的空白不得僅為 QA 而刪改。
 
 ## Comparison table markup
 
