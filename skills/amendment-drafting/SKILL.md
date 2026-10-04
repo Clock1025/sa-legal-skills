@@ -80,9 +80,10 @@ Apply underlining in Word formatting, not underscore characters or markup symbol
 - Added wording: underline it in **修正條文**.
 - Replaced wording: underline the old wording in **現行條文** and the replacement in **修正條文**.
 - Unchanged wording: do not underline it.
+- Diff underlining must not cover whitespace characters in either comparison column, especially the single U+3000 between the article number and first-paragraph text. Split runs or otherwise apply formatting to changed text only; do not underline a whole run that also contains whitespace. “Entirely new provision, fully underlined” means all added textual content, excluding structural whitespace; retain the required U+3000 without underlining it.
 - Entirely new provision:
-  - 修正條文欄：新增條文全文加底線。
-  - 現行條文欄：填「（本條新增）」；「（本條新增）」本身不加底線。
+  - 修正條文欄：新增條文的文字內容加底線，不包含結構性空白字元。
+  - 現行條文欄：填「（本條新增）」；「（本條新增）」本身不加底線。無正式範本另有規定時，在儲存格內靠左排列，不得置中。
   - 說明欄：填具體增訂理由。
 - When wording is moved or copied **from another instrument into the target instrument**, judge the 現行條文欄 only against the verified current text of the **target instrument**. If the target instrument does not already contain that provision at the corresponding location, it is an entirely new provision in the target instrument: 現行條文欄 must be 「（本條新增）」, not 「○○法第 X 條」 or the source instrument's text. Record the source instrument, original article number, and migration relationship in the 說明欄 or a working-version source map. Source text may be reproduced separately for traceability, but it must not be presented as the target instrument's 現行條文.
 - Entirely deleted provision:
