@@ -43,14 +43,14 @@ Adjust this structure when the user or applicable formal procedure requires anot
 
 ### Proposal separation across instruments
 
-A formal proposal ordinarily targets **one legal instrument or regulation**. When one policy package requires amendments, enactments, or repeals across multiple instruments:
+Each formal proposal must target **one legal instrument or regulation**. When one policy package requires amendments, enactments, or repeals across multiple instruments:
 
 - Treat each affected instrument as a **separate formal proposal**, even when the policy purpose is shared or the proposals are intended to move together. Each proposal must have its own 案由, 修正／制定／廢止總說明 as applicable, comparison table or repeal materials, and any required attachments.
 - By default, when file generation is available, output each instrument's formal proposal as a **separate file**.
 - If separate files would materially increase generation cost, token use, or operational burden, ask the user whether they prefer a consolidated working file. Do not choose consolidation solely for convenience or token savings without the user's agreement.
 - A consolidated file may contain multiple independent proposals for convenience, but each proposal must remain structurally complete and clearly separated. Do not collapse multiple instruments into one 案由, one comparison table, or a single formal proposal merely because they are related.
 - Related proposals may cross-reference one another in explanations or consequential notes. This does not merge their legal or procedural identity.
-- If an authoritative institutional template or applicable procedure expressly allows a multi-instrument omnibus proposal, follow that rule and state the basis.
+- Even if an authoritative institutional template or applicable procedure permits joint submission or a consolidated document, retain each instrument as a complete, independent formal proposal. Permission to submit or collect proposals together does not authorize merging them into a single multi-instrument proposal. Any change to this principle requires an explicit user decision; mark it **NEEDS_USER_DECISION** rather than introducing an exception yourself.
 
 The comparison table's **現行條文** column must faithfully preserve the verified source's provision wording, punctuation, and the substantive text and structure of its 項、款、目. Do not correct typos, change punctuation, standardize terminology, modernize wording, or rewrite sentence structure. Formal Word layout may normalize the article number and join it with the first paragraph as specified below; source website UI formatting or HTML block separation does not define the formal document layout. This formatting treatment does not authorize merging or changing any later 項、款、目.
 
