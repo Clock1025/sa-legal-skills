@@ -86,6 +86,10 @@ amendment-drafting
 
 DOCX 能力與實際字型渲染依執行環境而定；字型來源與安裝方式見[正式文件字型](#正式文件字型)。
 
+## 模型與平台使用建議
+
+不同模型與平台在規則遵循、GitHub 存取及 DOCX 輸出上的表現可能不同。現有實測中，Claude Sonnet 5.5 在 Skill 邊界遵守方面較穩定；ChatGPT GPT-5.6 Sol 的工具與 DOCX 能力較完整，但仍有 transition gate 與底線格式問題；Gemini 可在讀不到 repository 時改為貼上或上傳 Skill，本次 DOCX 環境不支援檔案產生；GPT-5.6 Luna 尚未完成本專案實測。結果會隨模型、平台與工具版本改變，PASS 也不是法律正確性保證。詳見[模型與平台使用建議](docs/platforms/model-compatibility.md)。
+
 ## 程序邊界
 
 AI 可以分析、提出建議及草擬條文、提案文件與 Email 草稿；在執行環境支援時，可產生可編輯 DOCX。AI 不會代表使用者寄信、正式提案、簽署、公告或執行任免等制度行為，也不會宣稱議案已送件、通過或法規已公布、生效。制度與政策決定由人作成，未確認的 AI 建議不得當作使用者決定。
