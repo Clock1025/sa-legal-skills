@@ -138,6 +138,10 @@ fc-cache -f
 fc-list | grep -i -E 'CNS|Kai|楷'
 ```
 
+## 開發者驗證與 Beta 流程
+
+見[自動驗證與 Beta Pre-release](docs/ci-cd.md)。
+
 ## 更新
 
 若已 Clone repository，可在 repository 目錄中執行：
