@@ -114,7 +114,8 @@ class PackageTests(unittest.TestCase):
 
     def test_illegal_tags_fail_cli_before_build(self):
         for tag in ('v0.1.3', 'v0.1.4-rc.1', 'v0.1.4-beta.1-extra',
-                    'v01.1.4-beta.1', 'v0.1.4-beta.x', 'main', 'v0.1.4-beta.1\n'):
+                    'v01.1.4-beta.1', 'v0.01.4-beta.1', 'v0.1.04-beta.1',
+                    'v0.1.4-beta.01', 'v0.1.4-beta.x', 'main', 'v0.1.4-beta.1\n'):
             with self.subTest(tag=tag):
                 result = self.cli('--beta-tag', tag)
                 self.assertNotEqual(result.returncode, 0)
@@ -128,27 +129,27 @@ class AncestryTests(unittest.TestCase):
         self.temp = tempfile.TemporaryDirectory(prefix='sa-git-test-')
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
-        self.git('init', '-b', 'main')
+        self.git('init', '-b', 'develop')
         self.git('config', 'user.name', 'Test')
         self.git('config', 'user.email', 'test@example.invalid')
         self.git('commit', '--allow-empty', '-m', 'base')
         self.base = self.git('rev-parse', 'HEAD')
-        self.git('update-ref', 'refs/remotes/origin/main', self.base)
+        self.git('update-ref', 'refs/remotes/origin/develop', self.base)
 
     def git(self, *args):
         return subprocess.check_output(['git', *args], cwd=self.root,
                                        stderr=subprocess.STDOUT, text=True).strip()
 
-    def test_lightweight_and_annotated_main_tags(self):
+    def test_lightweight_and_annotated_develop_tags(self):
         self.git('tag', 'v0.1.4-beta.1')
         self.git('tag', '-a', 'v0.1.4-beta.2', '-m', 'synthetic test')
         for tag in ('v0.1.4-beta.1', 'v0.1.4-beta.2'):
             validation.validate_beta(self.root, tag)
 
-    def test_older_main_commit_accepted(self):
+    def test_older_develop_commit_accepted(self):
         self.git('tag', 'v0.1.4-beta.1')
-        self.git('commit', '--allow-empty', '-m', 'new main')
-        self.git('update-ref', 'refs/remotes/origin/main', self.git('rev-parse', 'HEAD'))
+        self.git('commit', '--allow-empty', '-m', 'new develop')
+        self.git('update-ref', 'refs/remotes/origin/develop', self.git('rev-parse', 'HEAD'))
         self.git('checkout', '--detach', self.base)
         validation.validate_beta(self.root, 'v0.1.4-beta.1')
 
@@ -156,13 +157,44 @@ class AncestryTests(unittest.TestCase):
         self.git('switch', '-c', 'unmerged')
         self.git('commit', '--allow-empty', '-m', 'unmerged')
         self.git('tag', 'v0.1.4-beta.1')
-        with self.assertRaisesRegex(ValueError, 'not in main history'):
+        with self.assertRaisesRegex(ValueError, 'not in develop history'):
             validation.validate_beta(self.root, 'v0.1.4-beta.1')
 
     def test_wrong_checkout_rejected(self):
         self.git('tag', 'v0.1.4-beta.1')
-        self.git('commit', '--allow-empty', '-m', 'later main')
+        self.git('commit', '--allow-empty', '-m', 'later develop')
         with self.assertRaisesRegex(ValueError, 'HEAD is not'):
+            validation.validate_beta(self.root, 'v0.1.4-beta.1')
+
+    def test_integrated_develop_commit_without_main_accepted(self):
+        # New integrated development does not need a stable-main merge.
+        self.git('update-ref', 'refs/remotes/origin/main', self.base)
+        self.git('commit', '--allow-empty', '-m', 'integrated develop')
+        self.git('update-ref', 'refs/remotes/origin/develop', self.git('rev-parse', 'HEAD'))
+        self.git('tag', 'v0.1.4-beta.1')
+        validation.validate_beta(self.root, 'v0.1.4-beta.1')
+
+    def test_main_only_commit_rejected(self):
+        self.git('switch', '-c', 'main-only')
+        self.git('commit', '--allow-empty', '-m', 'not integrated into develop')
+        self.git('update-ref', 'refs/remotes/origin/main', self.git('rev-parse', 'HEAD'))
+        self.git('tag', 'v0.1.4-beta.1')
+        with self.assertRaisesRegex(ValueError, 'not in develop history'):
+            validation.validate_beta(self.root, 'v0.1.4-beta.1')
+
+    def test_missing_develop_ref_fails_cli(self):
+        self.git('tag', 'v0.1.4-beta.1')
+        self.git('update-ref', '-d', 'refs/remotes/origin/develop')
+        result = subprocess.run([sys.executable, str(ROOT / 'scripts/validate.py'),
+                                 '--root', str(self.root), '--beta-tag', 'v0.1.4-beta.1'],
+                                text=True, capture_output=True)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('develop history ref missing or invalid', result.stderr)
+
+    def test_shallow_history_rejected(self):
+        self.git('tag', 'v0.1.4-beta.1')
+        (self.root / '.git/shallow').write_text(self.base + '\n')
+        with self.assertRaisesRegex(ValueError, 'shallow checkout rejected'):
             validation.validate_beta(self.root, 'v0.1.4-beta.1')
 
     def test_missing_tag_rejected(self):
