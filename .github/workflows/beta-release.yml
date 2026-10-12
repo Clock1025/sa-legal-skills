@@ -1,0 +1,92 @@
+name: Beta Pre-release
+on:
+  push:
+    tags: ['v*.*.*-beta.*']
+permissions:
+  contents: read
+concurrency:
+  group: beta-release-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Check Beta tag, main ancestry, and complete package validation
+        env:
+          BETA_TAG: ${{ github.ref_name }}
+        run: python3 scripts/validate.py --beta-tag "$BETA_TAG"
+      - name: Run all smoke and negative tests
+        run: python3 -m unittest discover -s tests -v
+      - name: Prepare checksum
+        run: |
+          mkdir -p test-output/beta
+          cp sa-legal-skills.zip test-output/beta/
+          cd test-output/beta
+          sha256sum sa-legal-skills.zip > SHA256SUMS.txt
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: beta-package
+          path: test-output/beta/
+          if-no-files-found: error
+          retention-days: 7
+  publish:
+    needs: validate
+    if: github.event_name == 'push' && github.ref_type == 'tag'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: beta-package
+          path: package
+      - name: Verify artifact checksum
+        working-directory: package
+        run: sha256sum --check SHA256SUMS.txt
+      - name: Refuse existing Release and publish verified Beta
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          BETA_TAG: ${{ github.ref_name }}
+        run: |
+          python3 - <<'PY'
+          import os
+          import urllib.error
+          import urllib.request
+          url = f"https://api.github.com/repos/{os.environ['GH_REPO']}/releases/tags/{os.environ['BETA_TAG']}"
+          request = urllib.request.Request(url, headers={
+              'Authorization': 'Bearer ' + os.environ['GH_TOKEN'],
+              'Accept': 'application/vnd.github+json',
+              'X-GitHub-Api-Version': '2022-11-28',
+          })
+          try:
+              with urllib.request.urlopen(request):
+                  raise SystemExit('FAIL: Release already exists; refusing to overwrite. Inspect the existing Release.')
+          except urllib.error.HTTPError as error:
+              if error.code != 404:
+                  raise SystemExit(f'FAIL: cannot check existing Release (HTTP {error.code})')
+          PY
+          cat > notes.md <<'NOTES'
+          AUTOMATED CHECKS: PASS
+
+          Verified required files, Skill metadata and entry references, ZIP exact members,
+          source-byte equality, CRC integrity, extraction, two independent SHA-256 builds,
+          smoke/negative tests, strict Beta tag format and main-history ancestry.
+
+          REAL-MODEL BEHAVIOR: NOT TESTED / UNVERIFIED
+
+          Historical v0.1.3 fixture results were not rerun. Legal correctness, DOCX generation,
+          fonts and visual quality are not verified by these checks. This is a Beta Pre-release;
+          stable releases still require human approval.
+          NOTES
+          gh release create "$BETA_TAG" package/sa-legal-skills.zip package/SHA256SUMS.txt \
+            --repo "$GH_REPO" --verify-tag --prerelease --latest=false \
+            --title "$BETA_TAG" --notes-file notes.md
