@@ -100,6 +100,18 @@ C = 該段落實際正文所使用的中文字型與字級之一個全形中文�
 
 DOCX QA 若環境支援，核對條文段落 paragraph spacing before／after 為 0 pt、fallback line spacing 為 single／1.0；渲染後檢查不同項仍可區分、首行與續行縮排正確、款目階層未消失、表格內格式正常、換頁未破壞法規結構，以及新設縮排未以新增前置空白字元假裝實現。同時核對 underline、bold、East Asian font 與既有字型規則；若無法渲染，明確說明版面尚未驗證。既有原文含有的空白不得僅為 QA 而刪改。
 
+### 長表格分頁與文件品質驗證
+
+- 每一條文的「修正條文｜現行條文｜說明」必須保留同一邏輯列與可追溯的來源版本／條次對應。長列跨頁不能省略、截斷、重複正文或把相鄰條文移入錯誤欄位；不得為了好看而刪字、合併不同項或改寫引文。
+- 以 Word 原生標題列重複欄名（OOXML `w:tblHeader`），長列允許跨頁分割。不得對整張表套用 `w:cantSplit`、連鎖 `keepNext`／整段 `keepLines` 或固定 `exact` 列高，造成長文截斷、大片空白或無法合理換頁。短列若可容於一頁可適度保持完整；超過一頁的列不得強制不分割。檢查 style 繼承與最終有效屬性，不只直接格式。
+- 固定且可讀的三欄欄寬、頂端對齊與可見格線應保持續頁欄位關係。重複的是標題列而非條文正文；長短差異造成的空白欄不代表內容遺失，不得塞入別條或重複原文補滿。若需人工續列，標明非正文續頁資訊，保留逐段來源映射並核對三欄重組後全文，不能任意切斷法律結構。
+- 對照表來源、最終修正文字與逐條說明逐列比對；保留條→項→款→目獨立段落及既有縮排、中文標點、唯一 U+3000、原文保真、空白／未變動文字不加底線規則。格式調整不是實質修正，可能變更法意時依既有確認流程，不默認「技術修正」。
+- 生成後從 DOCX 實際位元組提取各列／欄／段落文字與來源核對，檢查多條連續長文、兩側長度不等及長說明；確認無截斷、重複、錯位、版本混用及誤加底線。此結構／文字檢查不證明 Word 分頁、字型替代或視覺品質。
+- 可渲染時實際逐頁檢查重複標題、跨頁接續、欄位、空白頁、clipping／overflow、段落階層及底線，核對中文字型實際套用與 fallback；記錄 DOCX/PDF 身分、renderer／版本、頁數、字型與檢查範圍。只有指定 East Asian font 不等於渲染已用該字型，不由單一平台推論跨平台一致。
+- 分開回報 DOCX generation、OOXML／source fidelity、rendering、visual QA、font QA 與真人模型行為。沒有實際渲染／看圖則寫 **VISUAL QA: NOT TESTED**；局部檢查如實列 PARTIAL 與未驗項目，不能拿靜態規則或 CI PASS 冒充版面驗證。可在 Skill Feedback Package 的 outputs verification／limitations 附上同一份驗證紀錄。
+
+可重建的虛構案例與開發者驗證方式見 [DOCX quality regression](../../docs/regression/v0.1.4-docx-quality.md)。這些是 reference fixtures，不是有效法規、真人模型測試或正式文件引擎；Release ZIP 未含 docs 時，以上規則仍可獨立使用。
+
 ## Comparison table markup
 
 Apply underlining in Word formatting, not underscore characters or markup symbols in the final DOCX:

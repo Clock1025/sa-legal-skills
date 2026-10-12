@@ -1,0 +1,28 @@
+{
+  "kind": "FICTIONAL_REFERENCE_FIXTURES",
+  "version": "docx-fixture-1",
+  "instrument": "虛構《文件測試辦法》；非現行法規",
+  "font": "Noto Serif CJK TC",
+  "cases": [
+    {"id": "C01", "purpose": "短條文一般修正", "rows": [
+      {"id": "R01", "article": "第一條", "paragraphs": [{"level": "article", "text": "應於會議{days}日前公告。", "repeat": 1}], "reason": "測試僅將七日改為五日，其他文字不得加底線。"}
+    ]},
+    {"id": "C02", "purpose": "單列長條文超過一頁", "rows": [
+      {"id": "R02", "article": "第二條", "paragraphs": [{"level": "article", "text": "應於會議{days}日前公告。", "repeat": 1}, {"level": "paragraph", "text": "虛構長文測試：資料內容應完整保留，跨頁不得截斷、遺漏或重複；欄位對照應清楚。", "repeat": 80}], "reason": "此為超過一頁的長列壓力測試，不得透過刪字或強制固定高度改善版面。"}
+    ]},
+    {"id": "C03", "purpose": "多條長文連續排列", "rows": [
+      {"id": "R03", "article": "第三條", "paragraphs": [{"level": "article", "text": "应於會議{days}日前公告。", "repeat": 1}, {"level": "paragraph", "text": "第一組虛構長文：各欄應對應同一條文；原文包含的字形不因排版而校正。", "repeat": 40}], "reason": "保持第三條的來源字形及欄位對應。"},
+      {"id": "R04", "article": "第四條", "paragraphs": [{"level": "article", "text": "應於會議{days}日前公告。", "repeat": 1}, {"level": "paragraph", "text": "第二組虛構長文：多條連續跨頁仍須保留原條次與比較關係。", "repeat": 45}], "reason": "保持第四條的原始段落與三欄配對。"},
+      {"id": "R05", "article": "第五條", "paragraphs": [{"level": "article", "text": "應於會議{days}日前公告。", "repeat": 1}, {"level": "paragraph", "text": "第三組虛構長文：標題列可重複，法規正文不可重複。", "repeat": 45}], "reason": "保持第五條，不將相鄰條文混用。"}
+    ]},
+    {"id": "C04", "purpose": "含項款目與多層縮排", "rows": [
+      {"id": "R06", "article": "第六條", "paragraphs": [{"level": "article", "text": "應於會議{days}日前公告。", "repeat": 1}, {"level": "paragraph", "text": "第二項應保留獨立段落，不以空白模擬縮排。", "repeat": 1}, {"level": "item", "text": "一、測試第一款的長文、自動換行與編號對齊。", "repeat": 8}, {"level": "subitem", "text": "（一）測試第一目的括號、階層及續行位置。", "repeat": 8}, {"level": "item", "text": "二、測試第二款，不能合併為另一項。", "repeat": 1}], "reason": "維持條、項、款、目結構；縮排屬格式，未增加法律政策。"}
+    ]},
+    {"id": "C05", "purpose": "兩側長度差異很大", "rows": [
+      {"id": "R07", "article": "第七條", "paragraphs": [{"level": "article", "text": "應於會議{days}日前公告。", "repeat": 1}], "added_paragraph": {"level": "paragraph", "text": "虛構新增段落：僅供確認長短欄位跨頁對應，不是實際法律提案。", "repeat": 75}, "reason": "新欄長、舊欄短，空欄續頁不可錯置其他條文，也不得縮短新文。"}
+    ]},
+    {"id": "C06", "purpose": "中文標點括號與長修正說明", "rows": [
+      {"id": "R08", "article": "第八條", "paragraphs": [{"level": "article", "text": "應於會議{days}日前公告；公告包含「時間、地點」（必要事項）：不得省略。", "repeat": 1}], "reason": "虛構說明（非法律結論）：現行規定與修正內容一一對應；逗號、句號、括號與引號都應保真。", "reason_repeat": 65}
+    ]}
+  ]
+}
