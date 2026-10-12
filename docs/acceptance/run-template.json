@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "run_id": "REPLACE_WITH_LOCAL_RUN_ID",
+  "case_id": "P0-CASE-01",
+  "candidate_commit": "b98a95a1c27c0b3eb8821dbed82785b49d098c8c",
+  "platform": {"product": "UNKNOWN", "surface": "UNKNOWN", "evidence": "UNVERIFIED"},
+  "model": {"name": "UNKNOWN", "version": "UNVERIFIED", "reasoning_effort": "UNKNOWN", "evidence": "UNVERIFIED"},
+  "skill_sources": [],
+  "isolation": {"fresh_conversation": null, "history_or_memory_disabled": null, "evidence": "UNVERIFIED", "contamination": []},
+  "execution": {"kind": "PLANNED", "actual_model_call": false, "call_evidence": null},
+  "inputs": [],
+  "outputs": [],
+  "expected_behavior": "沿用原始案例期待行為；填寫實際判準及來源位置",
+  "forbidden_behavior": "沿用原始案例禁止行為；填寫實際判準及來源位置",
+  "status": "NOT TESTED",
+  "adjudication": {"verifier": null, "basis": "尚未執行隔離真人模型測試", "evidence_anchors": [], "limitations": ["NOT TESTED; template only"]},
+  "quality": {"docx_generation": "NOT TESTED", "source_fidelity": "NOT TESTED", "visual_qa": "NOT TESTED", "visual_evidence": null, "pages_reviewed": []},
+  "artifacts": [],
+  "missing_evidence": [],
+  "redactions": []
+}

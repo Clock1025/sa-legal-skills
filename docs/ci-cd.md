@@ -46,6 +46,13 @@ python3 -m unittest discover -s tests -v
 任何失敗皆 non-zero exit。ZIP 位於既有 ignored `sa-legal-skills.zip`；測試使用自動清理的暫存目錄。
 Git 測試的 synthetic tags 只存在於暫存 Git fixture，不建立或推送專案版本 tag。
 
+## Beta 前人工驗收
+
+[驗收操作與矩陣](acceptance/model-regression.md)、[證據紀錄範本](acceptance/record-guide.md)及
+[Beta 前清單](acceptance/beta-checklist.md)供維護者獨立驗收。離線檔案完整性／CI PASS 不等於真人模型或 DOCX 視覺 PASS。
+這些是建議與證據管理，不新增自動發布閘門或授權；原有 workflow 不讀這些紀錄自動放行。
+測試scope與限制接受、最終 Tag／Release 授權仍由使用者明確決定。
+
 ## Beta 發布閘門
 
 經獨立審查合併到 develop、確認想測試的版本與人工驗收範圍後，維護者才另外授權建立 Beta tag。
