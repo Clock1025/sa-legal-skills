@@ -138,6 +138,12 @@ fc-cache -f
 fc-list | grep -i -E 'CNS|Kai|楷'
 ```
 
+## Skill 完整回報包
+
+在任一 Skill 對話要求：「請產生完整 Skill 回報包，包含可取得的完整對話紀錄。」
+只匯出實際可取得的資料，明列缺失、來源與驗證限制；無 ZIP 工具時提供文字回退，不假裝取得平台全歷史。
+[回報契約與離線工具](docs/feedback-package.md)說明欄位、來源、授權與操作；不自動上傳 GitHub，也不代表真人模型或法律品質驗證。
+
 ## 開發者驗證與 Beta 流程
 
 `main` 是預設的穩定主線，`develop` 是開發與 Beta 整合主線；一般功能分支從最新 develop 建立，PR 指向 develop。正式發布準備才經人工審查合併至 main，穩定版 Tag／Release 另需人工授權。
