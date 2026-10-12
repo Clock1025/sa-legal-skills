@@ -18,7 +18,7 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
-      - name: Check Beta tag, main ancestry, and complete package validation
+      - name: Check Beta tag, develop ancestry, and complete package validation
         env:
           BETA_TAG: ${{ github.ref_name }}
         run: python3 scripts/validate.py --beta-tag "$BETA_TAG"
@@ -79,7 +79,7 @@ jobs:
 
           Verified required files, Skill metadata and entry references, ZIP exact members,
           source-byte equality, CRC integrity, extraction, two independent SHA-256 builds,
-          smoke/negative tests, strict Beta tag format and main-history ancestry.
+          smoke/negative tests, strict Beta tag format and develop-history ancestry.
 
           REAL-MODEL BEHAVIOR: NOT TESTED / UNVERIFIED
 

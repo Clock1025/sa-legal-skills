@@ -140,7 +140,11 @@ fc-list | grep -i -E 'CNS|Kai|楷'
 
 ## 開發者驗證與 Beta 流程
 
-見[自動驗證與 Beta Pre-release](docs/ci-cd.md)。
+`main` 是預設的穩定主線，`develop` 是開發與 Beta 整合主線；一般功能分支從最新 develop 建立，PR 指向 develop。正式發布準備才經人工審查合併至 main，穩定版 Tag／Release 另需人工授權。
+
+main 與 Latest 正式 Release 可能有 CI、文件等非 Skill 內容差異。若要固定版本，使用 [v0.1.3 正式 Release](https://github.com/Clock1025/sa-legal-skills/releases/tag/v0.1.3) 或指定 [v0.1.3 Skill 路徑](https://github.com/Clock1025/sa-legal-skills/blob/v0.1.3/skills/regulation-review/SKILL.md)，不要以 main 或 Latest 代替固定版本識別。
+
+PR／Beta 操作、測試與尚未啟用之保護設定建議見[自動驗證與 Beta Pre-release](docs/ci-cd.md)。
 
 ## 更新
 
