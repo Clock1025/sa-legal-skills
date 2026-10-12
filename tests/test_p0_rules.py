@@ -1,5 +1,8 @@
 """Static rule-presence checks only; no model inference or legal/semantic validator."""
 from pathlib import Path
+import copy
+import json
+import re
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -34,6 +37,43 @@ def missing_fragments(text, fragments):
     return [fragment for fragment in fragments if fragment not in text]
 
 
+def check_example_structure(record):
+    """Check demonstration fields/links only, not truth or legal/model semantics."""
+    def require(condition, message):
+        if not condition:
+            raise ValueError(message)
+    require(record['example_type'] == 'FICTIONAL_DEMONSTRATION', 'fictional label missing')
+    issue = record['issue']
+    require(re.fullmatch(r'I-[0-9]{3}', issue['id']) and issue['status'] == 'OPEN', 'issue identity/status')
+    sources = {source['id']: source for source in record['sources']}
+    require(len(sources) == len(record['sources']), 'duplicate source ID')
+    for sid, source in sources.items():
+        require(re.fullmatch(r'SRC-[0-9]{3}', sid), 'source ID')
+        if source['type'] == 'legal_text_not_provided':
+            require(source['version'] == source['location'] == 'UNVERIFIED' and source['text'] is None,
+                    'unprovided legal source falsely verified')
+    ids = [decision['id'] for decision in record['decisions']]
+    require(len(ids) == len(set(ids)) and ids == issue['decision_ids'], 'decision IDs inconsistent')
+    require(any(d['status'] == 'CONFIRMED' for d in record['decisions']), 'confirmed atomic example missing')
+    for decision in record['decisions']:
+        require(re.fullmatch(r'D-[0-9]{3}', decision['id']), 'decision ID')
+        require(decision['issue_id'] == issue['id'], 'issue link')
+        scope = decision['scope']
+        require(all(scope.get(key) for key in ('instrument', 'offices', 'limits')), 'scope missing')
+        require(decision['source_ids'] and all(sid in sources for sid in decision['source_ids']), 'source link')
+        basis = decision['confirmation_basis']
+        if decision['status'] == 'CONFIRMED':
+            require(basis is not None, 'confirmation basis missing')
+            require(basis['source_id'] in decision['source_ids'], 'confirmation source link')
+            source = sources[basis['source_id']]
+            require(source['type'] == 'fictional_user_statement' and source['version'] == 'example-1',
+                    'confirmation must link fictional input')
+            require(basis['location'] == source['location'] and basis['quote'] in source['text'],
+                    'confirmation quote/location mismatch')
+        else:
+            require(decision['status'] in ('DIRECTION', 'OPEN') and basis is None, 'unconfirmed basis')
+
+
 class P0StaticTests(unittest.TestCase):
     def test_common_rules_present_in_each_skill(self):
         for skill in SKILLS:
@@ -65,6 +105,36 @@ class P0StaticTests(unittest.TestCase):
                      'old-to-new provision mappings', 'new matters requiring confirmation',
                      'policy consequences', 'current-text column and quotations remaining faithful')
         self.assertEqual(missing_fragments(text, fragments), [])
+
+    def test_example_record_structure_and_traceable_fictional_input(self):
+        text = (ROOT / 'skills/large-scale-reform/SKILL.md').read_text()
+        records = [json.loads(raw) for raw in re.findall(r'```json\n(.*?)\n```', text, re.S)]
+        self.assertEqual(len(records), 2)
+        all_ids = []
+        for record in records:
+            check_example_structure(record)
+            all_ids.extend([record['issue']['id'], *record['issue']['decision_ids'],
+                            *(source['id'] for source in record['sources'])])
+        self.assertEqual(len(all_ids), len(set(all_ids)))
+
+    def test_example_missing_scope_basis_or_wrong_link_rejected(self):
+        text = (ROOT / 'skills/large-scale-reform/SKILL.md').read_text()
+        record = json.loads(re.findall(r'```json\n(.*?)\n```', text, re.S)[0])
+        for defect in ('scope', 'basis', 'quote', 'duplicate', 'legal_version'):
+            with self.subTest(defect=defect):
+                bad = copy.deepcopy(record)
+                if defect == 'scope':
+                    bad['decisions'][0]['scope']['limits'] = ''
+                elif defect == 'basis':
+                    bad['decisions'][0]['confirmation_basis'] = None
+                elif defect == 'quote':
+                    bad['decisions'][0]['confirmation_basis']['quote'] = 'not in the fictional source'
+                elif defect == 'duplicate':
+                    bad['decisions'][1]['id'] = bad['decisions'][0]['id']
+                else:
+                    bad['sources'][1]['version'] = 'pretend-verified'
+                with self.assertRaises(ValueError):
+                    check_example_structure(bad)
 
     def test_eight_documented_cases_have_positive_negative_and_limits(self):
         text = (ROOT / 'docs/regression/v0.1.4-p0-cases.md').read_text()

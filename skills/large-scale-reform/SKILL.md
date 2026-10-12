@@ -70,39 +70,48 @@ Apply these safeguards:
 - Record the user's actual words or a faithful concise summary, the date/context when available, and affected decisions when this helps prevent later confusion.
 - When the user changes a choice, preserve the history as SUPERSEDED; update dependent issues and identify which draft text must change.
 
-Example record:
+Example record (fictional demonstration, not actual case evidence):
 
-```text
-DEC-012 人事任免制度
-狀態：DIRECTION
+The following examples contain stipulated fictional user statements only. Their SRC records make those statements traceable within each example; they are not real user decisions or verified legal sources. Legal text has not been supplied, so its version/location is UNVERIFIED and must be obtained before legal comparison or a definitive formal proposal. In real work, replace demonstration evidence with actual, checkable user records; never copy these decisions into a case.
 
-已確認：
-- 部門首長由會長提名
-- 須經議會同意
-
-尚待確認：
-- 免職是否須經議會同意
-- 被否決後是否可再次提名同一人
-- 代理人是否適用相同程序
-
-連動影響：
-- 會長職權
-- 議會職權
-- 人事程序
-- 就任
-- 代理
-- 公告
+```json
+{
+  "example_type": "FICTIONAL_DEMONSTRATION",
+  "sources": [
+    {"id": "SRC-001", "type": "fictional_user_statement", "document": "本範例內的虛構對話，非真實使用者紀錄", "version": "example-1", "location": "message-1", "text": "我確認：僅《組織規則》的正職部門首長由會長提名，任命須經議會同意。免職程序我比較傾向也經議會同意，尚未決定。"},
+    {"id": "SRC-002", "type": "legal_text_not_provided", "document": "示意《組織規則》（非真實法規來源）", "version": "UNVERIFIED", "location": "UNVERIFIED", "text": null}
+  ],
+  "issue": {"id": "I-001", "title": "人事任免制度", "status": "OPEN", "decision_ids": ["D-001", "D-002", "D-003", "D-004"]},
+  "decisions": [
+    {"id": "D-001", "issue_id": "I-001", "content": "正職部門首長由會長提名", "status": "CONFIRMED", "scope": {"instrument": "示意《組織規則》", "offices": ["部門首長"], "limits": "僅正職部門首長；不含代理人或其他職務"}, "source_ids": ["SRC-001", "SRC-002"], "confirmation_basis": {"source_id": "SRC-001", "location": "message-1", "quote": "我確認：僅《組織規則》的正職部門首長由會長提名，任命須經議會同意。"}, "superseded_by": null},
+    {"id": "D-002", "issue_id": "I-001", "content": "正職部門首長任命須經議會同意", "status": "CONFIRMED", "scope": {"instrument": "示意《組織規則》", "offices": ["部門首長"], "limits": "僅正職部門首長；不含代理人或其他職務"}, "source_ids": ["SRC-001", "SRC-002"], "confirmation_basis": {"source_id": "SRC-001", "location": "message-1", "quote": "我確認：僅《組織規則》的正職部門首長由會長提名，任命須經議會同意。"}, "superseded_by": null},
+    {"id": "D-003", "issue_id": "I-001", "content": "免職是否須經議會同意", "status": "DIRECTION", "scope": {"instrument": "示意《組織規則》", "offices": ["部門首長"], "limits": "僅正職部門首長；不含代理人或其他職務"}, "source_ids": ["SRC-001", "SRC-002"], "confirmation_basis": null, "superseded_by": null},
+    {"id": "D-004", "issue_id": "I-001", "content": "代理人是否適用同一任免程序", "status": "OPEN", "scope": {"instrument": "示意《組織規則》", "offices": ["代理部門首長"], "limits": "只討論代理職務；未確認適用正職規則"}, "source_ids": ["SRC-002"], "confirmation_basis": null, "superseded_by": null}
+  ]
+}
 ```
 
-Atomic-decision example:
+Atomic-decision example (fictional demonstration):
 
-```text
-ISSUE 看守機制
-總體議題狀態：OPEN
-
-CONFIRMED：重要職務原則上應設看守機制。
-OPEN：適用職位、啟動條件、終止條件、代理人選、權限限制。
+```json
+{
+  "example_type": "FICTIONAL_DEMONSTRATION",
+  "sources": [
+    {"id": "SRC-003", "type": "fictional_user_statement", "document": "本範例內的虛構對話，非真實使用者紀錄", "version": "example-1", "location": "message-1", "text": "我確認《組織規則》的會長與副會長應有看守機制，但具體條件與權限還沒決定。"},
+    {"id": "SRC-004", "type": "legal_text_not_provided", "document": "示意《組織規則》（非真實法規來源）", "version": "UNVERIFIED", "location": "UNVERIFIED", "text": null}
+  ],
+  "issue": {"id": "I-002", "title": "看守機制", "status": "OPEN", "decision_ids": ["D-005", "D-006", "D-007", "D-008", "D-009"]},
+  "decisions": [
+    {"id": "D-005", "issue_id": "I-002", "content": "會長與副會長應有看守機制的原則", "status": "CONFIRMED", "scope": {"instrument": "示意《組織規則》", "offices": ["會長", "副會長"], "limits": "僅看守原則；不含啟動、終止、人選、權限或其他職位"}, "source_ids": ["SRC-003", "SRC-004"], "confirmation_basis": {"source_id": "SRC-003", "location": "message-1", "quote": "我確認《組織規則》的會長與副會長應有看守機制，但具體條件與權限還沒決定。"}, "superseded_by": null},
+    {"id": "D-006", "issue_id": "I-002", "content": "看守機制啟動條件", "status": "OPEN", "scope": {"instrument": "示意《組織規則》", "offices": ["會長", "副會長"], "limits": "僅該項待決細節；原則確認不等於細節確認"}, "source_ids": ["SRC-004"], "confirmation_basis": null, "superseded_by": null},
+    {"id": "D-007", "issue_id": "I-002", "content": "看守機制終止條件", "status": "OPEN", "scope": {"instrument": "示意《組織規則》", "offices": ["會長", "副會長"], "limits": "僅該項待決細節；原則確認不等於細節確認"}, "source_ids": ["SRC-004"], "confirmation_basis": null, "superseded_by": null},
+    {"id": "D-008", "issue_id": "I-002", "content": "看守人選", "status": "OPEN", "scope": {"instrument": "示意《組織規則》", "offices": ["會長", "副會長"], "limits": "僅該項待決細節；原則確認不等於細節確認"}, "source_ids": ["SRC-004"], "confirmation_basis": null, "superseded_by": null},
+    {"id": "D-009", "issue_id": "I-002", "content": "看守權限限制", "status": "OPEN", "scope": {"instrument": "示意《組織規則》", "offices": ["會長", "副會長"], "limits": "僅該項待決細節；原則確認不等於細節確認"}, "source_ids": ["SRC-004"], "confirmation_basis": null, "superseded_by": null}
+  ]
+}
 ```
+
+The I-level status describes the overall unresolved issue, not the status of every linked D-level decision. Each atomic decision keeps its own status, scope, and confirmation evidence: DIRECTION/OPEN records have no confirmation_basis. CONFIRMED records below demonstrate only the explicitly stated scope in the fictional input; they do not confirm unprovided legal text or authorize new offices or implementation details.
 
 ## Policy / Implementation Separation
 
