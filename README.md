@@ -154,6 +154,8 @@ main 與 Latest 正式 Release 可能有 CI、文件等非 Skill 內容差異。
 
 PR／Beta 操作、測試與尚未啟用之保護設定建議見[自動驗證與 Beta Pre-release](docs/ci-cd.md)。
 
+Beta 前的[真人模型驗收操作、紀錄與人工清單](docs/acceptance/model-regression.md)分開管理 CI、模型實測及 DOCX 視覺證據；未實測仍為 NOT TESTED，是否發布由使用者決定。
+
 ## 更新
 
 若已 Clone repository，可在 repository 目錄中執行：
