@@ -85,7 +85,7 @@ The following examples contain stipulated fictional user statements only. Their 
   "decisions": [
     {"id": "D-001", "issue_id": "I-001", "content": "正職部門首長由會長提名", "status": "CONFIRMED", "scope": {"instrument": "示意《組織規則》", "offices": ["部門首長"], "limits": "僅正職部門首長；不含代理人或其他職務"}, "source_ids": ["SRC-001", "SRC-002"], "confirmation_basis": {"source_id": "SRC-001", "location": "message-1", "quote": "我確認：僅《組織規則》的正職部門首長由會長提名，任命須經議會同意。"}, "superseded_by": null},
     {"id": "D-002", "issue_id": "I-001", "content": "正職部門首長任命須經議會同意", "status": "CONFIRMED", "scope": {"instrument": "示意《組織規則》", "offices": ["部門首長"], "limits": "僅正職部門首長；不含代理人或其他職務"}, "source_ids": ["SRC-001", "SRC-002"], "confirmation_basis": {"source_id": "SRC-001", "location": "message-1", "quote": "我確認：僅《組織規則》的正職部門首長由會長提名，任命須經議會同意。"}, "superseded_by": null},
-    {"id": "D-003", "issue_id": "I-001", "content": "免職是否須經議會同意", "status": "DIRECTION", "scope": {"instrument": "示意《組織規則》", "offices": ["部門首長"], "limits": "僅正職部門首長；不含代理人或其他職務"}, "source_ids": ["SRC-001", "SRC-002"], "confirmation_basis": null, "superseded_by": null},
+    {"id": "D-003", "issue_id": "I-001", "content": "傾向正職部門首長免職也須經議會同意，尚未決定", "status": "DIRECTION", "scope": {"instrument": "示意《組織規則》", "offices": ["部門首長"], "limits": "僅正職部門首長；不含代理人或其他職務"}, "source_ids": ["SRC-001", "SRC-002"], "confirmation_basis": null, "superseded_by": null},
     {"id": "D-004", "issue_id": "I-001", "content": "代理人是否適用同一任免程序", "status": "OPEN", "scope": {"instrument": "示意《組織規則》", "offices": ["代理部門首長"], "limits": "只討論代理職務；未確認適用正職規則"}, "source_ids": ["SRC-002"], "confirmation_basis": null, "superseded_by": null}
   ]
 }
@@ -111,7 +111,7 @@ Atomic-decision example (fictional demonstration):
 }
 ```
 
-The I-level status describes the overall unresolved issue, not the status of every linked D-level decision. Each atomic decision keeps its own status, scope, and confirmation evidence: DIRECTION/OPEN records have no confirmation_basis. CONFIRMED records below demonstrate only the explicitly stated scope in the fictional input; they do not confirm unprovided legal text or authorize new offices or implementation details.
+The I-level status describes the overall unresolved issue, not the status of every linked D-level decision. Each atomic decision keeps its own status, scope, and confirmation evidence: DIRECTION/OPEN records have no confirmation_basis. CONFIRMED records in these examples demonstrate only the explicitly stated scope in the fictional input; they do not confirm unprovided legal text or authorize new offices or implementation details.
 
 ## Policy / Implementation Separation
 
