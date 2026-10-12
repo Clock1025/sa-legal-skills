@@ -7,6 +7,14 @@ description: Review existing student association or student self-governance rule
 
 Review the supplied rules and facts; do not make institutional or policy choices for the user. State the scope of the review, identify gaps, and tie every material conclusion to an identifiable source.
 
+## Stage provenance and incomplete input
+
+At the start or resumption of a work stage, when switching Skills, or before reusing old work materials, record the active Skill file and source path, the verifiable version/commit/ref (if available), and whether its complete contents were actually read in this turn. Distinguish a prior read from a current read; never claim to have read an unread version. Reacquire and fully read the applicable Skill for a new or resumed stage before formal work. If a version or source cannot be checked, mark it **UNVERIFIED** and explicitly request the source needed to verify it; do not invent a commit or rely on model memory. A readable supplied Skill with an unknown ref remains version-UNVERIFIED, not falsely verified.
+
+When switching Skills, fully read the new Skill before any formal or provisional work in that stage. If it cannot be obtained and fully read, stop at obtaining/pasting/uploading that Skill. Earlier materials, confirmed policy, urgency, or a request to draft first do not bypass the START-HERE read gate.
+
+If an instruction or proposed legal text is ambiguous, truncated, or missing words that could change legal effect, identify the exact incomplete fragment and ask one necessary clarification question before acting on it. Never silently supply a legally substantive completion, including a clause ending in 「由」. Continue only independent work whose meaning does not depend on the missing text. Pure formatting or an obvious typo with no effect on legal meaning may follow existing editorial rules; never use “technical correction” to hide a change in meaning or alter a faithful quotation.
+
 ## Review workflow
 
 1. **Define the question and its type.** Identify the organization, relevant rules, action or arrangement under review (if any), actors, dates, procedural history, and what the user wants answered. Separate established facts from assumptions and disputed facts. Classify each question as descriptive/interpretive or as a compliance/legality assessment before choosing how to report the answer.
@@ -42,6 +50,12 @@ Do not use “符合” as a default when no violation has been proven. Lack of 
 - Mark inferences as inferences. Distinguish text-based conclusions from assumptions, customary practice, and recommendations.
 - Do not present common practice, remembered wording, or an unverified online copy as authoritative current law.
 - If authorities conflict, versions are unclear, or legal effect depends on unresolved facts, describe the competing readings and limits rather than claiming certainty.
+
+## Policy scope and proposed changes
+
+Keep effective current law distinct from proposed text. When carrying policy records into review, preserve the status and instrument/office scope: CONFIRMED is an explicit user decision; DIRECTION is a preference; OPEN is undecided; DEFERRED is postponed; SUPERSEDED is replaced; ASSISTANT_PROPOSAL is an unaccepted AI suggestion. Do not promote these other states to CONFIRMED or treat a scoped confirmation as extending to later-added instruments. Identify new scope requiring confirmation and ask again if a new source changes the premises. Suggestions remain separate from current-rule findings and any clean formal draft.
+
+A suggested change to the legal subject, regulated persons, powers, legal effects, periods, mandatory procedures, or exceptions is a **possible substantive change**, even when only a few words differ. Explain that possibility and obtain user confirmation before adopting it, unless the exact change is already explicitly confirmed. Do not silently treat 「該會議」 → 「其出席之會議」 as mere editing. This review Skill may identify the issue; formal drafting still requires reading and switching to amendment-drafting.
 
 ## Scope boundary and formal action
 

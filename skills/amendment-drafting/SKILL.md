@@ -7,6 +7,14 @@ description: Turn a sufficiently settled student association or student self-gov
 
 Translate the user's chosen institutional direction into precise, internally consistent legal text and proposal materials. The user owns policy choices. Clarify ambiguity that affects substance; do not silently change a choice to make drafting easier. When a large-scale reform record is supplied, treat its confirmed decisions as authoritative and exclude open, deferred, or unconfirmed proposals from the clean formal version.
 
+## Stage provenance and incomplete input
+
+At the start or resumption of a work stage, when switching Skills, or before reusing old work materials, record the active Skill file and source path, the verifiable version/commit/ref (if available), and whether its complete contents were actually read in this turn. Distinguish a prior read from a current read; never claim to have read an unread version. Reacquire and fully read the applicable Skill for a new or resumed stage before formal work. If a version or source cannot be checked, mark it **UNVERIFIED** and explicitly request the source needed to verify it; do not invent a commit or rely on model memory. A readable supplied Skill with an unknown ref remains version-UNVERIFIED, not falsely verified.
+
+When switching Skills, fully read the new Skill before any formal or provisional work in that stage. If it cannot be obtained and fully read, stop at obtaining/pasting/uploading that Skill. Earlier materials, confirmed policy, urgency, or a request to draft first do not bypass the START-HERE read gate.
+
+If an instruction or proposed legal text is ambiguous, truncated, or missing words that could change legal effect, identify the exact incomplete fragment and ask one necessary clarification question before acting on it. Never silently supply a legally substantive completion, including a clause ending in 「由」. Continue only independent work whose meaning does not depend on the missing text. Pure formatting or an obvious typo with no effect on legal meaning may follow existing editorial rules; never use “technical correction” to hide a change in meaning or alter a faithful quotation.
+
 ## Intake and source control
 
 1. Identify the intended instrument, provisions, policy direction, scope, audience, and requested deliverables.
@@ -19,6 +27,16 @@ Translate the user's chosen institutional direction into precise, internally con
    - **UNRESOLVED** — rechecked and found to have a consequential link, but necessary policy, procedure, or other matter remains undecided, so it cannot safely be drafted yet; do not supply the missing policy yourself.
 
    Do not let a previously identified related provision silently disappear when drafting begins. If an item has not been rechecked, do not imply that the consequential review is complete. Tracking these dispositions is a drafting and review completeness requirement, not a policy decision.
+
+## Policy status and scoped adoption
+
+Use the reform record's decision/source IDs and preserve their provenance and old-to-new provision mappings through cross-instrument migration or renumbering. If a supplied record lacks scope, confirmation evidence, or source/version locations, identify the gap rather than inventing it. Keep proposal text separate from verified effective current law.
+
+Distinguish **CONFIRMED**, **DIRECTION**, **OPEN**, **DEFERRED**, **SUPERSEDED**, and **ASSISTANT_PROPOSAL** with the same meanings used in reform records: explicitly decided, preferred direction, undecided, postponed, replaced, and AI-only suggestion respectively. Only **CONFIRMED** policy within its recorded scope may enter a clean formal draft. Other statuses may be discussed in clearly labeled, separate working candidates, never presented as agreed policy. 「比較傾向 C」 alone is DIRECTION; an unaccepted AI committee composition remains ASSISTANT_PROPOSAL. 「加上去」 or 「照這個」 requires a traceable, clearly presented specific option, applicable scope, and policy consequences; clarify an unclear referent rather than confirming everything around it.
+
+Confirmation for specified instruments or offices does not automatically cover later-added sources or institutions. Separate the confirmed scope from new matters requiring confirmation; if new sources change the premises, ask again before applying the affected policy. Preserve confirmed decisions for unaffected portions.
+
+Changes to the legal subject, regulated persons, powers, legal effects, periods, mandatory procedures, or exceptions are a **possible substantive change**, however few words are changed. Explain the possible effect and obtain user confirmation before adopting the change, unless existing explicit confirmation covers that exact change. Changing 「該會議」 to 「其出席之會議」 can change scope; do not classify it as mere editing. Pure legal formatting follows existing rules, with the current-text column and quotations remaining faithful to the source.
 
 ## Drafting deliverables
 
