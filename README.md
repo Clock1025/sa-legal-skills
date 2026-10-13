@@ -4,6 +4,8 @@
 
 第一次使用？從[新手引導](docs/first-time-user.md)開始；不確定提示詞貼哪裡或如何提供檔案，可看[平台使用指南](docs/platforms/)。
 
+快速查找新手、各平台已知問題及版本資訊，可看[文件導覽](docs/README.md)。
+
 ## 快速開始
 
 不需要會 Git，也不需要執行安裝程式；可依 AI 的讀取能力選擇使用方式：
@@ -88,7 +90,7 @@ DOCX 能力與實際字型渲染依執行環境而定；字型來源與安裝方
 
 ## 模型與平台使用建議
 
-不同模型與平台在規則遵循、GitHub 存取及 DOCX 輸出上的表現可能不同。現有實測中，Claude Sonnet 5.5 在 Skill 邊界遵守方面較穩定；ChatGPT GPT-5.6 Sol 的工具與 DOCX 能力較完整，但仍有 transition gate 與底線格式問題；Gemini 可在讀不到 repository 時改為貼上或上傳 Skill，本次 DOCX 環境不支援檔案產生；GPT-5.6 Luna 尚未完成本專案實測。結果會隨模型、平台與工具版本改變，PASS 也不是法律正確性保證。詳見[模型與平台使用建議](docs/platforms/model-compatibility.md)。
+不同模型、帳號與平台的 GitHub 存取、Skill 規則遵循及 DOCX 輸出能力可能不同。既有 v0.1.3 實測、v0.1.4-beta.1 首輪行為觀察與兩份實際 DOCX 文件檢查，各自具有不同的證據範圍；不宜用少數測試結果替模型排名，或把單次工具限制推論為平台永久不支援。請依[模型與平台使用建議](docs/platforms/model-compatibility.md)與個別平台指南核對已知問題及替代方法。正式使用仍須查核法規原文、已確認政策和產出文件。
 
 ## 程序邊界
 

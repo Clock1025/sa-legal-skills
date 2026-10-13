@@ -2,6 +2,14 @@
 
 以下為使用者回報的 **2026-10-02** 實測紀錄：**Gemini 3.1 Pro** 直接讀取 GitHub repository 失敗，模型有明確告知無法讀取；手動提供完整 `SKILL.md` 後可使用，且 `large-scale-reform` 已進行實際案件測試。這是當次人工實測回報，不是本輪自動化測試；本輪未重新執行。平台、模型與工具能力可能更新，不代表 Gemini 永久不支援 GitHub。
 
+## 已知問題與限制（依既有實測）
+
+- **曾無法直接讀取 GitHub repo：**2026-10-02 使用者測試的 Gemini 3.1 Pro／一般聊天無法直接取得 GitHub repository；後續 2026-10-04 收錄的 Extended Thinking 測試中，`github.com` 與 `raw.githubusercontent.com` 直接讀取均為 UNAVAILABLE。模型有誠實說明，手動貼入／上傳完整 Skill 是當次可用的替代方式。
+- **該次環境不能生成 DOCX：**Gemini 3.1 Pro／Extended Thinking 的 best-effort 測試結果為 DOCX generation `UNSUPPORTED`，只提供文字／Markdown；OOXML、Word 原生表格與視覺品質皆 `NOT VERIFIED`。模型對草案品質自評 PASS，不等於獨立驗收通過。
+- **Flash-Lite 規則遵循受提示詞影響（extended thinking OFF）：**v0.1.3 紀錄的短提示詞測試曾出現未讀 Skill 就開始分析等 FAIL；使用完整 canonical START-HERE 的當次測試 PASS，但不能推論之後都一定遵守。
+
+**請注意：這是特定日期、模型與工具設定的觀察，不代表 Gemini 永久不能連 GitHub 或產生 DOCX。** 先嘗試正常讀取；不能讀時採用下方「完整複製貼入」或上傳方式，不必等待平台支援。Flash-Lite 的紀錄亦見 [v0.1.3 回歸](../regression/v0.1.3.md)；跨平台總覽見[模型與平台使用建議](model-compatibility.md)。
+
 ## 先開新對話
 
 開啟 [Gemini](https://gemini.google.com)，登入後選擇目前介面的「新對話／New chat」。把提示詞貼到平常輸入訊息的文字框。第一次使用可先貼[START-HERE 的唯一可複製提示詞](../../START-HERE.md#可複製提示詞)，讓 AI 判斷要用哪份 Skill；無法讀 GitHub 時，依下面方式提供檔案。
