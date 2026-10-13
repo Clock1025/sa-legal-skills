@@ -180,8 +180,9 @@ def gaps(record):
     return list(dict.fromkeys(missing))
 
 
-def summary(records):
+def summary(records, matrix=None, candidate_commit=None):
     require(len(records) == len({Path(p).resolve() for p in records}), '不要重複指定同一份紀錄')
+    seen = set()  # Only integrity-valid runs at a matching candidate count as present.
     lines = ['# 驗收摘要（離線彙整，不是自動判分）', '',
              '| Run / 案例 / 候選 | 平台 / 模型 / 版本 | 執行 / 規則狀態 | 檔案一致性 | 缺漏與限制 |',
              '| --- | --- | --- | --- | --- |']
@@ -190,6 +191,7 @@ def summary(records):
             require(not path.is_symlink() and not path.parent.is_symlink(), '紀錄不能是 symlink')
             record = json.loads(path.read_text(encoding='utf-8'))
             check(record, path.parent)
+            seen.add((record['case_id'], record['candidate_commit']))
             fields = [record['run_id'] + ' / ' + record['case_id'] + ' / ' + record['candidate_commit'][:12],
                       record['platform']['product'] + ' ' + record['platform']['surface'] + ' / ' + record['model']['name'] + ' / ' + record['model']['version'],
                       record['execution']['kind'] + ' / ' + record['status'], 'PASS（僅一致性）',
@@ -197,6 +199,16 @@ def summary(records):
         except (ValueError, KeyError, TypeError, OSError) as error:
             fields = [path.parent.name, 'UNKNOWN', '未核對；不重寫原判定', 'FAIL', str(error)]
         lines.append('| ' + ' | '.join(escaped(f) for f in fields) + ' |')
+    if matrix is not None:
+        require(re.fullmatch(r'[0-9a-f]{40}', candidate_commit or '') is not None, '矩陣摘要必須指定完整候選 SHA')
+        absent = [c['id'] for c in matrix['cases'] if (c['id'], candidate_commit) not in seen]
+        lines.extend(['', '## 此候選尚無有效 run 紀錄的案例', '',
+                      f'候選：{escaped(candidate_commit)}；共 {len(absent)} / {len(matrix["cases"])} 案尚無有效紀錄。',
+                      '無紀錄不等於模型失敗；已有紀錄但尚未獨立判定的案例仍保留上表 NOT TESTED。', ''])
+        if absent:
+            lines.extend('- ' + escaped(case_id) + '：NOT TESTED（無有效 run）' for case_id in absent)
+        else:
+            lines.append('無。所有案例都有有效紀錄，但不代表真人行為通過。')
     lines += ['', '待人工審查：原始輸入／輸出範圍、真實性、隔離、Skill 讀取及原案判準；不採模型自評。',
               '缺底層工具日誌不自動否定已可觀察行為；未核對的讀取／工具能力另列限制。',
               '實際風險與規則符合、證據完整性分開；此工具不給風險等級或法律結論。',
@@ -292,6 +304,7 @@ def main():
     p.add_argument('--inputs'); p.add_argument('--skill', action='append', default=[], metavar='NAME=FILE')
     p = commands.add_parser('summary', help='彙整本地 runs；不包含原始正文')
     p.add_argument('--record', action='append', type=Path, default=[], help='另指定既有schema的紀錄，可重複選不同檔案')
+    p.add_argument('--commit', help='可選：以指定候選 SHA 列出矩陣中尚無有效 run 的案例')
     args = parser.parse_args()
     try:
         if args.command == 'prepare': print(prepare(ROOT, args.commit, args.bundle_id, args.case))
@@ -303,7 +316,8 @@ def main():
                              args.origin, args.observed_call, args.inputs, skills))
         else:
             records = args.record or sorted(child(store(ROOT), 'runs').glob('*/record.json'))
-            print(summary(records), end='')
+            matrix = load_plan(ROOT, args.commit) if args.commit else None
+            print(summary(records, matrix, args.commit), end='')
     except (ValueError, KeyError, TypeError, OSError, subprocess.CalledProcessError, IndexError) as error:
         print(f'FAIL: {error}', file=sys.stderr)
         return 1
