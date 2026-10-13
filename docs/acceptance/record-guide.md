@@ -68,3 +68,9 @@ model品質欄只記該次實際模型產物，不能填入reference fixture的�
 模型回報「我已讀取」「我已驗收」是SELF_REPORTED；verifier需對原始證據自行判斷。
 若已觀察到失敗，只是某些獨立驗證未完成，保留該失敗／PARTIAL，不用NOT TESTED掩蓋可證明的錯誤。
 離線checker對缺原始輸出只會要求NOT TESTED，不負責整合完整案件的子項判定。
+
+## 減少手工整理
+
+可使用[半自動工具指南](assistant-guide.md)從既有矩陣產生分離的操作卡／模型輸入、匯入UTF-8 TXT、保存hash與索引並彙整摘要。沿用本schema與checker，不自動判分、不重建對話，也不增加真人覆蓋。可見對話可用於可觀察行為判定；無底層工具日誌本身不代表行為FAIL，未能核對的Skill讀取／隔離／工具能力另列限制。
+
+[四個實務情境](practical-cases.md)與[風險整理建議](risk-review.md)為補充資料，不取代原P0判準或改寫歷史結果。
