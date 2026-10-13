@@ -2,6 +2,14 @@
 
 開啟平常使用的 AI，建立一個新對話，把[START-HERE 的唯一可複製提示詞](../../START-HERE.md#可複製提示詞)貼到訊息框。若是讀取 workspace 的 Agent，提供檔案路徑；不確定時直接說明想解決的問題。各平台介面、網路讀取、附件與檔案產生能力不同，且可能更新。
 
+## 尚未逐一驗證的限制
+
+本頁適用多種不同 Agent，**沒有針對每個平台做獨立真人驗收**，因此不能把 ChatGPT、Claude 或 Gemini 的問題直接當成其他 Agent 的已知缺陷。
+
+使用前請先核實三件事：能否實際讀取指定 `SKILL.md`；切換 Skill 時會否在尚未讀取前起草；有 DOCX 需求時能否真正輸出可編輯文件並檢查版面。無法讀取、無法輸出或沒有證據的項目要如實標示，不能用模型自述代替驗證。
+
+若要看已有逐平台觀察及替代做法，可參閱 [ChatGPT](chatgpt.md)、[Claude](claude.md)、[Gemini](gemini.md)與[模型比較](model-compatibility.md)。
+
 ## 取得本次需要的 Skill
 
 - [regulation-review](https://github.com/Clock1025/sa-legal-skills/blob/main/skills/regulation-review/SKILL.md)：現行規定、權限、程序、期限與合規問題。
