@@ -89,12 +89,15 @@ class AcceptanceAssistTests(unittest.TestCase):
     def test_unsafe_paths_and_non_utf8(self):
         source = self.base / "bad.txt"
         source.write_bytes(b"\xff")
-        for run_id in ("../bad", "/absolute", "bad/path", "safe"):
-            self.run_cli("import-txt", "EXAMPLE-01", run_id, source, "--commit", self.sha,
-                         "--matrix", self.matrix, "--template", self.template, "--root", self.runs, ok=False)
+        self.run_cli("import-txt", "EXAMPLE-01", "safe", source, "--commit", self.sha,
+                     "--matrix", self.matrix, "--template", self.template, "--root", self.runs, ok=False)
         self.assertFalse((self.runs / "safe").exists())
         valid = self.base / "real.txt"
         valid.write_text("fiction")
+        for run_id in ("../bad", "/absolute", "bad/path"):
+            self.run_cli("import-txt", "EXAMPLE-01", run_id, valid, "--commit", self.sha,
+                         "--matrix", self.matrix, "--template", self.template, "--root", self.runs, ok=False)
+        self.assertFalse((self.base / "bad").exists())
         link = self.base / "linked.txt"
         link.symlink_to(valid)
         self.run_cli("import-txt", "EXAMPLE-01", "link", link, "--commit", self.sha,
