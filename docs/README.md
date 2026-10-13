@@ -35,6 +35,6 @@
 - [v0.1.4 P0 案例](regression/v0.1.4-p0-cases.md)・[DOCX 品質回歸](regression/v0.1.4-docx-quality.md)：參考及模擬驗證紀錄，不能當成整體真人測試通過。
 - [GitHub Releases](https://github.com/Clock1025/sa-legal-skills/releases)：已發布版本與附件。要固定版本，使用 Tag 或完整 Commit，不以會移動的 `main`／`develop` 代替。
 
-**發行範圍：**正式 Release ZIP 固定只含 `START-HERE.md`、`LICENSE` 和三份 `skills/*/SKILL.md`。本頁、平台指南及驗收腳本沒有打包進 ZIP，請到 repository 網頁閱讀或取得。
+**發行範圍：** 正式 Release ZIP 固定只含 `START-HERE.md`、`LICENSE` 和三份 `skills/*/SKILL.md`。本頁、平台指南及驗收腳本沒有打包進 ZIP，請到 repository 網頁閱讀或取得。
 
 [返回專案首頁](../README.md)

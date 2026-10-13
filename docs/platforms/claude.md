@@ -4,9 +4,9 @@
 
 ## 已知問題與限制（依既有實測）
 
-- **Skill 切換曾出現提前起草：**較早的 Claude Sonnet 5.5／Medium 真實案件中，模型表示無法讀取新 `amendment-drafting` Skill，仍先輸出暫擬修正條文，當次 transition gate FAIL。**2026-10-04 記錄的新版 START-HERE fresh-context 重測則 PASS**，在要求「不用等 Skill」時仍拒絕提前起草；這不代表所有 Claude 對話都有強制 gate。
-- **長表格與字型需人工看頁：**已知長列跨頁、頁面排版等問題不能只用模型自評判斷；取得 DOCX 時仍須逐頁查看是否截字、續頁錯位或字型替代。是否能產生 DOCX 依當次帳號與工具環境而定。
-- **GitHub 讀取成功限當次環境：**2026-10-02 Claude Sonnet 5.5／Medium 成功讀取指定 Skill，但不推論每個模型或之後版本都能讀 repo。
+- **Skill 切換曾出現提前起草：** 較早的 Claude Sonnet 5.5／Medium 真實案件中，模型表示無法讀取新 `amendment-drafting` Skill，仍先輸出暫擬修正條文，當次 transition gate FAIL。**2026-10-04 記錄的新版 START-HERE fresh-context 重測則 PASS**，在要求「不用等 Skill」時仍拒絕提前起草；這不代表所有 Claude 對話都有強制 gate。
+- **長表格與字型需人工看頁：** 已知長列跨頁、頁面排版等問題不能只用模型自評判斷；取得 DOCX 時仍須逐頁查看是否截字、續頁錯位或字型替代。是否能產生 DOCX 依當次帳號與工具環境而定。
+- **GitHub 讀取成功限當次環境：** 2026-10-02 Claude Sonnet 5.5／Medium 成功讀取指定 Skill，但不推論每個模型或之後版本都能讀 repo。
 
 若切換階段無法讀新 Skill，請先貼入或上傳完整 `SKILL.md` 再繼續；需要正式 Word 文件時以實際檔案檢查為準。證據與歷史狀態見 [v0.1.3 回歸](../regression/v0.1.3.md)及[模型比較](model-compatibility.md)。
 
