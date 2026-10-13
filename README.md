@@ -10,9 +10,9 @@
 
 不需要會 Git，也不需要執行安裝程式；可依 AI 的讀取能力選擇使用方式：
 
-1. **最快：能讀取 GitHub 的 Agent。**提供 repository URL：<https://github.com/Clock1025/sa-legal-skills>，再指定 Skill 路徑，例如 `skills/regulation-review/SKILL.md`。Agent 應先實際讀取檔案；若無法讀取 GitHub 或該檔案，必須明確告知，不得宣稱已讀取。
-2. **最通用：直接提供 `SKILL.md`。**取得本次需要的檔案，完整貼入或上傳到 ChatGPT 或其他 AI，再提供法規文件與案件資料。
-3. **長期／進階：**Clone repository、使用 GitHub Codespaces，或依 Agent 支援方式安裝到 Skills 目錄；詳見下方進階使用方式。
+1. **最快：能讀取 GitHub 的 Agent。** 提供 repository URL：<https://github.com/Clock1025/sa-legal-skills>，再指定 Skill 路徑，例如 `skills/regulation-review/SKILL.md`。Agent 應先實際讀取檔案；若無法讀取 GitHub 或該檔案，必須明確告知，不得宣稱已讀取。
+2. **最通用：直接提供 `SKILL.md`。** 取得本次需要的檔案，完整貼入或上傳到 ChatGPT 或其他 AI，再提供法規文件與案件資料。
+3. **長期／進階：** Clone repository、使用 GitHub Codespaces，或依 Agent 支援方式安裝到 Skills 目錄；詳見下方進階使用方式。
 
 選擇 Skill：現行規定與合規問題用 `regulation-review`；整體制度設計及未決事項追蹤用 `large-scale-reform`；制度方向已定、要起草正式文件用 `amendment-drafting`。相關檔案見下方 Skills 說明。
 
