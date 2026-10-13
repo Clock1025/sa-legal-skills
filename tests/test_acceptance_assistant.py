@@ -220,6 +220,27 @@ class AssistantTests(unittest.TestCase):
         self.assertEqual((standalone / 'record.json').read_bytes(), original)
         with self.assertRaises(ValueError): assistant.summary([standalone / 'record.json', standalone / 'record.json'])
 
+    def test_candidate_summary_includes_missing_cases_without_grading(self):
+        result = self.imported()
+        matrix = assistant.load_plan(self.repo, self.sha)
+        report = assistant.summary([result / 'record.json'], matrix, self.sha)
+        self.assertIn('20 / 21', report)
+        self.assertIn('P0-CASE-03：NOT TESTED（無有效 run）', report)
+        self.assertIn('SYNTHETIC / NOT TESTED', report)
+        self.assertNotIn('SYNTHETIC OUTPUT, NOT A LIVE MODEL', report)
+        other = assistant.summary([result / 'record.json'], matrix, 'a' * 40)
+        self.assertIn('21 / 21', other)
+
+    def test_candidate_summary_tampered_record_is_not_valid_run(self):
+        result = self.imported()
+        matrix = assistant.load_plan(self.repo, self.sha)
+        (result / 'transcript.txt').write_text('CHANGED SYNTHETIC BYTES')
+        report = assistant.summary([result / 'record.json'], matrix, self.sha)
+        self.assertIn('21 / 21', report)
+        self.assertIn('hash mismatch', report)
+        with self.assertRaisesRegex(ValueError, '候選 SHA'):
+            assistant.summary([], matrix, 'develop')
+
     def test_cli_invalid_skill_argument_and_empty_summary(self):
         cmd = [sys.executable, str(ROOT / 'scripts/acceptance_assistant.py'), 'import-txt',
                '--commit', self.sha, '--run-id', 'x', '--case', 'P0-CASE-05', '--transcript', str(self.txt), '--skill', 'missing-equals']
