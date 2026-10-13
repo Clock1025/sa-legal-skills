@@ -82,6 +82,15 @@ python3 scripts/acceptance_assistant.py summary \
 
 既有其他資料夾的run可用 `summary --record test-output/acceptance/my-run/record.json`（可重複選不同檔案），直接唯讀彙整，不要求重新匯入或移動原紀錄。
 
+若需要一眼看到**指定候選仍無有效 run 的所有案例**，加上固定的候選 SHA：
+
+```bash
+python3 scripts/acceptance_assistant.py summary \
+  --commit 0b6df14e99ba57bcadfe43ead5fe0f079ef36680
+```
+
+新增清單只列該 SHA 下沒有通過檔案一致性檢查的 run 紀錄之案例，不會將其他 SHA 的紀錄算進來，也不會把「有 run」自動視為已 PASS。已觀察但未裁定的行為維持 NOT TESTED；壞檔會顯示原始一致性錯誤，不覆蓋原判定。
+
 摘要檢查每份record/hash，列案例、模型、執行／原規則狀態、檔案一致性、缺漏及人工待辦。
 檔案竄改或schema錯誤列一致性FAIL，**不改寫原行為判定**；模型版本／底層日誌不足不自動變行為FAIL。
 摘要不含原始對話正文；metadata／人工備註仍可能含敏感資訊，公開前仍須使用者授權及適當處理。
