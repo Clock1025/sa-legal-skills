@@ -144,4 +144,9 @@ jobs:
           test "$(gh release view "$RELEASE_TAG" --repo "$GH_REPO" --json isDraft,isPrerelease --jq '[.isDraft,.isPrerelease] | join(",")')" = 'false,false'
           test "$(gh api "repos/${GH_REPO}/releases/latest" --jq '.tag_name')" = "$RELEASE_TAG"
           test "$(gh release view "$RELEASE_TAG" --repo "$GH_REPO" --json assets --jq '[.assets[].name] | sort | join(",")')" = 'SHA256SUMS.txt,sa-legal-skills.zip'
+          test "$(gh api "repos/${GH_REPO}/git/ref/tags/${RELEASE_TAG}" --jq '.object.sha')" = "$RELEASE_COMMIT"
+          mkdir -p published-download
+          gh release download "$RELEASE_TAG" --repo "$GH_REPO" --dir published-download --pattern 'sa-legal-skills.zip' --pattern 'SHA256SUMS.txt'
+          (cd published-download && sha256sum --check SHA256SUMS.txt)
+          echo "$EXPECTED_ZIP_SHA256  published-download/sa-legal-skills.zip" | sha256sum --check --strict -
           echo "Published verified stable release ${RELEASE_TAG}"
