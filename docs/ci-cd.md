@@ -115,3 +115,39 @@ Release Notes 明列 `AUTOMATED CHECKS: PASS` 與具體檢查，以及
 
 實際 GitHub Release 建立、附件上傳、Latest 狀態及重跑拒絕行為在本次交付為
 **NOT LIVE-TESTED**；未建立任何專案 Beta tag 或 Release。
+
+## v0.1.4 Stable：手動發布（固定來源）
+
+`.github/workflows/stable-release.yml` 僅接受 `workflow_dispatch`，且只允許在本 repository
+的 `main` 執行；一般 push、PR 或 Tag 不會觸發。這是一次性 v0.1.4 發布機制，不接受任意版本輸入。
+Beta workflow 的行為不變。
+
+審查並合併發布機制 PR 後，維護者到 **Actions → v0.1.4 Stable Release (manual) → Run workflow**，
+選擇 `main`，再手動執行。CLI 等效命令（本 PR 交付時尚未執行）：
+
+```bash
+gh workflow run stable-release.yml --repo Clock1025/sa-legal-skills --ref main
+```
+
+Workflow 程式與繁體中文說明取自觸發時的 main Commit；**Skill 套件與既有測試始終取自
+`6aa5c775d8ea011ea4b2380ef467591a6966070a`**，不使用合併 Workflow 後的新 main 內容。
+五個檔案固定不變，封裝沿用候選 Commit 的 `scripts/package-release.sh`／`validate.py`。
+唯讀 validate job 執行候選的 115 項 unittest、發布工具離線安全測試，以及封裝驗證；
+重新計算 SHA-256，必須符合
+`ee933fe8fd06f50a6d7ea42d5a5164586cf08a825b1a3fb68d6f33c17a34152b`。
+產物保存 7 天，publish job 重新核對固定來源、成員、CRC 與 checksum。
+
+只有 publish job 取得 `contents: write`，以內建 `GITHUB_TOKEN` 建立固定 Commit 的 lightweight Tag
+`v0.1.4`，先建立 Draft Release（非 Pre-release、非 Latest），上傳兩個附件並實際下載核對，
+才將 Draft 公開且設為 Latest。公開後再次下載核對，確認 Latest、Tag 及既有 v0.1.3／RC Tag 未變。
+不使用長期 Token、不 force push、不移動或覆寫 Tag。
+
+任何同名 Tag 或 Release（包括草稿）都會保守停止，查詢權限錯誤不當作不存在。
+上傳／草稿驗證失敗會留下 Tag 與未公開草稿供維護者檢查，不自動刪除、覆寫或續傳；
+**不可直接重跑期待自動恢復**。先檢查 Actions 失敗步驟與 Releases 草稿，再另行決定處理方式。
+公開後驗證若失敗，工作流回報失敗並保留現狀，不自動刪除已公開版本。
+
+Release Notes 位於 `docs/releases/v0.1.4.md`，保留 CASE-05、C05 版面 PARTIAL／預設直式未模型複驗、
+Microsoft Word 及完整真實案件端到端試用限制。程式／模擬測試成功不代表真人模型或法律品質驗收。
+本機與 PR CI 可核對離線程式及安全測試；手動 Workflow、GitHub 草稿上傳、公開與下載流程在本次 PR
+交付為 **NOT LIVE-TESTED**，必須等維護者審查合併後才執行。

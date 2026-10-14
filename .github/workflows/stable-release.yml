@@ -1,0 +1,72 @@
+name: v0.1.4 Stable Release (manual)
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: stable-release-v0.1.4
+  cancel-in-progress: false
+jobs:
+  validate:
+    if: github.repository == 'Clock1025/sa-legal-skills' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout release tooling
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ github.sha }}
+          path: tooling
+          persist-credentials: false
+      - name: Checkout fixed accepted candidate
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: 6aa5c775d8ea011ea4b2380ef467591a6966070a
+          path: candidate
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Run candidate unit tests (115)
+        working-directory: candidate
+        run: python3 -m unittest discover -s tests -v
+      - name: Run release safety tests
+        run: python3 -m unittest discover -s tooling/tests -p test_stable_release.py -v
+      - name: Validate fixed sources, package and checksum
+        run: python3 tooling/scripts/publish_stable.py prepare --source candidate --package package
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: stable-v0.1.4-package
+          path: package/
+          if-no-files-found: error
+          retention-days: 7
+  publish:
+    needs: validate
+    if: github.repository == 'Clock1025/sa-legal-skills' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ github.sha }}
+          path: tooling
+          persist-credentials: false
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: 6aa5c775d8ea011ea4b2380ef467591a6966070a
+          path: candidate
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: stable-v0.1.4-package
+          path: package
+      - name: Draft, upload, verify, publish and verify again
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >-
+          python3 tooling/scripts/publish_stable.py publish
+          --source candidate --package package
+          --notes tooling/docs/releases/v0.1.4.md
