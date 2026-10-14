@@ -97,6 +97,31 @@ class P0StaticTests(unittest.TestCase):
                     mutated = text.replace(fragment, '')
                     self.assertIn(fragment, missing_fragments(mutated, fragments))
 
+    def test_case04_multi_option_assent_and_case05_truncated_clause_rules(self):
+        """Static guardrails; behavioral correctness still needs real-model testing."""
+        text = (ROOT / 'skills/large-scale-reform/SKILL.md').read_text()
+        case04 = ('In a multi-option discussion', 'a bare 「加上去」',
+                  'when the current exchange leaves the referent or intended action ambiguous',
+                  'added for discussion', 'formally adopted as policy',
+                  'Keep statuses unchanged', 'one short, specific clarification',
+                  'Only promote the precisely identified decision',
+                  'A short answer such as 「可以」 is sufficient',
+                  'single, clearly framed confirmation question',
+                  'earlier discussion of other options alone does not invalidate that answer',
+                  '「可以」 confirms only that stated decision',
+                  'Do not require renewed confirmation')
+        case05 = ('the entire input is 「委員之任免由」',
+                  'do not complete the sentence', 'infer an appointing body',
+                  'Keep only the missing meaning unresolved',
+                  'preserve any previously CONFIRMED atomic decisions',
+                  'without using them to silently complete the fragment')
+        for case, clauses in (('04', case04), ('05', case05)):
+            with self.subTest(case=case):
+                self.assertEqual(missing_fragments(text, clauses), [])
+                # Mutation verifies rule presence only, not a model's interpretation.
+                for clause in clauses:
+                    self.assertIn(clause, missing_fragments(text.replace(clause, ''), clauses))
+
     def test_drafting_preserves_status_scope_and_mapping_contract(self):
         text = (ROOT / 'skills/amendment-drafting/SKILL.md').read_text()
         fragments = ('CONFIRMED', 'DIRECTION', 'OPEN', 'DEFERRED', 'SUPERSEDED',
