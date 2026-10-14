@@ -1,0 +1,152 @@
+name: Stable Release v0.1.4
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: stable-release-v0.1.4
+  cancel-in-progress: false
+
+env:
+  RELEASE_TAG: v0.1.4
+  RELEASE_COMMIT: 6aa5c775d8ea011ea4b2380ef467591a6966070a
+  EXPECTED_ZIP_SHA256: ee933fe8fd06f50a6d7ea42d5a5164586cf08a825b1a3fb68d6f33c17a34152b
+
+jobs:
+  validate:
+    if: github.repository == 'Clock1025/sa-legal-skills' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout the approved release commit
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: 6aa5c775d8ea011ea4b2380ef467591a6966070a
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Verify pinned source and main ancestry
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$RELEASE_COMMIT"
+          git fetch --no-tags origin +refs/heads/main:refs/remotes/origin/main
+          git merge-base --is-ancestor "$RELEASE_COMMIT" refs/remotes/origin/main
+      - name: Validate sources and reproducible release package
+        run: python3 scripts/validate.py
+      - name: Run all unit and negative tests
+        run: python3 -m unittest discover -s tests -v
+      - name: Verify exact release hash and prepare artifacts
+        run: |
+          set -euo pipefail
+          echo "$EXPECTED_ZIP_SHA256  sa-legal-skills.zip" | sha256sum --check --strict -
+          mkdir -p release-package
+          cp sa-legal-skills.zip release-package/
+          (cd release-package && sha256sum sa-legal-skills.zip > SHA256SUMS.txt && sha256sum --check SHA256SUMS.txt)
+      - name: Store validated artifacts
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: stable-v0.1.4-package
+          path: release-package/
+          if-no-files-found: error
+          retention-days: 7
+
+  publish:
+    needs: validate
+    if: github.repository == 'Clock1025/sa-legal-skills' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout main for approved release notes
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Verify release commit belongs to main
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          git merge-base --is-ancestor "$RELEASE_COMMIT" HEAD
+          test -s docs/releases/v0.1.4.md
+      - name: Download only the validated artifacts
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: stable-v0.1.4-package
+          path: release-package
+      - name: Verify artifact integrity before any write
+        run: |
+          set -euo pipefail
+          cd release-package
+          sha256sum --check SHA256SUMS.txt
+          echo "$EXPECTED_ZIP_SHA256  sa-legal-skills.zip" | sha256sum --check --strict -
+          test "$(find . -maxdepth 1 -type f | wc -l)" -eq 2
+      - name: Refuse existing tag or release (including drafts)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          python3 - <<'PY'
+          import os
+          from urllib.error import HTTPError
+          from urllib.request import Request, urlopen
+          repo = os.environ['GH_REPO']
+          tag = os.environ['RELEASE_TAG']
+          for endpoint in (f'git/ref/tags/{tag}', f'releases/tags/{tag}'):
+              url = f'https://api.github.com/repos/{repo}/{endpoint}'
+              req = Request(url, headers={
+                  'Authorization': 'Bearer ' + os.environ['GH_TOKEN'],
+                  'Accept': 'application/vnd.github+json',
+                  'X-GitHub-Api-Version': '2022-11-28',
+              })
+              try:
+                  with urlopen(req, timeout=20):
+                      raise SystemExit(f'FAIL: {endpoint} already exists; no overwrite allowed')
+              except HTTPError as error:
+                  if error.code != 404:
+                      raise SystemExit(f'FAIL: cannot verify {endpoint}: HTTP {error.code}')
+          print('PASS: neither the stable tag nor a release exists')
+          PY
+      - name: Create an immutable-target tag and draft release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          gh api --method POST "repos/${GH_REPO}/git/refs" -f "ref=refs/tags/${RELEASE_TAG}" -f "sha=${RELEASE_COMMIT}" >/dev/null
+          test "$(gh api "repos/${GH_REPO}/git/ref/tags/${RELEASE_TAG}" --jq '.object.sha')" = "$RELEASE_COMMIT"
+          gh release create "$RELEASE_TAG" --repo "$GH_REPO" --verify-tag --draft --latest=false --title 'v0.1.4 — 決策管理與修法文件品質改善' --notes-file docs/releases/v0.1.4.md
+      - name: Upload, download, and verify draft assets before publication
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          gh release upload "$RELEASE_TAG" release-package/sa-legal-skills.zip release-package/SHA256SUMS.txt --repo "$GH_REPO"
+          test "$(gh release view "$RELEASE_TAG" --repo "$GH_REPO" --json isDraft --jq '.isDraft')" = true
+          test "$(gh release view "$RELEASE_TAG" --repo "$GH_REPO" --json assets --jq '[.assets[].name] | sort | join(",")')" = 'SHA256SUMS.txt,sa-legal-skills.zip'
+          mkdir -p downloaded
+          gh release download "$RELEASE_TAG" --repo "$GH_REPO" --dir downloaded --pattern 'sa-legal-skills.zip' --pattern 'SHA256SUMS.txt'
+          (cd downloaded && sha256sum --check SHA256SUMS.txt)
+          echo "$EXPECTED_ZIP_SHA256  downloaded/sa-legal-skills.zip" | sha256sum --check --strict -
+      - name: Publish stable release as Latest
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          test "$(gh api "repos/${GH_REPO}/git/ref/tags/${RELEASE_TAG}" --jq '.object.sha')" = "$RELEASE_COMMIT"
+          gh release edit "$RELEASE_TAG" --repo "$GH_REPO" --draft=false --prerelease=false --latest
+          test "$(gh release view "$RELEASE_TAG" --repo "$GH_REPO" --json isDraft,isPrerelease --jq '[.isDraft,.isPrerelease] | join(",")')" = 'false,false'
+          test "$(gh api "repos/${GH_REPO}/releases/latest" --jq '.tag_name')" = "$RELEASE_TAG"
+          test "$(gh release view "$RELEASE_TAG" --repo "$GH_REPO" --json assets --jq '[.assets[].name] | sort | join(",")')" = 'SHA256SUMS.txt,sa-legal-skills.zip'
+          test "$(gh api "repos/${GH_REPO}/git/ref/tags/${RELEASE_TAG}" --jq '.object.sha')" = "$RELEASE_COMMIT"
+          mkdir -p published-download
+          gh release download "$RELEASE_TAG" --repo "$GH_REPO" --dir published-download --pattern 'sa-legal-skills.zip' --pattern 'SHA256SUMS.txt'
+          (cd published-download && sha256sum --check SHA256SUMS.txt)
+          echo "$EXPECTED_ZIP_SHA256  published-download/sa-legal-skills.zip" | sha256sum --check --strict -
+          echo "Published verified stable release ${RELEASE_TAG}"
