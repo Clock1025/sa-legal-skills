@@ -20,7 +20,7 @@ class ReleaseNotesTests(unittest.TestCase):
                 self.assertTrue(body, tag)
                 self.assertFalse(body.startswith("# "), tag)
                 self.assertFalse(body.startswith(title), tag)
-                self.assertNotIn("\\n# " + tag, body)
+                self.assertNotIn("\n# " + tag, body)
 
 
 if __name__ == "__main__":
