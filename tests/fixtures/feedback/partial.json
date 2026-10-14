@@ -1,0 +1,150 @@
+{
+  "schema_version": "1.0",
+  "conversation_id": "OX7m4q2x",
+  "generated_at": null,
+  "platform": {
+    "code": "OX",
+    "product": "Codex",
+    "surface": "Codex",
+    "evidence_status": "SELF_REPORTED",
+    "evidence": "Fictional supplied fixture metadata, not a live session"
+  },
+  "model_segments": [
+    {
+      "id": "E1",
+      "platform": {
+        "code": "UU",
+        "product": "UNKNOWN",
+        "surface": "UNKNOWN",
+        "evidence_status": "UNVERIFIED",
+        "evidence": "Earlier product/surface unavailable in fictional input"
+      },
+      "model": "UNKNOWN",
+      "reasoning_effort": "UNKNOWN",
+      "start": "T1",
+      "end": "T1",
+      "evidence_status": "UNVERIFIED",
+      "evidence": "Earlier model metadata unavailable"
+    },
+    {
+      "id": "E2",
+      "platform": {
+        "code": "OX",
+        "product": "Codex",
+        "surface": "Codex",
+        "evidence_status": "SELF_REPORTED",
+        "evidence": "Fictional supplied fixture metadata, not a live session"
+      },
+      "model": "UNKNOWN",
+      "reasoning_effort": "UNKNOWN",
+      "start": "T2",
+      "end": "T2",
+      "evidence_status": "SELF_REPORTED",
+      "evidence": "Supplied fixture only; no live model run"
+    }
+  ],
+  "skill_reads": [
+    {
+      "name": "regulation-review",
+      "source_id": "SRC-001",
+      "path": "supplied/skills/regulation-review/SKILL.md",
+      "stage": "review",
+      "version": "UNVERIFIED",
+      "version_status": "UNVERIFIED",
+      "read_status": "UNVERIFIED",
+      "evidence_anchors": [],
+      "evidence": "No read receipt available; not a claim that a Skill was read"
+    }
+  ],
+  "transcript": {
+    "transcript_completeness": "PARTIAL",
+    "coverage": {
+      "scope": "Fictional user-visible discussion; early turns unavailable",
+      "start": "T1",
+      "end": "T2",
+      "verification": "UNVERIFIED",
+      "evidence": "Only two supplied turns; no platform export",
+      "missing": [
+        "Earlier discussion unavailable"
+      ],
+      "truncations": [],
+      "summary_substitutions": []
+    },
+    "turns": [
+      {
+        "anchor": "T1",
+        "role": "user",
+        "text": "請產生完整 Skill 回報包，包含可取得的完整對話紀錄。",
+        "representation": "VERBATIM",
+        "origin": "fictional fixture turn 1"
+      },
+      {
+        "anchor": "T2",
+        "role": "assistant",
+        "text": "只能提供目前可取得的兩則虛構範例訊息，早期對話無法核對。",
+        "representation": "VERBATIM",
+        "origin": "fictional fixture turn 2"
+      }
+    ]
+  },
+  "sources": [
+    {
+      "id": "SRC-001",
+      "name": "regulation-review/SKILL.md (fictional reference, no supplied bytes)",
+      "kind": "skill",
+      "version": "UNVERIFIED",
+      "location": "UNVERIFIED",
+      "visibility": "UNAVAILABLE",
+      "evidence_status": "UNVERIFIED"
+    }
+  ],
+  "attachments": [
+    {
+      "id": "A-001",
+      "name": "unavailable-example.pdf",
+      "availability": "UNAVAILABLE",
+      "authorized": false,
+      "reason": "Fictional missing attachment; no bytes supplied",
+      "package_path": null,
+      "evidence_status": "UNVERIFIED",
+      "verification": "NOT VERIFIED"
+    }
+  ],
+  "outputs": [
+    {
+      "id": "O-001",
+      "name": "sample-output.txt",
+      "availability": "AVAILABLE",
+      "authorized": true,
+      "reason": "Fictional public fixture authorized for local packaging only",
+      "local_path": "sample-output.txt",
+      "package_path": "files/sample-output.txt",
+      "evidence_status": "OBSERVED",
+      "verification": "Only byte integrity, not legal/DOCX quality"
+    }
+  ],
+  "report": {
+    "context": "Fictional feedback-package test; no student case or real model run",
+    "task": "Archive supplied visible evidence",
+    "scope": "Only supplied fixture records",
+    "confirmed_decisions": [],
+    "open_questions": [
+      "Original model/Skill version and earlier dialogue unavailable"
+    ],
+    "events": [
+      {
+        "description": "Declared early dialogue missing",
+        "evidence_anchor": "T2",
+        "evidence_status": "SELF_REPORTED"
+      }
+    ],
+    "validation_limits": [
+      "No real-model inference; no legal or DOCX validation"
+    ]
+  },
+  "limitations": [
+    "Fictional supplied-data fixture; private/platform history not accessed",
+    "Metadata is caller-declared, not independently verified"
+  ],
+  "redactions": []
+}

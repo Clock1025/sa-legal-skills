@@ -7,6 +7,24 @@ description: Review existing student association or student self-governance rule
 
 Review the supplied rules and facts; do not make institutional or policy choices for the user. State the scope of the review, identify gaps, and tie every material conclusion to an identifiable source.
 
+## Skill Feedback Package
+
+Recognize: 「請產生完整 Skill 回報包，包含可取得的完整對話紀錄。」 Follow the single [feedback-package contract](../../docs/feedback-package.md) when accessible. This is retrospective archiving, not a new legal-work stage: do not block it with the Skill-switch read gate or use it to perform unread-Skill work. Existing policy statuses, scope, source fidelity and formal-work read gates still apply.
+
+Even with only the Release ZIP and no docs, export only actually available user-visible user/assistant turns in order, preserving verbatim text and separating summaries/redactions. Never reconstruct lost dialogue, hidden prompts/private reasoning, unavailable tools or attachments. Record platform product/surface separately from model segments (E1/E2), actual stage-specific Skill paths/reads/versions (unknown: UNVERIFIED), D/I/SRC references, attachments/outputs and evidence anchors; distinguish OBSERVED, SELF_REPORTED and UNVERIFIED. Use transcript_completeness COMPLETE only for a declared, checked user-visible scope without gaps/redactions; known missing/truncated/summarized/redacted content is PARTIAL, unknown coverage UNVERIFIED. Disclose endpoints, evidence, omissions and verification limits; never turn static checks or self-assessment into model/quality PASS.
+
+Reuse a recorded 8-character conversation ID (canonical platform code + six lowercase letters/digits); if platform/surface or its canonical code cannot be checked use UU and disclose the uncertainty, not a guess from model name. Keep model/Skill changes segmented; when ID persistence is unavailable disclose it and let the user supply an existing ID. Use report_<conversation-id>_<YYMMDD>_<4-character-alphanumeric-suffix>.zip, checking collisions; use a reliable or explicitly supplied date, never invent a timestamp or claim secure randomness without a tool call. Produce manifest.json (schema_version, conversation_id/report_id/generated_at, platform/model_segments/skill_reads, transcript coverage, sources, attachments/outputs, limitations/redactions, actual file index), report.md, transcript.md, sources-index.md and attachments/INDEX.md plus outputs/INDEX.md even when empty. If canonical docs are unavailable, disclose that limit and leave unknown fields null/UNKNOWN/UNVERIFIED rather than inventing the schema's details.
+
+Copy raw files only when accessible, explicitly authorized and minimally necessary; no automatic external upload. Compute SHA-256/byte sizes only from actual bytes. Provide a real downloadable ZIP only after creating and checking it. Without file/ZIP capability, provide copyable text sections for manifest/report/transcript and all indexes, disclose omitted files/features and manual save/pack steps, and never give a nonexistent download link. A feedback export does not verify legal sources, user decisions, model obedience or DOCX quality.
+
+## Stage provenance and incomplete input
+
+At the start or resumption of a work stage, when switching Skills, or before reusing old work materials, record the active Skill file and source path, the verifiable version/commit/ref (if available), and whether its complete contents were actually read in this turn. Distinguish a prior read from a current read; never claim to have read an unread version. Reacquire and fully read the applicable Skill for a new or resumed stage before formal work. If a version or source cannot be checked, mark it **UNVERIFIED** and explicitly request the source needed to verify it; do not invent a commit or rely on model memory. A readable supplied Skill with an unknown ref remains version-UNVERIFIED, not falsely verified.
+
+When switching Skills, fully read the new Skill before any formal or provisional work in that stage. If it cannot be obtained and fully read, stop at obtaining/pasting/uploading that Skill. Earlier materials, confirmed policy, urgency, or a request to draft first do not bypass the START-HERE read gate.
+
+If an instruction or proposed legal text is ambiguous, truncated, or missing words that could change legal effect, identify the exact incomplete fragment and ask one necessary clarification question before acting on it. Never silently supply a legally substantive completion, including a clause ending in 「由」. Continue only independent work whose meaning does not depend on the missing text. Pure formatting or an obvious typo with no effect on legal meaning may follow existing editorial rules; never use “technical correction” to hide a change in meaning or alter a faithful quotation.
+
 ## Review workflow
 
 1. **Define the question and its type.** Identify the organization, relevant rules, action or arrangement under review (if any), actors, dates, procedural history, and what the user wants answered. Separate established facts from assumptions and disputed facts. Classify each question as descriptive/interpretive or as a compliance/legality assessment before choosing how to report the answer.
@@ -42,6 +60,12 @@ Do not use “符合” as a default when no violation has been proven. Lack of 
 - Mark inferences as inferences. Distinguish text-based conclusions from assumptions, customary practice, and recommendations.
 - Do not present common practice, remembered wording, or an unverified online copy as authoritative current law.
 - If authorities conflict, versions are unclear, or legal effect depends on unresolved facts, describe the competing readings and limits rather than claiming certainty.
+
+## Policy scope and proposed changes
+
+Keep effective current law distinct from proposed text. When carrying policy records into review, preserve the status and instrument/office scope: CONFIRMED is an explicit user decision; DIRECTION is a preference; OPEN is undecided; DEFERRED is postponed; SUPERSEDED is replaced; ASSISTANT_PROPOSAL is an unaccepted AI suggestion. Do not promote these other states to CONFIRMED or treat a scoped confirmation as extending to later-added instruments. Identify new scope requiring confirmation and ask again if a new source changes the premises. Suggestions remain separate from current-rule findings and any clean formal draft.
+
+A suggested change to the legal subject, regulated persons, powers, legal effects, periods, mandatory procedures, or exceptions is a **possible substantive change**, even when only a few words differ. Explain that possibility and obtain user confirmation before adopting it, unless the exact change is already explicitly confirmed. Do not silently treat 「該會議」 → 「其出席之會議」 as mere editing. This review Skill may identify the issue; formal drafting still requires reading and switching to amendment-drafting.
 
 ## Scope boundary and formal action
 

@@ -7,6 +7,24 @@ description: Turn a sufficiently settled student association or student self-gov
 
 Translate the user's chosen institutional direction into precise, internally consistent legal text and proposal materials. The user owns policy choices. Clarify ambiguity that affects substance; do not silently change a choice to make drafting easier. When a large-scale reform record is supplied, treat its confirmed decisions as authoritative and exclude open, deferred, or unconfirmed proposals from the clean formal version.
 
+## Skill Feedback Package
+
+Recognize: 「請產生完整 Skill 回報包，包含可取得的完整對話紀錄。」 Follow the single [feedback-package contract](../../docs/feedback-package.md) when accessible. This is retrospective archiving, not a new legal-work stage: do not block it with the Skill-switch read gate or use it to perform unread-Skill work. Existing policy statuses, scope, source fidelity and formal-work read gates still apply.
+
+Even with only the Release ZIP and no docs, export only actually available user-visible user/assistant turns in order, preserving verbatim text and separating summaries/redactions. Never reconstruct lost dialogue, hidden prompts/private reasoning, unavailable tools or attachments. Record platform product/surface separately from model segments (E1/E2), actual stage-specific Skill paths/reads/versions (unknown: UNVERIFIED), D/I/SRC references, attachments/outputs and evidence anchors; distinguish OBSERVED, SELF_REPORTED and UNVERIFIED. Use transcript_completeness COMPLETE only for a declared, checked user-visible scope without gaps/redactions; known missing/truncated/summarized/redacted content is PARTIAL, unknown coverage UNVERIFIED. Disclose endpoints, evidence, omissions and verification limits; never turn static checks or self-assessment into model/quality PASS.
+
+Reuse a recorded 8-character conversation ID (canonical platform code + six lowercase letters/digits); if platform/surface or its canonical code cannot be checked use UU and disclose the uncertainty, not a guess from model name. Keep model/Skill changes segmented; when ID persistence is unavailable disclose it and let the user supply an existing ID. Use report_<conversation-id>_<YYMMDD>_<4-character-alphanumeric-suffix>.zip, checking collisions; use a reliable or explicitly supplied date, never invent a timestamp or claim secure randomness without a tool call. Produce manifest.json (schema_version, conversation_id/report_id/generated_at, platform/model_segments/skill_reads, transcript coverage, sources, attachments/outputs, limitations/redactions, actual file index), report.md, transcript.md, sources-index.md and attachments/INDEX.md plus outputs/INDEX.md even when empty. If canonical docs are unavailable, disclose that limit and leave unknown fields null/UNKNOWN/UNVERIFIED rather than inventing the schema's details.
+
+Copy raw files only when accessible, explicitly authorized and minimally necessary; no automatic external upload. Compute SHA-256/byte sizes only from actual bytes. Provide a real downloadable ZIP only after creating and checking it. Without file/ZIP capability, provide copyable text sections for manifest/report/transcript and all indexes, disclose omitted files/features and manual save/pack steps, and never give a nonexistent download link. A feedback export does not verify legal sources, user decisions, model obedience or DOCX quality.
+
+## Stage provenance and incomplete input
+
+At the start or resumption of a work stage, when switching Skills, or before reusing old work materials, record the active Skill file and source path, the verifiable version/commit/ref (if available), and whether its complete contents were actually read in this turn. Distinguish a prior read from a current read; never claim to have read an unread version. Reacquire and fully read the applicable Skill for a new or resumed stage before formal work. If a version or source cannot be checked, mark it **UNVERIFIED** and explicitly request the source needed to verify it; do not invent a commit or rely on model memory. A readable supplied Skill with an unknown ref remains version-UNVERIFIED, not falsely verified.
+
+When switching Skills, fully read the new Skill before any formal or provisional work in that stage. If it cannot be obtained and fully read, stop at obtaining/pasting/uploading that Skill. Earlier materials, confirmed policy, urgency, or a request to draft first do not bypass the START-HERE read gate.
+
+If an instruction or proposed legal text is ambiguous, truncated, or missing words that could change legal effect, identify the exact incomplete fragment and ask one necessary clarification question before acting on it. Never silently supply a legally substantive completion, including a clause ending in 「由」. Continue only independent work whose meaning does not depend on the missing text. Pure formatting or an obvious typo with no effect on legal meaning may follow existing editorial rules; never use “technical correction” to hide a change in meaning or alter a faithful quotation.
+
 ## Intake and source control
 
 1. Identify the intended instrument, provisions, policy direction, scope, audience, and requested deliverables.
@@ -19,6 +37,16 @@ Translate the user's chosen institutional direction into precise, internally con
    - **UNRESOLVED** — rechecked and found to have a consequential link, but necessary policy, procedure, or other matter remains undecided, so it cannot safely be drafted yet; do not supply the missing policy yourself.
 
    Do not let a previously identified related provision silently disappear when drafting begins. If an item has not been rechecked, do not imply that the consequential review is complete. Tracking these dispositions is a drafting and review completeness requirement, not a policy decision.
+
+## Policy status and scoped adoption
+
+Use the reform record's decision/source IDs and preserve their provenance and old-to-new provision mappings through cross-instrument migration or renumbering. If a supplied record lacks scope, confirmation evidence, or source/version locations, identify the gap rather than inventing it. Keep proposal text separate from verified effective current law.
+
+Distinguish **CONFIRMED**, **DIRECTION**, **OPEN**, **DEFERRED**, **SUPERSEDED**, and **ASSISTANT_PROPOSAL** with the same meanings used in reform records: explicitly decided, preferred direction, undecided, postponed, replaced, and AI-only suggestion respectively. Only **CONFIRMED** policy within its recorded scope may enter a clean formal draft. Other statuses may be discussed in clearly labeled, separate working candidates, never presented as agreed policy. 「比較傾向 C」 alone is DIRECTION; an unaccepted AI committee composition remains ASSISTANT_PROPOSAL. 「加上去」 or 「照這個」 requires a traceable, clearly presented specific option, applicable scope, and policy consequences; clarify an unclear referent rather than confirming everything around it.
+
+Confirmation for specified instruments or offices does not automatically cover later-added sources or institutions. Separate the confirmed scope from new matters requiring confirmation; if new sources change the premises, ask again before applying the affected policy. Preserve confirmed decisions for unaffected portions.
+
+Changes to the legal subject, regulated persons, powers, legal effects, periods, mandatory procedures, or exceptions are a **possible substantive change**, however few words are changed. Explain the possible effect and obtain user confirmation before adopting the change, unless existing explicit confirmation covers that exact change. Changing 「該會議」 to 「其出席之會議」 can change scope; do not classify it as mere editing. Pure legal formatting follows existing rules, with the current-text column and quotations remaining faithful to the source.
 
 ## Drafting deliverables
 
@@ -56,6 +84,8 @@ The comparison table's **現行條文** column must faithfully preserve the veri
 
 ### 法規段落與 Word 縮排
 
+正式法規文件及修正條文對照表預設採 **A4 直式（portrait）**。不得僅因條文過長、三欄內容長度差異或減少頁數而自行改為橫式（landscape）；應依既有長表格分頁規則處理。使用者明確指定其他方向，或已提供具權威性的正式文件範本另有要求時，以使用者要求或該正式範本為準。
+
 「項」通常沒有編號符號，段落界線與縮排本身就是法規結構資訊。不得因重新排版而合併不同項，或使其看起來像同一段。有機關／正式範本時，優先沿用其條、項、款、目縮排及字級、行距、段前段後格式。無範本時，使用一致、可讀且不破壞法規層級的格式，不預設固定字級；行距與段落間距依下列規則，縮排採以下預設：
 
 C = 該段落實際正文所使用的中文字型與字級之一個全形中文字寬（約 1 em）的版面基準。以下僅為無正式範本時的 fallback，不得凌駕使用者提供的正式範本：
@@ -71,6 +101,18 @@ C = 該段落實際正文所使用的中文字型與字級之一個全形中文�
 - 新擬文字可依正式範本或預設法制格式安排必要的條號與正文間隔；這不等於用大量空白模擬段落縮排。
 
 DOCX QA 若環境支援，核對條文段落 paragraph spacing before／after 為 0 pt、fallback line spacing 為 single／1.0；渲染後檢查不同項仍可區分、首行與續行縮排正確、款目階層未消失、表格內格式正常、換頁未破壞法規結構，以及新設縮排未以新增前置空白字元假裝實現。同時核對 underline、bold、East Asian font 與既有字型規則；若無法渲染，明確說明版面尚未驗證。既有原文含有的空白不得僅為 QA 而刪改。
+
+### 長表格分頁與文件品質驗證
+
+- 每一條文的「修正條文｜現行條文｜說明」必須保留同一邏輯列與可追溯的來源版本／條次對應。長列跨頁不能省略、截斷、重複正文或把相鄰條文移入錯誤欄位；不得為了好看而刪字、合併不同項或改寫引文。
+- 以 Word 原生標題列重複欄名（OOXML `w:tblHeader`），長列允許跨頁分割。不得對整張表套用 `w:cantSplit`、連鎖 `keepNext`／整段 `keepLines` 或固定 `exact` 列高，造成長文截斷、大片空白或無法合理換頁。短列若可容於一頁可適度保持完整；超過一頁的列不得強制不分割。檢查 style 繼承與最終有效屬性，不只直接格式。
+- 固定且可讀的三欄欄寬、頂端對齊與可見格線應保持續頁欄位關係。重複的是標題列而非條文正文；長短差異造成的空白欄不代表內容遺失，不得塞入別條或重複原文補滿。若需人工續列，標明非正文續頁資訊，保留逐段來源映射並核對三欄重組後全文，不能任意切斷法律結構。
+- 對照表來源、最終修正文字與逐條說明逐列比對；保留條→項→款→目獨立段落及既有縮排、中文標點、唯一 U+3000、原文保真、空白／未變動文字不加底線規則。格式調整不是實質修正，可能變更法意時依既有確認流程，不默認「技術修正」。
+- 生成後從 DOCX 實際位元組提取各列／欄／段落文字與來源核對，檢查多條連續長文、兩側長度不等及長說明；確認無截斷、重複、錯位、版本混用及誤加底線。此結構／文字檢查不證明 Word 分頁、字型替代或視覺品質。
+- 可渲染時實際逐頁檢查重複標題、跨頁接續、欄位、空白頁、clipping／overflow、段落階層及底線，核對中文字型實際套用與 fallback；記錄 DOCX/PDF 身分、renderer／版本、頁數、字型與檢查範圍。只有指定 East Asian font 不等於渲染已用該字型，不由單一平台推論跨平台一致。
+- 分開回報 DOCX generation、OOXML／source fidelity、rendering、visual QA、font QA 與真人模型行為。沒有實際渲染／看圖則寫 **VISUAL QA: NOT TESTED**；局部檢查如實列 PARTIAL 與未驗項目，不能拿靜態規則或 CI PASS 冒充版面驗證。可在 Skill Feedback Package 的 outputs verification／limitations 附上同一份驗證紀錄。
+
+可重建的虛構案例與開發者驗證方式見 [DOCX quality regression](../../docs/regression/v0.1.4-docx-quality.md)。這些是 reference fixtures，不是有效法規、真人模型測試或正式文件引擎；Release ZIP 未含 docs 時，以上規則仍可獨立使用。
 
 ## Comparison table markup
 

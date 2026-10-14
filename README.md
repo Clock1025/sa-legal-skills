@@ -4,7 +4,7 @@
 
 第一次使用？從[新手引導](docs/first-time-user.md)開始；不確定提示詞貼哪裡或如何提供檔案，可看[平台使用指南](docs/platforms/)。
 
-快速查找新手、各平台已知問題及版本資訊，可看[文件導覽](docs/README.md)。
+快速查找新手、各平台已知問題、版本資訊及維護者工具，可看[文件導覽](docs/README.md)。
 
 ## 快速開始
 
@@ -86,6 +86,8 @@ amendment-drafting
 - 整條新增時，現行條文欄填「（本條新增）」；整條刪除時，修正條文欄填「（刪除）」。這些標記本身不加底線。
 - 有既有正式文件或機關範本時，沿用其格式；否則依環境可用字型選用標楷體、全字庫正楷體或繁體中文 fallback。
 
+本 repository 沒有正式 DOCX 文件引擎；[DOCX 品質回歸案例](docs/regression/v0.1.4-docx-quality.md)中的小型 OOXML 工具只生成虛構測試文件。
+
 DOCX 能力與實際字型渲染依執行環境而定；字型來源與安裝方式見[正式文件字型](#正式文件字型)。
 
 ## 模型與平台使用建議
@@ -140,9 +142,21 @@ fc-cache -f
 fc-list | grep -i -E 'CNS|Kai|楷'
 ```
 
+## Skill 完整回報包
+
+在任一 Skill 對話要求：「請產生完整 Skill 回報包，包含可取得的完整對話紀錄。」
+只匯出實際可取得的資料，明列缺失、來源與驗證限制；無 ZIP 工具時提供文字回退，不假裝取得平台全歷史。
+[回報契約與離線工具](docs/feedback-package.md)說明欄位、來源、授權與操作；不自動上傳 GitHub，也不代表真人模型或法律品質驗證。
+
 ## 開發者驗證與 Beta 流程
 
-見[自動驗證與 Beta Pre-release](docs/ci-cd.md)。
+`main` 是預設的穩定主線，`develop` 是開發與 Beta 整合主線；一般功能分支從最新 develop 建立，PR 指向 develop。正式發布準備才經人工審查合併至 main，穩定版 Tag／Release 另需人工授權。
+
+main 與 Latest 正式 Release 可能有 CI、文件等非 Skill 內容差異。若要固定版本，使用 [v0.1.3 正式 Release](https://github.com/Clock1025/sa-legal-skills/releases/tag/v0.1.3) 或指定 [v0.1.3 Skill 路徑](https://github.com/Clock1025/sa-legal-skills/blob/v0.1.3/skills/regulation-review/SKILL.md)，不要以 main 或 Latest 代替固定版本識別。
+
+PR／Beta 操作、測試與尚未啟用之保護設定建議見[自動驗證與 Beta Pre-release](docs/ci-cd.md)。
+
+Beta 前的[真人模型驗收操作、紀錄與人工清單](docs/acceptance/model-regression.md)分開管理 CI、模型實測及 DOCX 視覺證據；未實測仍為 NOT TESTED，是否發布由使用者決定。
 
 ## 更新
 

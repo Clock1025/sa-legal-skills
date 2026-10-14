@@ -75,15 +75,20 @@ def validate_package(root):
     print(f'PASS: sources, ZIP members/bytes/CRC/extraction, deterministic SHA-256 {digests[0]}')
 
 
-def validate_beta(root, tag, main_ref='refs/remotes/origin/main'):
+def validate_beta(root, tag, develop_ref='refs/remotes/origin/develop'):
     require(BETA.fullmatch(tag) is not None, f'illegal Beta tag: {tag!r}')
     def git(*args):
         return subprocess.check_output(['git', *args], cwd=root, text=True).strip()
+    require(git('rev-parse', '--is-shallow-repository') == 'false',
+            'Beta validation requires complete Git history; shallow checkout rejected')
+    branch = subprocess.run(['git', 'rev-parse', '--verify', f'{develop_ref}^{{commit}}'],
+                            cwd=root, capture_output=True, text=True)
+    require(branch.returncode == 0, f'develop history ref missing or invalid: {develop_ref}')
     commit = git('rev-parse', '--verify', f'refs/tags/{tag}^{{commit}}')
     require(git('rev-parse', 'HEAD') == commit, 'checkout HEAD is not the Beta tag commit')
-    result = subprocess.run(['git', 'merge-base', '--is-ancestor', commit, main_ref], cwd=root)
-    require(result.returncode == 0, 'Beta tag commit is not in main history (or history unavailable)')
-    print(f'PASS: Beta tag {tag} resolves to checked-out main-history commit {commit}')
+    result = subprocess.run(['git', 'merge-base', '--is-ancestor', commit, develop_ref], cwd=root)
+    require(result.returncode == 0, 'Beta tag commit is not in develop history (or history unavailable)')
+    print(f'PASS: Beta tag {tag} resolves to checked-out develop-history commit {commit}')
 
 
 def main():

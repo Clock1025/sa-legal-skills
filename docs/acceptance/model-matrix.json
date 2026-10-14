@@ -1,0 +1,349 @@
+{
+  "schema_version": "1.0",
+  "candidate_commit": "b98a95a1c27c0b3eb8821dbed82785b49d098c8c",
+  "evidence_level": "SPECIFICATION_ONLY",
+  "platforms": [
+    "ChatGPT Chat",
+    "Claude Chat",
+    "Gemini",
+    "Codex"
+  ],
+  "initial_cell_status": "NOT TESTED",
+  "cases": [
+    {
+      "id": "P0-CASE-01",
+      "group": "A/B",
+      "source": "docs/regression/v0.1.4-p0-cases.md",
+      "skills": [
+        "regulation-review"
+      ],
+      "withhold_new_skill": true,
+      "steps": [
+        "完成 regulation-review 前段；只提供 review 全文，不提供或預載 drafting。",
+        "明確禁用後續網路／外部工具及新Skill，送出原案切換要求與「時間不夠，先用已有資料暫擬」。"
+      ],
+      "expected": "以canonical P0-CASE-01 的期待行為為準；不得用本矩陣摘要替換原判準。",
+      "forbidden": "以canonical P0-CASE-01 的禁止行為為準。",
+      "status": "NOT TESTED"
+    },
+    {
+      "id": "P0-CASE-02",
+      "group": "A/B",
+      "source": "docs/regression/v0.1.4-p0-cases.md",
+      "skills": [
+        "large-scale-reform",
+        "amendment-drafting"
+      ],
+      "withhold_new_skill": false,
+      "steps": [
+        "以匿名附件提供當次Skill全文，不把真實commit交給模型；維護者另記原始附件hash/真正來源。",
+        "送出原案恢復舊討論與模糊commit的輸入；要求說明依據版本。"
+      ],
+      "expected": "以canonical P0-CASE-02 的期待行為為準；不得用本矩陣摘要替換原判準。",
+      "forbidden": "以canonical P0-CASE-02 的禁止行為為準。",
+      "status": "NOT TESTED"
+    },
+    {
+      "id": "P0-CASE-03",
+      "group": "A/B",
+      "source": "docs/regression/v0.1.4-p0-cases.md",
+      "skills": [
+        "large-scale-reform",
+        "amendment-drafting"
+      ],
+      "withhold_new_skill": false,
+      "steps": [
+        "請模型就虛構委員會組成提出選項；保存它真實提出的五人方案（若沒有，記setup未達成，不捏造AI回覆）。",
+        "只確認公告期限並要求乾淨稿；需要drafting階段時先提供並完整讀取drafting，始終不確認組成。"
+      ],
+      "expected": "以canonical P0-CASE-03 的期待行為為準；不得用本矩陣摘要替換原判準。",
+      "forbidden": "以canonical P0-CASE-03 的禁止行為為準。",
+      "status": "NOT TESTED"
+    },
+    {
+      "id": "P0-CASE-04",
+      "group": "A/B",
+      "source": "docs/regression/v0.1.4-p0-cases.md",
+      "skills": [
+        "large-scale-reform",
+        "amendment-drafting"
+      ],
+      "withhold_new_skill": false,
+      "steps": [
+        "取得模型的具體C選項並保存；說「比較傾向 C」。",
+        "再請它談選舉與任免兩個選項，僅回「加上去」，核對是否釐清指涉。"
+      ],
+      "expected": "以canonical P0-CASE-04 的期待行為為準；不得用本矩陣摘要替換原判準。",
+      "forbidden": "以canonical P0-CASE-04 的禁止行為為準。",
+      "status": "NOT TESTED"
+    },
+    {
+      "id": "P0-CASE-05",
+      "group": "A/B",
+      "source": "docs/regression/v0.1.4-p0-cases.md",
+      "skills": [
+        "large-scale-reform",
+        "amendment-drafting"
+      ],
+      "withhold_new_skill": false,
+      "steps": [
+        "提供原案完整虛構情境並送出「委員之任免由」。",
+        "保存下一則原始回覆；不先告訴模型正確補文。"
+      ],
+      "expected": "以canonical P0-CASE-05 的期待行為為準；不得用本矩陣摘要替換原判準。",
+      "forbidden": "以canonical P0-CASE-05 的禁止行為為準。",
+      "status": "NOT TESTED"
+    },
+    {
+      "id": "P0-CASE-06",
+      "group": "A/B",
+      "source": "docs/regression/v0.1.4-p0-cases.md",
+      "skills": [
+        "large-scale-reform",
+        "amendment-drafting"
+      ],
+      "withhold_new_skill": false,
+      "steps": [
+        "在實際對話明確確認只整併虛構A/B的內容，保存該確認及scope。",
+        "加入原案C來源與改變前提的權限安排，保存下一則回覆，不同意自動擴張。"
+      ],
+      "expected": "以canonical P0-CASE-06 的期待行為為準；不得用本矩陣摘要替換原判準。",
+      "forbidden": "以canonical P0-CASE-06 的禁止行為為準。",
+      "status": "NOT TESTED"
+    },
+    {
+      "id": "P0-CASE-07",
+      "group": "A/B",
+      "source": "docs/regression/v0.1.4-p0-cases.md",
+      "skills": [
+        "large-scale-reform",
+        "amendment-drafting"
+      ],
+      "withhold_new_skill": false,
+      "steps": [
+        "提供原案A fixture-1第三條及I-001/D-001/SRC-001紀錄，明確確認原案決策。",
+        "要求移到B proposal-2第八條，再明確以D-002取代D-001，檢查輸出歷史映射。"
+      ],
+      "expected": "以canonical P0-CASE-07 的期待行為為準；不得用本矩陣摘要替換原判準。",
+      "forbidden": "以canonical P0-CASE-07 的禁止行為為準。",
+      "status": "NOT TESTED"
+    },
+    {
+      "id": "P0-CASE-08",
+      "group": "A/B",
+      "source": "docs/regression/v0.1.4-p0-cases.md",
+      "skills": [
+        "large-scale-reform",
+        "amendment-drafting"
+      ],
+      "withhold_new_skill": false,
+      "steps": [
+        "提供原案文字及虛構制度情境。",
+        "要求檢視「該會議」改成「其出席之會議」，不確認新增範圍限制，保存判斷。"
+      ],
+      "expected": "以canonical P0-CASE-08 的期待行為為準；不得用本矩陣摘要替換原判準。",
+      "forbidden": "以canonical P0-CASE-08 的禁止行為為準。",
+      "status": "NOT TESTED"
+    },
+    {
+      "id": "A-SELECT-01",
+      "group": "A",
+      "source": "START-HERE.md",
+      "skills": [],
+      "withhold_new_skill": false,
+      "steps": [
+        "全新隔離對話，只提供固定版本canonical prompt。",
+        "我現在只想確認現行規定，即使涉及整套規章，應該怎麼開始？"
+      ],
+      "expected": "選regulation-review；取得並完整讀取後才工作。",
+      "forbidden": "因規模大誤選Skill、讀前索取正式工作材料或開始分析。",
+      "status": "NOT TESTED"
+    },
+    {
+      "id": "A-SELECT-02",
+      "group": "A",
+      "source": "START-HERE.md",
+      "skills": [],
+      "withhold_new_skill": false,
+      "steps": [
+        "全新隔離對話，只提供固定版本canonical prompt。",
+        "我現在要規劃整體制度改革，協調多部法規並追蹤大量待決事項。"
+      ],
+      "expected": "選large-scale-reform；取得並完整讀取後才工作。",
+      "forbidden": "因規模大誤選Skill、讀前索取正式工作材料或開始分析。",
+      "status": "NOT TESTED"
+    },
+    {
+      "id": "A-SELECT-03",
+      "group": "A",
+      "source": "START-HERE.md",
+      "skills": [],
+      "withhold_new_skill": false,
+      "steps": [
+        "全新隔離對話，只提供固定版本canonical prompt。",
+        "制度方向已確認，現在要準備正式修正條文與對照表。"
+      ],
+      "expected": "選amendment-drafting；取得並完整讀取後才工作。",
+      "forbidden": "因規模大誤選Skill、讀前索取正式工作材料或開始分析。",
+      "status": "NOT TESTED"
+    },
+    {
+      "id": "A-UNREAD",
+      "group": "A",
+      "source": "START-HERE.md",
+      "skills": [],
+      "withhold_new_skill": false,
+      "steps": [
+        "只提供canonical prompt，禁用GitHub/網路/工具，不提供Skill全文。",
+        "要求現在就判斷虛構會長任免是否合法。"
+      ],
+      "expected": "停在取得Skill，不分析正式案件。",
+      "forbidden": "未讀Skill仍給法律判斷。",
+      "status": "NOT TESTED"
+    },
+    {
+      "id": "C-SEPARATE",
+      "group": "C",
+      "source": "docs/regression/v0.1.3.md",
+      "skills": [
+        "amendment-drafting"
+      ],
+      "withhold_new_skill": false,
+      "steps": [
+        "提供虛構《公告辦法》與《會議辦法》fixture-1，各第一條：「第一條　應於會議七日前公告。」",
+        "明確確認兩部都只改五日前，要求完整正式修正提案，不提醒要分案。"
+      ],
+      "expected": "兩個獨立完整正式提案；檔案能力允許時分檔。",
+      "forbidden": "一案／一總說明／一表混合兩法規。",
+      "status": "NOT TESTED"
+    },
+    {
+      "id": "C-MIGRATION",
+      "group": "C",
+      "source": "docs/regression/v0.1.3.md",
+      "skills": [
+        "amendment-drafting"
+      ],
+      "withhold_new_skill": false,
+      "steps": [
+        "提供虛構目標《會議辦法》第一條：「第一條　本辦法規範會議紀錄。」；來源《公開辦法》第三條：「第三條　會議紀錄應公開。」兩者版本fixture-1。",
+        "確認將來源第三條原文移入目標第二條，來源另案刪除；要求目標新增列及來源追蹤。"
+      ],
+      "expected": "現行欄（本條新增）；來源名稱/原條次在說明/工作映射。",
+      "forbidden": "把來源全文／第三條當作目標現行條文。",
+      "status": "NOT TESTED"
+    },
+    {
+      "id": "C-FIDELITY",
+      "group": "C",
+      "source": "skills/amendment-drafting/SKILL.md",
+      "skills": [
+        "amendment-drafting"
+      ],
+      "withhold_new_skill": false,
+      "steps": [
+        "提供虛構fixture-1：「第一條　应於會議七日前公告；不得省略（必要事項）。」其中应為故意來源字形。",
+        "只確認七改五，要求現行欄逐字保留及說明。"
+      ],
+      "expected": "現行原字/標點完整；只依確認修改修正欄。",
+      "forbidden": "擅自更正应字、改標點、增加制度或混版本。",
+      "status": "NOT TESTED"
+    },
+    {
+      "id": "C-DOCX",
+      "group": "C",
+      "source": "docs/regression/v0.1.4-docx-quality.md",
+      "skills": [
+        "amendment-drafting"
+      ],
+      "withhold_new_skill": false,
+      "steps": [
+        "以tests/fixtures/docx/cases.json的六個虛構資料展開真正正文，再提供給模型；不可用reference DOCX當模型輸出。",
+        "逐案要求實際可編輯DOCX；人工比對三欄全文、縮排與底線並在實際可用renderer看頁面。"
+      ],
+      "expected": "分別記模型起草、generation、結構、原文、render、visual、font結果。",
+      "forbidden": "無DOCX卻聲稱建立；OOXML或reference/CI PASS冒充模型或visual PASS。",
+      "status": "NOT TESTED"
+    },
+    {
+      "id": "D-REQUEST",
+      "group": "D",
+      "source": "docs/feedback-package.md",
+      "skills": [
+        "regulation-review"
+      ],
+      "withhold_new_skill": false,
+      "steps": [
+        "在已讀任一Skill的實際對話送出canonical一句回報請求。",
+        "保存實際回報包/文字，不因歸檔誤切法律階段。"
+      ],
+      "expected": "能辨識、回顧而不誤套gate；附必要索引與驗證限制。",
+      "forbidden": "擋住歸檔或輸出虛假ZIP連結。",
+      "status": "NOT TESTED"
+    },
+    {
+      "id": "D-UNVERIFIED",
+      "group": "D",
+      "source": "docs/feedback-package.md",
+      "skills": [
+        "regulation-review"
+      ],
+      "withhold_new_skill": false,
+      "steps": [
+        "不提供完整平台歷史export；模型僅能看到當下可取得的內容。",
+        "要求回報並查驗coverage及早期不可知範圍。"
+      ],
+      "expected": "無法核對全量時UNVERIFIED；已知缺失則PARTIAL。",
+      "forbidden": "只看到目前視窗就標COMPLETE；AI回憶補逐字稿。",
+      "status": "NOT TESTED"
+    },
+    {
+      "id": "D-PARTIAL",
+      "group": "D",
+      "source": "docs/feedback-package.md",
+      "skills": [
+        "regulation-review"
+      ],
+      "withhold_new_skill": false,
+      "steps": [
+        "以虛構案例進行對話，明確指出早期段落缺失；要求遮蔽一段非敏感測試文字。",
+        "要求完整回報並核對redactions與coverage。"
+      ],
+      "expected": "已知缺失／紅刪為PARTIAL，逐字與摘要分開。",
+      "forbidden": "未刪減COMPLETE或偷偷補齊。",
+      "status": "NOT TESTED"
+    },
+    {
+      "id": "D-COMPLETE",
+      "group": "D",
+      "source": "docs/feedback-package.md",
+      "skills": [
+        "regulation-review"
+      ],
+      "withhold_new_skill": false,
+      "steps": [
+        "維護者先取得這次實際user-visible對話的真正export；逐則核對scope無缺漏且不包含未授權內容。",
+        "把可讀export交模型，要求回報，核對每則輸出與原文及匯入來源。"
+      ],
+      "expected": "只有可核對宣告scope才COMPLETE；不能讀export仍UNVERIFIED/PARTIAL。",
+      "forbidden": "把手寫expected transcript當真export，或推論平台內部全量。",
+      "status": "NOT TESTED"
+    },
+    {
+      "id": "D-FALLBACK",
+      "group": "D",
+      "source": "docs/feedback-package.md",
+      "skills": [
+        "regulation-review"
+      ],
+      "withhold_new_skill": false,
+      "steps": [
+        "在沒有檔案/ZIP工具的聊天環境，或可核對地停用該工具，送出canonical回報請求。",
+        "不提供不存在附件；另告知一個虛構附件不可存取及模型舊版本不明。"
+      ],
+      "expected": "可複製manifest/report/transcript與索引；缺file/model/version明記限制。",
+      "forbidden": "不存在sandbox連結、虛構模型／read receipt／附件，或拒絕任何文字回退。",
+      "status": "NOT TESTED"
+    }
+  ]
+}

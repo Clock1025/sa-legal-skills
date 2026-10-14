@@ -18,7 +18,7 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
-      - name: Check Beta tag, main ancestry, and complete package validation
+      - name: Check Beta tag, develop ancestry, and complete package validation
         env:
           BETA_TAG: ${{ github.ref_name }}
         run: python3 scripts/validate.py --beta-tag "$BETA_TAG"
@@ -75,17 +75,39 @@ jobs:
                   raise SystemExit(f'FAIL: cannot check existing Release (HTTP {error.code})')
           PY
           cat > notes.md <<'NOTES'
-          AUTOMATED CHECKS: PASS
+          ## 版本定位
 
-          Verified required files, Skill metadata and entry references, ZIP exact members,
-          source-byte equality, CRC integrity, extraction, two independent SHA-256 builds,
-          smoke/negative tests, strict Beta tag format and main-history ancestry.
+          本版為實驗性 Beta Pre-release，供實際模型測試、蒐集缺陷及改進 Agent Skills 使用。
+          發布不代表已通過 RC 驗收；穩定版發布仍須維護者明確核准。
+          本工作流使用 --latest=false，不將本版設為 Latest；穩定版與 Latest 請以 GitHub 實際標記為準。
 
-          REAL-MODEL BEHAVIOR: NOT TESTED / UNVERIFIED
+          ## 自動化驗證
 
-          Historical v0.1.3 fixture results were not rerun. Legal correctness, DOCX generation,
-          fonts and visual quality are not verified by these checks. This is a Beta Pre-release;
-          stable releases still require human approval.
+          自動化檢查：PASS。
+
+          已檢查必要來源檔案、Skill metadata 與入口參照、固定 ZIP 成員、來源位元組一致性、
+          CRC 完整性、解壓縮、兩次獨立建置的 SHA-256、全部單元與負例測試、
+          Beta Tag 格式，以及 Tag Commit 的 develop 歷史來源；發布附件已通過 SHA-256 核對。
+
+          自動化 PASS 不代表法律正確性、真人模型驗收或 DOCX 視覺品質 PASS。
+
+          ## 真人模型驗收狀態
+
+          真人模型驗收狀態：UNVERIFIED（未驗證）。
+
+          本工作流不讀取或核對真人模型測試的原始證據，不能據此判定是否已進行實測或是否通過。
+          若已有人工測試，請由維護者另行補充案例、平台／模型、Skill Commit、原始證據位置、
+          獨立判定與限制；缺少可核對證據的項目維持未驗證，不沿用歷史結果冒充本版重新測試。
+
+          DOCX 生成、條文保真、字型、跨頁版面及實際視覺品質須對本版模型產物另行驗收。
+          尚未實際渲染並查看頁面的項目應標示 VISUAL QA: NOT TESTED；局部檢查須揭露範圍。
+
+          ## 下載與使用限制
+
+          - sa-legal-skills.zip：Skill 套件。
+          - SHA256SUMS.txt：下載後核對 ZIP 的 SHA-256。
+
+          使用者仍須自行核對法規來源、制度政策及最終文件；AI 不代替政策決定或正式法定程序。
           NOTES
           gh release create "$BETA_TAG" package/sa-legal-skills.zip package/SHA256SUMS.txt \
             --repo "$GH_REPO" --verify-tag --prerelease --latest=false \

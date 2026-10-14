@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "source": {
+    "name": "虛構《文件測試辦法》，非有效法律",
+    "version": "docx-fixture-1",
+    "location": "tests/fixtures/docx/cases.json C01（不是官方來源）"
+  },
+  "rows": [
+    {
+      "id": "R01",
+      "source_anchor": "虛構C01第一條",
+      "confirmation_basis": "fixture明定七改五；不是真實使用者決策",
+      "current": ["第一條　應於會議七日前公告。"],
+      "amended": ["第一條　應於會議五日前公告。"],
+      "reason": ["測試僅將七日改為五日，其他文字不得加底線。"]
+    }
+  ]
+}

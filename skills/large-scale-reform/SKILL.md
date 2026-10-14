@@ -7,6 +7,24 @@ description: Manage a long-running redesign or large-scale amendment of a studen
 
 Treat large-scale reform as a staged institutional design project. The human decides institutional policy. Your role is to structure the work, expose gaps and consequences, maintain decision integrity, and prepare confirmed choices for drafting. Do not turn an unresolved framework into a purportedly complete rewrite.
 
+## Skill Feedback Package
+
+Recognize: 「請產生完整 Skill 回報包，包含可取得的完整對話紀錄。」 Follow the single [feedback-package contract](../../docs/feedback-package.md) when accessible. This is retrospective archiving, not a new legal-work stage: do not block it with the Skill-switch read gate or use it to perform unread-Skill work. Existing policy statuses, scope, source fidelity and formal-work read gates still apply.
+
+Even with only the Release ZIP and no docs, export only actually available user-visible user/assistant turns in order, preserving verbatim text and separating summaries/redactions. Never reconstruct lost dialogue, hidden prompts/private reasoning, unavailable tools or attachments. Record platform product/surface separately from model segments (E1/E2), actual stage-specific Skill paths/reads/versions (unknown: UNVERIFIED), D/I/SRC references, attachments/outputs and evidence anchors; distinguish OBSERVED, SELF_REPORTED and UNVERIFIED. Use transcript_completeness COMPLETE only for a declared, checked user-visible scope without gaps/redactions; known missing/truncated/summarized/redacted content is PARTIAL, unknown coverage UNVERIFIED. Disclose endpoints, evidence, omissions and verification limits; never turn static checks or self-assessment into model/quality PASS.
+
+Reuse a recorded 8-character conversation ID (canonical platform code + six lowercase letters/digits); if platform/surface or its canonical code cannot be checked use UU and disclose the uncertainty, not a guess from model name. Keep model/Skill changes segmented; when ID persistence is unavailable disclose it and let the user supply an existing ID. Use report_<conversation-id>_<YYMMDD>_<4-character-alphanumeric-suffix>.zip, checking collisions; use a reliable or explicitly supplied date, never invent a timestamp or claim secure randomness without a tool call. Produce manifest.json (schema_version, conversation_id/report_id/generated_at, platform/model_segments/skill_reads, transcript coverage, sources, attachments/outputs, limitations/redactions, actual file index), report.md, transcript.md, sources-index.md and attachments/INDEX.md plus outputs/INDEX.md even when empty. If canonical docs are unavailable, disclose that limit and leave unknown fields null/UNKNOWN/UNVERIFIED rather than inventing the schema's details.
+
+Copy raw files only when accessible, explicitly authorized and minimally necessary; no automatic external upload. Compute SHA-256/byte sizes only from actual bytes. Provide a real downloadable ZIP only after creating and checking it. Without file/ZIP capability, provide copyable text sections for manifest/report/transcript and all indexes, disclose omitted files/features and manual save/pack steps, and never give a nonexistent download link. A feedback export does not verify legal sources, user decisions, model obedience or DOCX quality.
+
+## Stage provenance and incomplete input
+
+At the start or resumption of a work stage, when switching Skills, or before reusing old work materials, record the active Skill file and source path, the verifiable version/commit/ref (if available), and whether its complete contents were actually read in this turn. Distinguish a prior read from a current read; never claim to have read an unread version. Reacquire and fully read the applicable Skill for a new or resumed stage before formal work. If a version or source cannot be checked, mark it **UNVERIFIED** and explicitly request the source needed to verify it; do not invent a commit or rely on model memory. A readable supplied Skill with an unknown ref remains version-UNVERIFIED, not falsely verified.
+
+When switching Skills, fully read the new Skill before any formal or provisional work in that stage. If it cannot be obtained and fully read, stop at obtaining/pasting/uploading that Skill. Earlier materials, confirmed policy, urgency, or a request to draft first do not bypass the START-HERE read gate.
+
+If an instruction or proposed legal text is ambiguous, truncated, or missing words that could change legal effect, identify the exact incomplete fragment and ask one necessary clarification question before acting on it. Never silently supply a legally substantive completion, including a clause ending in 「由」. For example, if the entire input is 「委員之任免由」, ask who is intended to exercise the appointment/removal authority; do not complete the sentence, infer an appointing body from earlier options, or mark it CONFIRMED. Keep only the missing meaning unresolved until the user supplies it; preserve any previously CONFIRMED atomic decisions within their recorded scope, without using them to silently complete the fragment. Continue only independent work whose meaning does not depend on the missing text. Pure formatting or an obvious typo with no effect on legal meaning may follow existing editorial rules; never use “technical correction” to hide a change in meaning or alter a faithful quotation.
+
 ## Project workflow
 
 ### 1. Read and verify the current framework
@@ -23,7 +41,9 @@ Identify gaps, contradictions, ambiguous assignments, unfinished procedures, unc
 
 ### 4. Maintain an issue register and decision log
 
-Do not assume chat context will be permanently available. If the execution environment supports persistent files or workspace storage, maintain suitable structured records for the individual reform case, such as `decisions.md` and `issues.md`. These case records may contain decision IDs, status, confirmed and unresolved points, dependencies, superseded decisions, and affected provisions or instruments; they are project work products and must not be written into this general skill. If persistent files are unavailable, keep the same structured decision and issue records in the current work product or conversation and make their limits clear. Use stable IDs where helpful. Do not silently overwrite a prior decision: mark it **SUPERSEDED** and link the later decision.
+Do not assume chat context will be permanently available. If the execution environment supports persistent files or workspace storage, maintain suitable structured records for the individual reform case, such as `decisions.md` and `issues.md`. These case records may contain decision IDs, status, confirmed and unresolved points, dependencies, superseded decisions, and affected provisions or instruments; they are project work products and must not be written into this general skill. If persistent files are unavailable, keep the same structured decision and issue records in the current work product or conversation and make their limits clear. Use stable decision, issue, and source IDs independent of article numbers (for example, `D-001`, `I-001`, and `SRC-001`); never use an old article number as an immutable identity. Do not silently overwrite a prior decision: mark it **SUPERSEDED** and link the later decision.
+
+For each source record, retain its original instrument/document, verifiable version and source location, and whether it is current law or a proposal. Never fabricate sources, versions, text, or simulated document provenance. Link decisions and issues to those source IDs. Each decision record must include its content, status, affected instruments and scope, the user's confirmation context (if any), and later changes or supersession links. When renumbering, preserve the stable IDs and an old-to-new provision mapping with instrument and version on both sides; keep earlier mappings rather than overwriting history. If a record cannot be persisted, include the same traceable fields in the working material and disclose that limitation.
 
 ### 5. Trace cross-rule dependencies
 
@@ -50,46 +70,59 @@ Assign a state to each important institutional decision. Use these exact status 
 
 Apply these safeguards:
 
-- Never record an assistant recommendation, common practice, implication, or convenient drafting assumption as the user's decision.
+- Never record an assistant recommendation, common practice, implication, or convenient drafting assumption as the user's decision. Only **CONFIRMED** policy within its recorded scope may enter a clean formal draft. DIRECTION, OPEN, DEFERRED, SUPERSEDED, and ASSISTANT_PROPOSAL must remain outside it; discuss them only in clearly labeled, separate working candidates.
+- 「比較傾向 C」 is DIRECTION unless the conversation explicitly completes that decision. 「加上去」 or 「照這個」 confirms only the specific option, scope, and policy consequences clearly presented at that time and traceable to that reply. If the referent is unclear, ask what was agreed; never promote the whole surrounding context.
+- In a multi-option discussion (for example, election, appointment, dismissal, and a suggested mixed-composition model), when the current exchange leaves the referent or intended action ambiguous, a bare 「加上去」, 「照這個」, or 「可以」 does **not** on its own identify whether the user wants an option added for discussion, added to a working draft, or formally adopted as policy—even when the assistant just proposed a particular model. Do not infer that the most recently mentioned assistant proposal was confirmed, or promote a prior DIRECTION to CONFIRMED on that basis. Keep statuses unchanged and ask **one short, specific clarification** naming the live alternatives, such as 「你是要把 C5 加入比較清單，還是正式確認採用 C5 的選舉＋任命混合組成原則？」 Only promote the precisely identified decision after the user unambiguously confirms its adoption and scope. A short answer such as 「可以」 is sufficient when it directly answers a single, clearly framed confirmation question identifying the decision, adoption, scope, and policy consequences; earlier discussion of other options alone does not invalidate that answer. For example, after 「是否正式確認 D-001：僅部門首長由會長提名、議會同意後任命，不含免職或代理職務？」, 「可以」 confirms only that stated decision, not the other options. Do not require renewed confirmation when a prior reply already unmistakably did so.
+- Confirmation is bound to the specified instruments, offices, and institutional scope. A later-added instrument or source is not automatically covered: separate previously confirmed policy from the new scope still needing confirmation. If the new source changes the proposal's premises, ask again before extending or implementing the affected decision. Do not confuse proposal text with effective current law.
+- A change to the legal subject, regulated persons, powers, legal effects, periods, mandatory procedures, or exceptions is a **possible substantive change**, even if only a few words change. Explain the possible effect and obtain user confirmation for that change before adopting it; existing confirmation suffices only when it explicitly covers this change. For example, changing 「該會議」 to 「其出席之會議」 may alter scope and must not be treated as mere editing.
 - A high-level institutional issue may contain principles that the user has confirmed and details that remain undecided. Split these into atomic decisions and assign each its own status. Do not downgrade an explicitly confirmed principle to DIRECTION or OPEN merely because some details are unresolved. The overall issue may remain OPEN while its confirmed atomic decisions remain CONFIRMED.
 - Replies such as 「都可以」、「都行」、「沒差」 do not by themselves confirm an option. Record that there is no strong current preference, keep the decision OPEN (or DIRECTION only if the user has stated an actual direction), and ask only if a choice is needed to progress.
 - If drafting must proceed temporarily on one option, label it **「暫定方案（未確認）」**, state who proposed it and what depends on it, and keep it out of the clean formal proposal unless the user later confirms it.
 - Record the user's actual words or a faithful concise summary, the date/context when available, and affected decisions when this helps prevent later confusion.
 - When the user changes a choice, preserve the history as SUPERSEDED; update dependent issues and identify which draft text must change.
 
-Example record:
+Example record (fictional demonstration, not actual case evidence):
 
-```text
-DEC-012 人事任免制度
-狀態：DIRECTION
+The following examples contain stipulated fictional user statements only. Their SRC records make those statements traceable within each example; they are not real user decisions or verified legal sources. Legal text has not been supplied, so its version/location is UNVERIFIED and must be obtained before legal comparison or a definitive formal proposal. In real work, replace demonstration evidence with actual, checkable user records; never copy these decisions into a case.
 
-已確認：
-- 部門首長由會長提名
-- 須經議會同意
-
-尚待確認：
-- 免職是否須經議會同意
-- 被否決後是否可再次提名同一人
-- 代理人是否適用相同程序
-
-連動影響：
-- 會長職權
-- 議會職權
-- 人事程序
-- 就任
-- 代理
-- 公告
+```json
+{
+  "example_type": "FICTIONAL_DEMONSTRATION",
+  "sources": [
+    {"id": "SRC-001", "type": "fictional_user_statement", "document": "本範例內的虛構對話，非真實使用者紀錄", "version": "example-1", "location": "message-1", "text": "我確認：僅《組織規則》的正職部門首長由會長提名，任命須經議會同意。免職程序我比較傾向也經議會同意，尚未決定。"},
+    {"id": "SRC-002", "type": "legal_text_not_provided", "document": "示意《組織規則》（非真實法規來源）", "version": "UNVERIFIED", "location": "UNVERIFIED", "text": null}
+  ],
+  "issue": {"id": "I-001", "title": "人事任免制度", "status": "OPEN", "decision_ids": ["D-001", "D-002", "D-003", "D-004"]},
+  "decisions": [
+    {"id": "D-001", "issue_id": "I-001", "content": "正職部門首長由會長提名", "status": "CONFIRMED", "scope": {"instrument": "示意《組織規則》", "offices": ["部門首長"], "limits": "僅正職部門首長；不含代理人或其他職務"}, "source_ids": ["SRC-001", "SRC-002"], "confirmation_basis": {"source_id": "SRC-001", "location": "message-1", "quote": "我確認：僅《組織規則》的正職部門首長由會長提名，任命須經議會同意。"}, "superseded_by": null},
+    {"id": "D-002", "issue_id": "I-001", "content": "正職部門首長任命須經議會同意", "status": "CONFIRMED", "scope": {"instrument": "示意《組織規則》", "offices": ["部門首長"], "limits": "僅正職部門首長；不含代理人或其他職務"}, "source_ids": ["SRC-001", "SRC-002"], "confirmation_basis": {"source_id": "SRC-001", "location": "message-1", "quote": "我確認：僅《組織規則》的正職部門首長由會長提名，任命須經議會同意。"}, "superseded_by": null},
+    {"id": "D-003", "issue_id": "I-001", "content": "傾向正職部門首長免職也須經議會同意，尚未決定", "status": "DIRECTION", "scope": {"instrument": "示意《組織規則》", "offices": ["部門首長"], "limits": "僅正職部門首長；不含代理人或其他職務"}, "source_ids": ["SRC-001", "SRC-002"], "confirmation_basis": null, "superseded_by": null},
+    {"id": "D-004", "issue_id": "I-001", "content": "代理人是否適用同一任免程序", "status": "OPEN", "scope": {"instrument": "示意《組織規則》", "offices": ["代理部門首長"], "limits": "只討論代理職務；未確認適用正職規則"}, "source_ids": ["SRC-002"], "confirmation_basis": null, "superseded_by": null}
+  ]
+}
 ```
 
-Atomic-decision example:
+Atomic-decision example (fictional demonstration):
 
-```text
-ISSUE 看守機制
-總體議題狀態：OPEN
-
-CONFIRMED：重要職務原則上應設看守機制。
-OPEN：適用職位、啟動條件、終止條件、代理人選、權限限制。
+```json
+{
+  "example_type": "FICTIONAL_DEMONSTRATION",
+  "sources": [
+    {"id": "SRC-003", "type": "fictional_user_statement", "document": "本範例內的虛構對話，非真實使用者紀錄", "version": "example-1", "location": "message-1", "text": "我確認《組織規則》的會長與副會長應有看守機制，但具體條件與權限還沒決定。"},
+    {"id": "SRC-004", "type": "legal_text_not_provided", "document": "示意《組織規則》（非真實法規來源）", "version": "UNVERIFIED", "location": "UNVERIFIED", "text": null}
+  ],
+  "issue": {"id": "I-002", "title": "看守機制", "status": "OPEN", "decision_ids": ["D-005", "D-006", "D-007", "D-008", "D-009"]},
+  "decisions": [
+    {"id": "D-005", "issue_id": "I-002", "content": "會長與副會長應有看守機制的原則", "status": "CONFIRMED", "scope": {"instrument": "示意《組織規則》", "offices": ["會長", "副會長"], "limits": "僅看守原則；不含啟動、終止、人選、權限或其他職位"}, "source_ids": ["SRC-003", "SRC-004"], "confirmation_basis": {"source_id": "SRC-003", "location": "message-1", "quote": "我確認《組織規則》的會長與副會長應有看守機制，但具體條件與權限還沒決定。"}, "superseded_by": null},
+    {"id": "D-006", "issue_id": "I-002", "content": "看守機制啟動條件", "status": "OPEN", "scope": {"instrument": "示意《組織規則》", "offices": ["會長", "副會長"], "limits": "僅該項待決細節；原則確認不等於細節確認"}, "source_ids": ["SRC-004"], "confirmation_basis": null, "superseded_by": null},
+    {"id": "D-007", "issue_id": "I-002", "content": "看守機制終止條件", "status": "OPEN", "scope": {"instrument": "示意《組織規則》", "offices": ["會長", "副會長"], "limits": "僅該項待決細節；原則確認不等於細節確認"}, "source_ids": ["SRC-004"], "confirmation_basis": null, "superseded_by": null},
+    {"id": "D-008", "issue_id": "I-002", "content": "看守人選", "status": "OPEN", "scope": {"instrument": "示意《組織規則》", "offices": ["會長", "副會長"], "limits": "僅該項待決細節；原則確認不等於細節確認"}, "source_ids": ["SRC-004"], "confirmation_basis": null, "superseded_by": null},
+    {"id": "D-009", "issue_id": "I-002", "content": "看守權限限制", "status": "OPEN", "scope": {"instrument": "示意《組織規則》", "offices": ["會長", "副會長"], "limits": "僅該項待決細節；原則確認不等於細節確認"}, "source_ids": ["SRC-004"], "confirmation_basis": null, "superseded_by": null}
+  ]
+}
 ```
+
+The I-level status describes the overall unresolved issue, not the status of every linked D-level decision. Each atomic decision keeps its own status, scope, and confirmation evidence: DIRECTION/OPEN records have no confirmation_basis. CONFIRMED records in these examples demonstrate only the explicitly stated scope in the fictional input; they do not confirm unprovided legal text or authorize new offices or implementation details.
 
 ## Policy / Implementation Separation
 
