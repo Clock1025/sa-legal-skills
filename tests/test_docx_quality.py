@@ -131,6 +131,18 @@ class DocxQualityTests(unittest.TestCase):
             with self.subTest(defect=defect),self.assertRaises(ValueError):
                 check_docx(self.short,self.mutate(self.short,change))
 
+    def test_skill_a4_portrait_default_and_exceptions_static_only(self):
+        """Guard the written contract; this is not model or visual validation."""
+        text=(Path(__file__).resolve().parents[1]/'skills/amendment-drafting/SKILL.md').read_text()
+        for literal in ('正式法規文件及修正條文對照表預設採 **A4 直式（portrait）**',
+                        '不得僅因條文過長、三欄內容長度差異或減少頁數而自行改為橫式',
+                        '應依既有長表格分頁規則處理',
+                        '使用者明確指定其他方向',
+                        '已提供具權威性的正式文件範本另有要求',
+                        '以使用者要求或該正式範本為準'):
+            with self.subTest(clause=literal):
+                self.assertIn(literal,text)
+
     def test_skill_pagination_and_validation_limit_clauses_static_only(self):
         text=(Path(__file__).resolve().parents[1]/'skills/amendment-drafting/SKILL.md').read_text()
         for literal in ('w:tblHeader','w:cantSplit','keepNext','keepLines','exact','VISUAL QA: NOT TESTED',
