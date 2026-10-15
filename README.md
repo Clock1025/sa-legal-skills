@@ -6,11 +6,13 @@
 
 快速查找新手、各平台已知問題、版本資訊及維護者工具，可看[文件導覽](docs/README.md)。
 
-## v0.2.0-alpha.1 開發方向
+## v0.2.0-alpha.2 開發方向
 
 本開發線採「Google Docs 優先、DOCX 並存」：依當前工具與文件編輯權限辨識能力，優先局部編輯既有文件，逐項寫入已確認內容，使用版本條件保護協作者修改並讀回驗證；Google Docs 操作失敗、缺少權限或版本衝突無法安全解決時，停止相關操作、保留現況並回報原因、已完成部分及不確定狀態，不自動轉成 DOCX，也不擅自建立替代文件或覆蓋其他文件。只有使用者明確選擇 DOCX 時，才使用完整、獨立的 DOCX 流程。這是 prompt-only Skill 操作規範，沒有新增 Google Docs 後端或保證任何模型已有整合能力。
 
-詳見 [Google Docs 工作流程](docs/google-docs-workflow.md)及 [Alpha 開發範圍與驗證](docs/development/v0.2.0-alpha.1.md)。Google Docs 穩定前採 Alpha／Beta／RC 預發布，不直接發布 Stable；v0.1.x 持續獨立改善法律規範與 DOCX，必要共用修正經審查同步。
+詳見 [Google Docs 工作流程](docs/google-docs-workflow.md)及 [alpha.1 基礎紀錄](docs/development/v0.2.0-alpha.1.md)與 [alpha.2 母版流程及驗證](docs/development/v0.2.0-alpha.2.md)。Google Docs 穩定前採 Alpha／Beta／RC 預發布，不直接發布 Stable；v0.1.x 持續獨立改善法律規範與 DOCX，必要共用修正經審查同步。
+
+本批新增指定母版的授權複製、原生擴列填表、精確底線、版本條件續寫與讀回 QA 規範。母版在執行時由使用者提供，原母版唯讀不動；沒有母版／工具／權限就停止並回報。已確認版型為標楷體（指定 `DFKai-SB`）、A4 直式、提案正文 14 pt、對照表表頭／內文 12 pt、三欄各 139.5 pt；規範與靜態測試不等於 Google Docs API 或跨裝置視覺實測通過。
 
 ## 快速開始
 

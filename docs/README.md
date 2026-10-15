@@ -6,7 +6,7 @@
 
 ## v0.2 開發線
 
-本分支的 [Google Docs 工作流程](google-docs-workflow.md)與 [v0.2.0-alpha.1 範圍及驗證](development/v0.2.0-alpha.1.md)屬於開發中規範，不表示正式版或平台整合已發布。Google Docs 失敗時停止並回報，不自動轉換文件模式；使用者明確選擇 DOCX 時保留完整獨立流程。
+本分支的 [Google Docs 工作流程](google-docs-workflow.md)與 [alpha.1 基礎紀錄](development/v0.2.0-alpha.1.md)、[alpha.2 母版流程與驗證](development/v0.2.0-alpha.2.md)及 [母版人工驗收案例](acceptance/google-docs-template.md)屬於開發中規範，不表示正式版或平台整合已發布。Google Docs 失敗時停止並回報，不自動轉換文件模式；使用者明確選擇 DOCX 時保留完整獨立流程。
 
 ## 第一次使用
 

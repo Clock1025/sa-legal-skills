@@ -48,6 +48,48 @@ class GoogleDocsContractTests(unittest.TestCase):
                 with self.subTest(skill=skill, removed_rule=removed_rule):
                     self.assertNotIn(removed_rule, (ROOT / f'skills/{skill}/SKILL.md').read_text())
 
+    def test_template_minimum_contract_is_available_without_guides(self):
+        # Core equality is checked above; these are static requirements, not API calls.
+        block = workflow((ROOT / 'skills/amendment-drafting/SKILL.md').read_text())
+        for requirement in (
+            'never hardcode private template IDs, URLs or contents',
+            'If the template is missing, ask for it', 'keep the template read-only',
+            'destination differs from the template before any write',
+            'Resume the verified working copy', 'extend native rows beyond',
+            'read → conditionally write using the fresh revision → read back',
+            'first-page title 「學生議會關係文書」 24 pt', 'proposal fields 14 pt',
+            '20 pt with a native page break', 'table header/body 12 pt',
+            '139.5 pt each', '`DFKai-SB`', 'A4 portrait',
+            'changed text only, never unchanged text or structural whitespace',
+            'reported template acceptance does not verify a new copy',
+        ):
+            with self.subTest(requirement=requirement):
+                self.assertIn(requirement, block)
+
+    def test_template_drafting_requires_precise_styles_and_safe_resume(self):
+        text = (ROOT / 'skills/amendment-drafting/SKILL.md').read_text()
+        section = text.split('## Google Docs template proposal production', 1)[1].split('## Drafting deliverables', 1)[0]
+        for requirement in (
+            'one instrument per formal proposal', 'Do not invent the proposer',
+            'one logical data row', 'more than two provisions',
+            '「（本條新增）」', '「（刪除）」', 'U+3000',
+            '「七」→「五」', 'not also underline 「日前」',
+            'UTF-16 code units', 'checkpoint only after readback',
+            'do not duplicate rows or create another copy',
+            'requiredRevisionId', 'targetRevisionId',
+            'no placeholder/sample residue', 'actual copy',
+            'GOOGLE DOCS LIVE OPERATIONS: NOT TESTED', 'VISUAL QA: NOT TESTED',
+        ):
+            with self.subTest(requirement=requirement):
+                self.assertIn(requirement, section)
+        # Public prompts and guides must not embed a runtime private template link/ID.
+        import re
+        paths = [ROOT / f'skills/{skill}/SKILL.md' for skill in SKILLS]
+        paths += [ROOT / 'docs/google-docs-workflow.md',
+                  ROOT / 'docs/acceptance/google-docs-template.md']
+        for path in paths:
+            self.assertIsNone(re.search(r'https?://(?:docs|drive)\.google\.com/[^\s)]+', path.read_text()), path)
+
     def test_ci_targets_integration_branches_without_feature_hardcoding(self):
         # No YAML dependency: check the two existing event branch filters.
         ci = (ROOT / '.github/workflows/ci.yml').read_text()
@@ -67,8 +109,8 @@ class GoogleDocsContractTests(unittest.TestCase):
             with ZipFile(root / 'sa-legal-skills.zip') as archive:
                 self.assertEqual(len(archive.namelist()), 5)
                 for skill in SKILLS:
-                    self.assertEqual(workflow(archive.read(f'skills/{skill}/SKILL.md').decode()),
-                                     workflow((ROOT / f'skills/{skill}/SKILL.md').read_text()))
+                    self.assertEqual(archive.read(f'skills/{skill}/SKILL.md'),
+                                     (ROOT / f'skills/{skill}/SKILL.md').read_bytes())
                 self.assertIn('Google Docs', archive.read('START-HERE.md').decode())
 
 
