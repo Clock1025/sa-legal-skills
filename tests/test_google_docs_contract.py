@@ -21,6 +21,12 @@ class GoogleDocsContractTests(unittest.TestCase):
         # Deliberate contract assertions, not a simulation of integration success.
         for requirement in (
             'read gates, legal-source fidelity, policy confirmation',
+            'only when the user explicitly chooses it',
+            'never switch to DOCX automatically',
+            'stop the affected operations and preserve the current document state',
+            'failure reason, verified completed changes, unfinished work',
+            'Do not create a substitute Google Docs or DOCX',
+            'A Google Docs failure does not authorize a change of document mode',
             'document-specific edit permission', 'Do not infer support from a model name',
             'editing the supplied existing Google Docs in place',
             'do not regenerate or replace the whole document by default',
@@ -34,6 +40,19 @@ class GoogleDocsContractTests(unittest.TestCase):
         ):
             with self.subTest(requirement=requirement):
                 self.assertIn(requirement, blocks[0])
+
+        for removed_rule in ('continue with the existing DOCX workflow',
+                             'offer DOCX or a patch',
+                             'the fallback when safe Google Docs editing is unavailable'):
+            for skill in SKILLS:
+                with self.subTest(skill=skill, removed_rule=removed_rule):
+                    self.assertNotIn(removed_rule, (ROOT / f'skills/{skill}/SKILL.md').read_text())
+
+    def test_ci_targets_integration_branches_without_feature_hardcoding(self):
+        # No YAML dependency: check the two existing event branch filters.
+        ci = (ROOT / '.github/workflows/ci.yml').read_text()
+        self.assertEqual(ci.count('branches: [main, develop, develop-0.2]'), 2)
+        self.assertNotIn('feature/', ci)
 
     def test_five_file_zip_carries_the_contract_without_docs(self):
         # Work on a minimal copy so this test cannot overwrite a user's ZIP.
