@@ -1,9 +1,9 @@
 name: CI
 on:
   pull_request:
-    branches: [main, develop]
+    branches: [main, develop, develop-0.2]
   push:
-    branches: [main, develop, feature/v0.2-google-docs-foundation]
+    branches: [main, develop, develop-0.2, feature/v0.2-google-docs-foundation]
 permissions:
   contents: read
 jobs:

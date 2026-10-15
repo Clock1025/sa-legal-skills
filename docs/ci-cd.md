@@ -4,7 +4,7 @@
 
 ## v0.2 獨立開發線
 
-v0.2.0-alpha.1 的 feature／後續 PR 僅指向專用 v0.2 整合分支，不指向 main 或 v0.1.x develop。既有 `develop` 與要求的 `develop/0.2` 因 Git ref 名稱衝突不能並存；實際分支確認與驗證見 [開發紀錄](development/v0.2.0-alpha.1.md)。以下 main／develop 規則描述 v0.1.x，不適用於 v0.2 功能 PR。
+v0.2.0-alpha.1 的 feature／後續 PR 僅指向專用 v0.2 整合分支，不指向 main 或 v0.1.x develop。既有 `develop` 與原擬 `develop/0.2` 因 Git ref 名稱衝突不能並存，因此已確認並建立 **`develop-0.2`**；v0.2 的 feature PR 以 `develop-0.2` 為 base，PR 與 push 均納入 CI。實際分支確認與驗證見 [開發紀錄](development/v0.2.0-alpha.1.md)。以下 main／develop 規則描述 v0.1.x，不適用於 v0.2 功能 PR。
 
 本批不建立 Tag／Release，也不修改既有 v0.1.x 發布契約。後續 v0.2 Alpha／Beta／RC 發布流程須另行實作與授權，不能直接沿用檢查 origin/develop 的既有 Beta 發布器。
 
