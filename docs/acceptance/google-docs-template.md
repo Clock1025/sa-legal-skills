@@ -1,6 +1,6 @@
 # alpha.2 母版人工驗收案例
 
-來源：[Issue #32](https://github.com/Clock1025/sa-legal-skills/issues/32)。以下是授權平台可操作的**虛構測試輸入及預期結果**，不是實際 API 執行證據、有效法規或使用者案件政策。此批在 Codex 僅作靜態契約檢查；六組 Google Docs 情境全部 **NOT TESTED**。Issue 記錄的母版原型視覺驗收／ChatGPT 工具底線測試不能搬成這批自動化 PASS。
+來源：[Issue #32](https://github.com/Clock1025/sa-legal-skills/issues/32)。以下是授權平台可操作的**虛構測試輸入及預期結果**，不是實際 API 執行證據、有效法規或使用者案件政策。本次 Codex 僅作靜態契約檢查，未重新操作 Google Docs；PR #33 已有另個平台的分項 API 與人工驗收回報，範圍見下方紀錄。母版原型或單一案例通過不能外推成全部自動化 PASS。
 
 ## 準備及證據
 
@@ -41,7 +41,9 @@
 
 ### G04：長文、項款目、真實分頁及中斷續寫
 
-重用既有虛構 [DOCX 來源 fixtures](../../tests/fixtures/docx/cases.json) 的 C02 長段落與 C04 項款目結構作文本輸入，**不沿用其 DOCX 字型／渲染證據**。製作一個含 C04 層級及 C02 的長文第二項的虛構條文：repeat 按 fixture 展開為原段落內重複字句；各項／款／目仍各為獨立段落。新舊側的 `{days}` 分別替換成五／七，其他內容逐字相同；只畫這一字差異。保留展開後的完整來源快照供讀回逐段比對。
+分開驗收兩件事：(1) 重用既有虛構 [DOCX 來源 fixtures](../../tests/fixtures/docx/cases.json) 的 C02 長段落，repeat 按原段落展開，僅作跨頁壓力與全文保真檢查；新舊側 `{days}` 分別換五／七，其他逐字相同。(2) 款目縮排用可核對來源且段落界線清楚的真實層級文本，或無重複干擾的虛構短案例，不能用重複 80 次字句的畫面判定縮排。既有官方原文副本僅作排版測試，須標示非修法／非正式提案並留來源，不編造修正。保留完整來源快照，不沿用 DOCX 字型／渲染證據。
+
+對照表 12 pt 原生首行／續行值應為：第一項 0／12 pt、後續無編號項 24／12 pt、款 12／24 pt、目 24／36 pt。核對層級識別、新舊欄一致與實際畫面；自動換行、款目另段不是新項。短段落可選擇性 `keepLinesTogether=true`，長段自然跨頁，不造成大面積留白、不全文件套用；分開記錄屬性讀回與視覺結果。
 
 在具備原生工具的平台實際填入，確認長列跨頁不截斷、重複或錯欄，段落層級不合併，標題與表頭仍可辨識。以實際頁面檢查分頁／裁切／續頁；工具不支援的分頁設定明列限制，不宣稱等同 Word。完成一批並讀回後中斷，依 checkpoint 重讀同一副本再續寫下一條，確認沒有重複複製、重複列或內容。未確認前批結果時不得直接重送。
 
@@ -53,8 +55,21 @@
 
 ### G06：完整副本視覺與字型驗收
 
-對實際產物逐頁檢查第一頁標題 24 pt、提案欄 14 pt、另起頁的對照表標題 20 pt、表頭／內文 12 pt、三欄等寬、長文接續、項款目、真正底線與指定標楷體的顯示。保留 API 讀回結果與人工視覺回覆，分開判定。API 只能驗證值，不能證明沒有字型替代；Android／iPad 未查看就寫 NOT TESTED，即使桌面顯示正常也不能外推。
+對實際產物逐頁檢查第一頁標題 24 pt、案由／說明及其各款／提案人全部 14 pt、提案長文自然跨頁後另起新頁的對照表標題 20 pt、表頭／內文 12 pt、三欄等寬、長文接續、項款目、真正底線與指定標楷體的顯示。保留 API 讀回結果與人工視覺回覆，分開判定。API 只能驗證值，不能證明沒有字型替代；Android／iPad 未查看就寫 NOT TESTED，即使桌面顯示正常也不能外推。
 
 ## 結果記錄
 
 每組分開填：操作／文字與樣式讀回／渲染／使用者視覺驗收／裝置字型 QA，以及 PASS、FAIL、PARTIAL、UNSUPPORTED 或 NOT TESTED 與證據。修正後重測須保留首次缺陷與新結果。未執行六組案例時，維持 `GOOGLE DOCS LIVE OPERATIONS: NOT TESTED` 及 `VISUAL QA: NOT TESTED`；本地 unittest 通過只證明 prompt／ZIP 契約，不能替代以上驗收。
+
+
+## PR #33 既有外部驗收紀錄（2026-10-16）
+
+以下僅整理可讀取的 PR 討論，Codex 沒有重新操作私人文件或獨立重驗原始 API 回應／截圖。記錄的 PASS 僅限原留言案例與 commit，不代表最新 Skill 在新副本已完整重跑：
+
+| 範圍 | PR 回報狀態與限制 |
+| --- | --- |
+| G01／G03 | [原生 API 回報](https://github.com/Clock1025/sa-legal-skills/pull/33#issuecomment-6197505842)：G01 PASS；G03 首次換行繼承底線 FAIL，局部校正後讀回 PASS；不可抹去首次缺陷 |
+| 短篇視覺、G05 | [使用者回報](https://github.com/Clock1025/sa-legal-skills/pull/33#issuecomment-6197882056)：短篇五項視覺 PASS；過期 requiredRevisionId 被 API 拒絕且人工註記保留；不是完整 G06 PASS |
+| G04 款目 | [早期 FAIL](https://github.com/Clock1025/sa-legal-skills/pull/33#issuecomment-6198421902)保留；[後續官方原文副本](https://github.com/Clock1025/sa-legal-skills/pull/33#issuecomment-6198662685)款目視覺 PASS，未外推全部長文／恢復情境 |
+| 單一短目 keepLinesTogether | [讀回後人工重驗改善](https://github.com/Clock1025/sa-legal-skills/pull/33#issuecomment-6198712891)：該案例 PASS，屬非阻擋優化，不外推所有長段落 |
+| 仍待最終驗收 | G02 增字／人工修改／純改號、G04 完整 checkpoint 中斷恢復及精確底線、G06 完整副本逐頁／未檢裝置字型；最新 commit 新副本端到端遵循尚未重跑 |
