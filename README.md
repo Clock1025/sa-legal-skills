@@ -6,6 +6,12 @@
 
 快速查找新手、各平台已知問題、版本資訊及維護者工具，可看[文件導覽](docs/README.md)。
 
+## v0.2.0-alpha.1 開發方向
+
+本開發線採「Google Docs 優先、DOCX 並存」：依當前工具與文件編輯權限辨識能力，優先局部編輯既有文件，逐項寫入已確認內容，使用版本條件保護協作者修改並讀回驗證；Google Docs 操作失敗、缺少權限或版本衝突無法安全解決時，停止相關操作、保留現況並回報原因、已完成部分及不確定狀態，不自動轉成 DOCX，也不擅自建立替代文件或覆蓋其他文件。只有使用者明確選擇 DOCX 時，才使用完整、獨立的 DOCX 流程。這是 prompt-only Skill 操作規範，沒有新增 Google Docs 後端或保證任何模型已有整合能力。
+
+詳見 [Google Docs 工作流程](docs/google-docs-workflow.md)及 [Alpha 開發範圍與驗證](docs/development/v0.2.0-alpha.1.md)。Google Docs 穩定前採 Alpha／Beta／RC 預發布，不直接發布 Stable；v0.1.x 持續獨立改善法律規範與 DOCX，必要共用修正經審查同步。
+
 ## 快速開始
 
 不需要會 Git，也不需要執行安裝程式；可依 AI 的讀取能力選擇使用方式：
@@ -76,6 +82,8 @@ amendment-drafting
 - 大型改革中，已充分確認的制度部分可以逐部分交由 `amendment-drafting` 草擬，其他部分可繼續保持待決或暫緩。
 
 ## DOCX 輸出
+
+使用者明確選擇 DOCX 時，以下完整流程仍適用；Google Docs 操作失敗不會自動啟動此流程。
 
 `amendment-drafting` 在執行環境支援 DOCX 產生時，可依需求提供：
 
