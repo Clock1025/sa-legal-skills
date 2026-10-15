@@ -3,7 +3,7 @@ on:
   pull_request:
     branches: [main, develop]
   push:
-    branches: [main, develop]
+    branches: [main, develop, feature/v0.2-google-docs-foundation]
 permissions:
   contents: read
 jobs:

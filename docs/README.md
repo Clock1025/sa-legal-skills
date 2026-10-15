@@ -4,6 +4,10 @@
 
 依使用目的整理既有文件，不在本頁複製 Skill 規則或維護第二份啟動提示詞。第一次使用通常只需要 [START-HERE](../START-HERE.md)，不用安裝程式、執行驗收工具或了解 GitHub 分支。
 
+## v0.2 開發線
+
+本分支的 [Google Docs 工作流程](google-docs-workflow.md)與 [v0.2.0-alpha.1 範圍及驗證](development/v0.2.0-alpha.1.md)屬於開發中規範，不表示正式版或平台整合已發布。
+
 ## 第一次使用
 
 | 想做的事 | 文件 |

@@ -2,6 +2,12 @@
 
 本流程只驗證來源與封裝契約，不判斷法律正確性、真人模型行為或 DOCX 視覺品質。
 
+## v0.2 獨立開發線
+
+v0.2.0-alpha.1 的 feature／後續 PR 僅指向專用 v0.2 整合分支，不指向 main 或 v0.1.x develop。既有 `develop` 與要求的 `develop/0.2` 因 Git ref 名稱衝突不能並存；實際分支確認與驗證見 [開發紀錄](development/v0.2.0-alpha.1.md)。以下 main／develop 規則描述 v0.1.x，不適用於 v0.2 功能 PR。
+
+本批不建立 Tag／Release，也不修改既有 v0.1.x 發布契約。後續 v0.2 Alpha／Beta／RC 發布流程須另行實作與授權，不能直接沿用檢查 origin/develop 的既有 Beta 發布器。
+
 ## 分支策略與固定版本
 
 - `main` 保持 GitHub 預設分支與穩定主線，供一般使用者讀取；正式發布準備的合併仍需真人測試與人工審查。

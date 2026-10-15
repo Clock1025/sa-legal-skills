@@ -6,6 +6,12 @@
 
 快速查找新手、各平台已知問題、版本資訊及維護者工具，可看[文件導覽](docs/README.md)。
 
+## v0.2.0-alpha.1 開發方向
+
+本開發線採「Google Docs 優先、DOCX 並存」：依當前工具與文件編輯權限辨識能力，優先局部編輯既有文件，逐項寫入已確認內容，使用版本條件保護協作者修改並讀回驗證；不具備安全寫入能力時沿用 DOCX。這是 prompt-only Skill 操作規範，沒有新增 Google Docs 後端或保證任何模型已有整合能力。
+
+詳見 [Google Docs 工作流程](docs/google-docs-workflow.md)及 [Alpha 開發範圍與驗證](docs/development/v0.2.0-alpha.1.md)。Google Docs 穩定前採 Alpha／Beta／RC 預發布，不直接發布 Stable；v0.1.x 持續獨立改善法律規範與 DOCX，必要共用修正經審查同步。
+
 ## 快速開始
 
 不需要會 Git，也不需要執行安裝程式；可依 AI 的讀取能力選擇使用方式：
