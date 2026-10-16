@@ -1,12 +1,16 @@
 # 文件導覽：正式版使用者
 
-本頁是 GitHub 預設分支 `main` 的使用指南入口。**最新的使用說明可能記錄 Beta／新版模型的實測觀察，但不代表 `v0.1.3` 的 Skill 已更新或重新發布。** 要固定 Skill 內容，請使用正式 Release 的附件或指定版本 Tag。
+本頁整理使用與驗收文件。封閉 Alpha 測試者請先走下方固定版本入口；一般正式版資訊與歷史紀錄另列。**最新的使用說明可能記錄 Beta／新版模型的實測觀察，但不代表 `v0.1.3` 的 Skill 已更新或重新發布。** 要固定 Skill 內容，請使用正式 Release 的附件或指定版本 Tag。
 
 依使用目的整理既有文件，不在本頁複製 Skill 規則或維護第二份啟動提示詞。第一次使用通常只需要 [START-HERE](../START-HERE.md)，不用安裝程式、執行驗收工具或了解 GitHub 分支。
 
+## 封閉 Alpha 試用入口
+
+受邀試用 v0.2.0-alpha.2 的同學，先開啟 [START-HERE 固定版本入口](../START-HERE.md#封閉-alpha-試用先從這裡開始)，再照 [Google Docs 首次操作卡](first-time-user.md#google-docs-首次試用操作卡)進行。尚無 Alpha.2 Tag／Release，不使用 main 或最新正式版附件；只需同一份啟動提示詞，不必了解 Git／CI。
+
 ## v0.2 開發線
 
-本分支的 [Google Docs 工作流程](google-docs-workflow.md)與 [v0.2.0-alpha.1 範圍及驗證](development/v0.2.0-alpha.1.md)屬於開發中規範，不表示正式版或平台整合已發布。Google Docs 失敗時停止並回報，不自動轉換文件模式；使用者明確選擇 DOCX 時保留完整獨立流程。
+本分支的 [Google Docs 工作流程](google-docs-workflow.md)與 [alpha.1 基礎紀錄](development/v0.2.0-alpha.1.md)、[alpha.2 母版流程與驗證](development/v0.2.0-alpha.2.md)及 [母版人工驗收案例](acceptance/google-docs-template.md)屬於開發中規範，不表示正式版或平台整合已發布。Google Docs 失敗時停止並回報，不自動轉換文件模式；使用者明確選擇 DOCX 時保留完整獨立流程。
 
 ## 第一次使用
 
