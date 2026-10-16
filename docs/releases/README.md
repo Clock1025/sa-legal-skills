@@ -15,3 +15,8 @@
 各版 `v*.md` 是待套用於 GitHub Release Description 的正文，`titles.json` 是 Release Title 的單一來源。已公開的 Release metadata 不會因本目錄變更而自動更新；需維護者透過 GitHub 另外核准執行。
 
 未來建立新版本時，先新增版本檔與 titles.json 對應項，確認 CI 檢查通過，再於正式 Release 發布流程引用。現有 `stable-release-v0.1.4.yml` 為版本專用工作流，不會因更新此目錄自動重發 v0.1.4。
+
+
+## v0.2 Alpha 發布準備
+
+[v0.2.0-alpha.2 notes](v0.2.0-alpha.2.md) 為候選稿，不代表已發布；[準備紀錄與待確認事項](alpha-v02-preparation.md)及 [專用 CI/CD 流程](../ci-cd.md)供審查。實際 Tag／Release 須另行授權。

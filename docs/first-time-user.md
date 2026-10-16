@@ -6,7 +6,7 @@
 
 ## Google Docs 首次試用操作卡
 
-這是 v0.2.0-alpha.2 封閉試用指引，不是已發布版本。請先從 [START-HERE 的封閉 Alpha 入口](../START-HERE.md#封閉-alpha-試用先從這裡開始)取得固定版本 Skill；不要使用 main 或舊版 Release。你只要依序操作，不必選分支、安裝程式或看 CI。以下是操作步驟，不是另一份完整啟動提示詞。
+這是 v0.2.0-alpha.2 封閉試用指引，不是 Stable；是否已發布以 [Alpha.2 發布頁](https://github.com/Clock1025/sa-legal-skills/releases/tag/v0.2.0-alpha.2)為準，本頁本身不代表已發布。請先從 [START-HERE 的封閉 Alpha 入口](../START-HERE.md#封閉-alpha-試用先從這裡開始)取得固定版本 Skill；不要使用 main 或舊版 Release。你只要依序操作，不必選分支、安裝程式或看 CI。以下是操作步驟，不是另一份完整啟動提示詞。
 
 1. **先選對 Skill 並讀完。** 開新對話，使用 START-HERE 唯一提示詞；這次要試做修法文件，選固定版本的 `amendment-drafting`。先請 AI 完整讀取，讀不到就貼入或上傳完整檔案；它未讀完前，不提供案件材料，也不開始起草。若方向未定，先依 START-HERE 選適合的 Skill 整理，切換階段時再完整讀取新 Skill。
 2. **讀完後，再準備安全的案例。** 優先使用虛構案例或可公開的舊案；提供完整原文、來源、版本及想改的具體內容，舊案要標示為歷史測試材料。請 AI 列出已確認與未決事項，由你確認修改方向；不要把真實個資或未公開案件拿來測試，也不要讓 AI 猜原文或替你決定政策。
