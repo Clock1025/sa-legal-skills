@@ -2,7 +2,7 @@
 
 本 repository 提供學生自治組織使用的法規審查與修法輔助 Agent Skills。核心分工是：人負責制度與政策選擇；AI 協助整理想法、檢查漏洞與連動影響，並轉寫為正式法規文字及提案文件。
 
-**受邀參加 v0.2.0-alpha.2 封閉試用？** 請從 [固定版本試用入口](START-HERE.md#封閉-alpha-試用先從這裡開始)及 [Google Docs 新手操作卡](docs/first-time-user.md#google-docs-首次試用操作卡)開始。目前尚無 Alpha.2 Tag／Release，請勿使用下方最新正式版附件作本次測試。
+**受邀參加 v0.2.0-alpha.2 封閉試用？** 請從 [固定版本試用入口](START-HERE.md#封閉-alpha-試用先從這裡開始)及 [Google Docs 新手操作卡](docs/first-time-user.md#google-docs-首次試用操作卡)開始。Alpha.2 是否已發布以 [Alpha.2 發布頁](https://github.com/Clock1025/sa-legal-skills/releases/tag/v0.2.0-alpha.2)為準；請勿使用下方最新正式版附件作本次測試。
 
 第一次使用？從[新手引導](docs/first-time-user.md)開始；不確定提示詞貼哪裡或如何提供檔案，可看[平台使用指南](docs/platforms/)。
 

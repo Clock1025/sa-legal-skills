@@ -121,3 +121,23 @@ Release Notes 明列 `AUTOMATED CHECKS: PASS` 與具體檢查，以及
 
 實際 GitHub Release 建立、附件上傳、Latest 狀態及重跑拒絕行為在本次交付為
 **NOT LIVE-TESTED**；未建立任何專案 Beta tag 或 Release。
+
+## v0.2.0-alpha.2 專用流程（發布準備）
+
+`.github/workflows/alpha-v02.yml` 在此準備 PR 更新時只驗證並保存候選附件，來源固定為 PR 當次的 develop-0.2 base SHA；不發布 feature-only 內容、不建立 Tag。真正發布僅接受日後經使用者另行明確授權推送的精確 `v0.2.0-alpha.2` Tag，來源為 Tag commit，且必須在 origin/develop-0.2 歷史中。現有 v0.1 Beta／Stable workflows 保持原樣；Alpha 不使用 Beta 的 origin/develop 閘門。
+
+選用 Tag 觸發是因為本專案預設分支為 main，而 workflow_dispatch 的手動入口有預設分支可用性限制；不為啟用此流程而更動 main。此 PR 一律只走讀取權限的 prepare job；publish job 必須為本 repo 的精確 Alpha.2 Tag push 且 prepare 成功，才有 contents:write。
+
+腳本要求完整歷史、checkout HEAD 精確等於完整 40 字來源 SHA、來源乾淨且已整合 develop-0.2。PR 的 workflow／notes 來自該 PR 的 merge checkout，ZIP 則來自已整合的 base；這是可審查的舊 base 候選，不是 PR 已合併。準備 PR 另行審查並獲授權合併後，須重新核對 develop-0.2 HEAD、以最終整合 commit 重建附件／hash，確認後再另外授權建立 Tag，不能在本輪做。
+
+Actions artifact 保存 7 天，包含 sa-legal-skills.zip、SHA256SUMS.txt、SOURCE_COMMIT.txt、RELEASE-NOTES.md；前兩檔才是 Release 附件。本地可對獨立、乾淨的已整合 checkout 執行：
+
+```bash
+python3 scripts/prepare_alpha.py --source /path/to/integrated-checkout --commit FULL_SHA --output /tmp/fresh-alpha-candidate
+```
+
+來源未整合即拒絕，不得改正式 ref 來通過驗證。`scripts/validate.py` 保留原有五檔封裝與 v0.1 Beta 契約，Alpha 不呼叫 --beta-tag。
+
+未來授權的 Tag push 經 prepare 後，publish job 重驗 checksum／來源 SHA、拒絕已存在 Release（包括 Draft，查詢非 404 也拒絕），核對已存在 Tag 的 peeled commit，建立 `--draft --prerelease --latest=false`，下載並逐位元組核對兩份附件後才公開 Pre-release，仍為 `--latest=false`，再確認既有 Latest 沒有替換。不建立／移動 Tag、不使用 stable --latest、不覆寫既有正式版本。
+
+若上傳／發布中途失敗，停止並保留狀態；不盲目重跑、不自動刪除 Tag／Release，由維護者判斷殘留。此流程真實發布尚未執行，來源 gate／YAML／prepare CI 不能冒充建立 Tag、上傳附件或公開發布驗收。

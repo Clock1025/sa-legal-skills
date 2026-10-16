@@ -6,7 +6,7 @@
 
 ## 封閉 Alpha 試用入口
 
-受邀試用 v0.2.0-alpha.2 的同學，先開啟 [START-HERE 固定版本入口](../START-HERE.md#封閉-alpha-試用先從這裡開始)，再照 [Google Docs 首次操作卡](first-time-user.md#google-docs-首次試用操作卡)進行。尚無 Alpha.2 Tag／Release，不使用 main 或最新正式版附件；只需同一份啟動提示詞，不必了解 Git／CI。
+受邀試用 v0.2.0-alpha.2 的同學，先開啟 [START-HERE 固定版本入口](../START-HERE.md#封閉-alpha-試用先從這裡開始)，再照 [Google Docs 首次操作卡](first-time-user.md#google-docs-首次試用操作卡)進行。Alpha.2 是否已發布以 [發布頁](https://github.com/Clock1025/sa-legal-skills/releases/tag/v0.2.0-alpha.2)為準，本頁不代表已發布；不使用 main 或最新正式版附件；只需同一份啟動提示詞，不必了解 Git／CI。
 
 ## v0.2 開發線
 

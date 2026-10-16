@@ -4,7 +4,7 @@
 
 ## 封閉 Alpha 試用：先從這裡開始
 
-你收到 v0.2.0-alpha.2 試用邀請時，請使用下方固定版本；不需要會 Git 或看開發流程。**目前尚未建立 Alpha.2 Tag／Release**，試用的是 [PR #33](https://github.com/Clock1025/sa-legal-skills/pull/33) 已驗證的 Skill，固定版本為 `c07803e57d70ead05d9b5bdc5fdbf86e05ad1fb2`。這不是已發布的正式版，請勿改用專案首頁的 main 或「最新正式 Release」附件。
+你收到 v0.2.0-alpha.2 試用邀請時，請使用下方固定版本；不需要會 Git 或看開發流程。**這份入口文件不代表已發布**；是否已有 Alpha.2 Tag／Release，請核對 [Alpha.2 發布頁](https://github.com/Clock1025/sa-legal-skills/releases/tag/v0.2.0-alpha.2)（準備階段可能尚不存在）。試用的是 [PR #33](https://github.com/Clock1025/sa-legal-skills/pull/33) 已驗證的 Skill，固定版本為 `c07803e57d70ead05d9b5bdc5fdbf86e05ad1fb2`。這不是已發布的正式版，請勿改用專案首頁的 main 或「最新正式 Release」附件。
 
 | 這次想做什麼 | 點這裡取得固定版本 Skill |
 | --- | --- |
@@ -33,7 +33,7 @@ Google Docs 優先，DOCX 完整保留。讀完本次 Skill 後，AI 應依實�
 ```text
 請用一般學生看得懂的文字帶我開始。
 Skill 來源：https://github.com/Clock1025/sa-legal-skills/tree/c07803e57d70ead05d9b5bdc5fdbf86e05ad1fb2
-本次是尚未發布的 v0.2.0-alpha.2 封閉試用；請從上述固定版本讀取所選 Skill，不要改用 main 或最新正式 Release。
+本次是 v0.2.0-alpha.2 封閉試用；發布狀態以 Alpha.2 發布頁為準，不能只憑本提示詞認定已發布。請從上述固定版本讀取所選 Skill，不要改用 main 或最新正式 Release。
 
 根據我現在要做的事選擇本次 Skill：如果目前主要是檢查現行規定，即使涉及整套規章、未來可能大改或想法尚未整理，也先選 regulation-review；只有現在要規劃整體改革、協調多個制度或追蹤大量待決事項，才選 large-scale-reform；制度方向大致確定並要寫正式修正條文、修正總說明或對照表時，才選 amendment-drafting。
 
