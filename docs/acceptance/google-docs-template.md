@@ -57,6 +57,8 @@
 
 對實際產物逐頁檢查第一頁標題 24 pt、案由／說明及其各款／提案人全部 14 pt、提案長文自然跨頁後另起新頁的對照表標題 20 pt、表頭／內文 12 pt、三欄等寬、長文接續、項款目、真正底線與指定標楷體的顯示。保留 API 讀回結果與人工視覺回覆，分開判定。API 只能驗證值，不能證明沒有字型替代；Android／iPad 未查看就寫 NOT TESTED，即使桌面顯示正常也不能外推。
 
+G06 另核對兩項已確認呈現規格：14 pt 獨立說明段落首行相對續行縮兩字，原生 `indentFirstLine = indentStart + 28 pt`，無手動前置空白；虛構顯示編號採全形數字（如「跨頁測試文字０４」），不更動原文、引文、網址或必要英文／技術識別碼。這是提案正文規格，不把 14 pt／兩字縮排套用到 12 pt 表格說明欄。
+
 ## 結果記錄
 
 每組分開填：操作／文字與樣式讀回／渲染／使用者視覺驗收／裝置字型 QA，以及 PASS、FAIL、PARTIAL、UNSUPPORTED 或 NOT TESTED 與證據。修正後重測須保留首次缺陷與新結果。未執行六組案例時，維持 `GOOGLE DOCS LIVE OPERATIONS: NOT TESTED` 及 `VISUAL QA: NOT TESTED`；本地 unittest 通過只證明 prompt／ZIP 契約，不能替代以上驗收。
@@ -72,4 +74,16 @@
 | 短篇視覺、G05 | [使用者回報](https://github.com/Clock1025/sa-legal-skills/pull/33#issuecomment-6197882056)：短篇五項視覺 PASS；過期 requiredRevisionId 被 API 拒絕且人工註記保留；不是完整 G06 PASS |
 | G04 款目 | [早期 FAIL](https://github.com/Clock1025/sa-legal-skills/pull/33#issuecomment-6198421902)保留；[後續官方原文副本](https://github.com/Clock1025/sa-legal-skills/pull/33#issuecomment-6198662685)款目視覺 PASS，未外推全部長文／恢復情境 |
 | 單一短目 keepLinesTogether | [讀回後人工重驗改善](https://github.com/Clock1025/sa-legal-skills/pull/33#issuecomment-6198712891)：該案例 PASS，屬非阻擋優化，不外推所有長段落 |
-| 仍待最終驗收 | G02 增字／人工修改／純改號、G04 完整 checkpoint 中斷恢復及精確底線、G06 完整副本逐頁／未檢裝置字型；最新 commit 新副本端到端遵循尚未重跑 |
+| G02 | [先 PARTIAL](https://github.com/Clock1025/sa-legal-skills/pull/33#issuecomment-6198964291)，[真人修改後續接 PASS](https://github.com/Clock1025/sa-legal-skills/pull/33#issuecomment-6199032185)；不等於真正同時競爭驗收 |
+| G04 後續 | [同工作階段 checkpoint PASS](https://github.com/Clock1025/sa-legal-skills/pull/33#issuecomment-6199071508)；[新增列縮排首次 FAIL](https://github.com/Clock1025/sa-legal-skills/pull/33#issuecomment-6199115161)後[視覺重驗 PASS](https://github.com/Clock1025/sa-legal-skills/pull/33#issuecomment-6199132312)，[精確底線視覺 PASS](https://github.com/Clock1025/sa-legal-skills/pull/33#issuecomment-6199159633)；真正跨對話恢復未驗 |
+| G06 短篇 | [已測副本視覺 PASS](https://github.com/Clock1025/sa-legal-skills/pull/33#issuecomment-6199249289)，不外推長篇全部／其他裝置 |
+| G06 說明縮排及虛構編號 | 以下歷程保留；本次使用者指示明確確認兩項人工 PASS，非 Codex 本次 API 操作 |
+| 剩餘風險 | 真正跨對話 checkpoint 恢復、長篇全部逐頁驗收、Android／iPad 等未檢裝置字型、最新 Skill 在不同模型／平台的新副本端到端遵循，仍為 NOT TESTED／PARTIAL |
+
+
+### G06 說明縮排／全形編號：失敗與修正歷程
+
+- [初次探索](https://github.com/Clock1025/sa-legal-skills/pull/33#issuecomment-6199410411)：仍依賴兩個手動全形空白，不算完成純原生縮排；工具操作受阻時未宣稱已修正。
+- [交接紀錄](https://github.com/Clock1025/sa-legal-skills/pull/33#issuecomment-6199446917)：人工看到縮排，但虛構「04」等仍為半形；僅掃標點漏掉數字，視為檢查不足。當時替換受阻，保留未完成狀態。
+- [API 修正讀回](https://github.com/Clock1025/sa-legal-skills/pull/33#issuecomment-6208944590)：24 個虛構說明段落移除前置空白，原生 98／70 pt（14 pt 首行與續行相差 28 pt）一致；24 個說明編號及兩側各 34 組虛構編號改全形，共 92 處，讀回半形測試編號為 0。該留言當時仍待人工驗收，不能倒寫成當時已 PASS。
+- **本次使用者指示（2026-10-16）補充確認：以上原生說明縮排與虛構編號全形兩項人工驗收均 PASS。** 據此同步 Skill 規則；僅表示這兩項已測副本符合需求，不代表 G06 全項、長篇全部頁面或跨裝置全部通過。Codex 未重新操作私人副本／母版或獨立核取原始畫面。
